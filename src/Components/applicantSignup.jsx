@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Navbar from './navbar';
 
-class StudentSignup extends Component {
+class ApplicantSignup extends Component {
     state = {  } 
     render() { 
         return (
@@ -10,4 +10,4 @@ class StudentSignup extends Component {
     }
 }
  
-export default StudentSignup;
+export default ApplicantSignup;

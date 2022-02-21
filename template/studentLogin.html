@@ -49,8 +49,8 @@
           </li>
           <li><a href="organizationLogin.html">Organization</a></li>
           <li class="navbar-dropdown active">
-            <a href="studentLogin.html" class="dropdown-toggler" data-dropdown="my-dropdown-id">
-              Student 
+            <a href="applicantLogin.html" class="dropdown-toggler" data-dropdown="my-dropdown-id">
+              Applicant 
             </a>
           </li>
           <li><a href="{% url 'profile' %}">About Us</a></li>
@@ -79,7 +79,7 @@
 
       <!-- LOGIN FORM -->
       <form action="/login" id="login" onsubmit="return validatelogin()" name="loginform" method="POST">
-        <h1>Student's Login</h1>
+        <h1>Applicant's Login</h1>
         <hr />
         <div id="loginwarning" class="warning">
           <!-- INSERT LOGIN WARNINGS HERE -->
@@ -89,7 +89,7 @@
           <input type="text" name="email" placeholder="sanyamgandhi00" />
           <label for="password">Password</label>
           <input type="password" name="password" placeholder="******" />
-          <a href="studentDashboard.html"><input type="submit" value="Login" class="button" /></a>
+          <a href="applicantDashboard.html"><input type="submit" value="Login" class="button" /></a>
 
           <p class="text-p">
             Not Yet Registered? <a href="#signup" id="tosignup">Sign Up</a>
@@ -100,7 +100,7 @@
       <!-- SIGNUP FORM -->
 
       <form action="/signup" id="signup" onsubmit="return validatesignup()" name="signupform" method="POST">
-        <h1>Sign Up as a Student</h1>
+        <h1>Sign Up as a Applicant</h1>
         <hr />
         <div id="signupwarning" class="warning">
           <!-- INSERT SIGNUP WARNINGS HERE -->

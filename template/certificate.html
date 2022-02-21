@@ -44,7 +44,7 @@ input{
     <h2 style="font-size: 40px; text-transform: uppercase;"><span id="ddoc"></span></h2>
     <br>
 
-    <h3 style="font-size: 25px; ">Student Id : <span id="dstudentid"></span>  &nbsp;&nbsp; Named : <span id="dname"></span></h3>
+    <h3 style="font-size: 25px; ">Applicant Id : <span id="dapplicantid"></span>  &nbsp;&nbsp; Named : <span id="dname"></span></h3>
     
 
     <br>
@@ -62,7 +62,7 @@ input{
 <script type="text/javascript">
   var rname = localStorage.getItem("name");
   var rdoc = localStorage.getItem("doc");
-  var rstudentid = localStorage.getItem("studentid");
+  var rapplicantid = localStorage.getItem("applicantid");
   var rdesc = localStorage.getItem("desc");
   var rdatecreated = localStorage.getItem("datecreated");
 
@@ -70,7 +70,7 @@ input{
     console.log(rname);
     document.getElementById('dname').innerHTML = rname;
     document.getElementById('ddoc').innerHTML = rdoc;
-    document.getElementById('dstudentid').innerHTML = rstudentid;
+    document.getElementById('dapplicantid').innerHTML = rapplicantid;
     document.getElementById('ddesc').innerHTML = rdesc;
     document.getElementById('ddatecreated').innerHTML = rdatecreated;
 

@@ -1,6 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
-import Navbar from './Components/navbar';
+import Navbar from './components/navbar';
 
 function App() {
   return (
@@ -13,7 +13,7 @@ function App() {
               <a href="organizationLogin.html">ORGANIZATION &nbsp; <i className="fa fa-building" aria-hidden="true" /></a>
             </div>
             <div className="item2">
-              <a href="studentLogin.html">STUDENT &nbsp;<i className="fa fa-user" aria-hidden="true" /></a>
+              <a href="applicanttLogin.html">APPLICANT &nbsp;<i className="fa fa-user" aria-hidden="true" /></a>
             </div>
           </div>
         </div>

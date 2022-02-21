@@ -4,7 +4,7 @@ import Navbar from './navbar';
 
 
 
-export default class StudentLogin extends Component {
+export default class ApplicantLogin extends Component {
     render() {
       return  (
         <div>
@@ -19,7 +19,7 @@ export default class StudentLogin extends Component {
             </ul>
             {/* LOGIN FORM */}
             <form action="/login" id="login" onsubmit="return validatelogin()" name="loginform" method="POST">
-              <h1>Student's Login</h1>
+              <h1>Applicant's Login</h1>
               <hr />
               <div id="loginwarning" className="warning">
                 {/* INSERT LOGIN WARNINGS HERE */}
@@ -29,7 +29,7 @@ export default class StudentLogin extends Component {
                 <input type="text" name="email" placeholder="sanyamgandhi00" />
                 <label htmlFor="password">Password</label>
                 <input type="password" name="password" placeholder="******" />
-                <a href="studentDashboard.html"><input type="submit" defaultValue="Login" className="button" /></a>
+                <a href="applicant/dashboard"><input type="submit" defaultValue="Login" className="button" /></a>
                 <p className="text-p">
                   Not Yet Registered? <a href="#signup" id="tosignup">Sign Up</a>
                 </p>
@@ -37,7 +37,7 @@ export default class StudentLogin extends Component {
             </form>
             {/* SIGNUP FORM */}
             <form action="/signup" id="signup" onsubmit="return validatesignup()" name="signupform" method="POST">
-              <h1>Sign Up as a Student</h1>
+              <h1>Sign Up as a Applicant</h1>
               <hr />
               <div id="signupwarning" className="warning">
                 {/* INSERT SIGNUP WARNINGS HERE */}

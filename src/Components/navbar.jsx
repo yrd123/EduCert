@@ -22,13 +22,13 @@ class Navbar extends Component {
                 </li>
                 <li><a href="/organization/login">Organization</a></li>
                 <li className="navbar-dropdown">
-                  <a href="/student/login" className="dropdown-toggler" data-dropdown="my-dropdown-id">
-                    Student
+                  <a href="/applicant/login" className="dropdown-toggler" data-dropdown="my-dropdown-id">
+                  Applicant
                   </a>
                 </li>
                 <li><a href="{% url 'profile' %}">About Us</a></li>
-                <li><a href="/student/dashboard">Student Dashboard</a></li>
-                <li><a href="/organization/dashboard">Student Dashboard</a></li>
+                <li><a href="/applicant/dashboard">Applicant Dashboard</a></li>
+                <li><a href="/organization/dashboard">Organization Dashboard</a></li>
               </ul>
             </div>
           </div>

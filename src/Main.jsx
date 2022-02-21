@@ -1,9 +1,15 @@
 import React, { Component } from 'react';
-import App from './App';
-import OrganizationLogin from './Components/organizationLogin';
-import StudentLogin from './Components/studentLogin';
-import StudentDashboard from './Components/studentDashboard';
 import {BrowserRouter, Route , Routes } from 'react-router-dom';
+
+import App from './App';
+import OrganizationLogin from './components/organizationLogin';
+import OrganizationDashboard from './components/organizationDashboard';
+import OrganizationUploadDocument from './components/organizationUploadDocument';
+
+import ApplicantLogin from './components/applicantLogin';
+import ApplicantDashboard from './components/applicantDashboard';
+import ApplicantUploadDocument from './components/applicantUploadDocument';
+
 export default class Main extends Component {
     render() {
       return (
@@ -11,9 +17,12 @@ export default class Main extends Component {
           <Routes>
               <Route exact path="/" element={<App />} />
               <Route exact path="organization/login" element={<OrganizationLogin />} />  
-              <Route exact path="student/login" element={<StudentLogin />} />
-              <Route exact path="student/dashboard" element={<StudentDashboard />} />
-              <Route exact path="organization/dashboard" element={<StudentDashboard />} />
+              <Route exact path="organization/dashboard" element={<OrganizationDashboard />} />
+              <Route exact path="organization/uploadDocument" element={<OrganizationUploadDocument />} />
+
+              <Route exact path="applicant/login" element={<ApplicantLogin />} />
+              <Route exact path="applicant/dashboard" element={<ApplicantDashboard />} />
+              <Route exact path="applicant/uploadDocument" element={<ApplicantUploadDocument />} />
           </Routes>
         </BrowserRouter>
       );

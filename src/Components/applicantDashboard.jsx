@@ -1,11 +1,19 @@
 import React, { Component } from 'react';
+import { getDocumentsByApplicantId } from '../services/documentService';
 import Navbar from './navbar';
 
-class StudentDashboard extends Component {
-    state = {  } 
+class ApplicantDashboard extends Component {
+    state = { 
+        documents : getDocumentsByApplicantId("applicantid1")
+    };
+
+    getStatusClass(status){
+        return status === "Verified" ? "badge badge-success" : "badge badge-warning";
+    }
+
     render() { 
-        return (
-            <>
+
+        return (<>
             <Navbar/>
             <div style={{margin:10, backgroundColor: 'white', padding: 10}}>
             <table className="table table-striped">
@@ -21,6 +29,21 @@ class StudentDashboard extends Component {
                 </tr>
                 </thead>
                 <tbody>
+                { this.state.documents.map(document => 
+                    <tr>
+                        <th scope="row">1</th>
+                        <td>{document.documentName}</td>
+                        <td>{document.organizationName}</td>
+                        <td>{document.dateOfIssue}</td>
+                        <td>{document.typeOfCertificate}</td>
+                        <td><span className={this.getStatusClass(document.status)}>{document.status}</span></td>
+                        <td>
+                            <button type="button" className="btn btn-dark" data-toggle="modal" data-target="#exampleModal">
+                            Preview
+                            </button>
+                        </td>
+                    </tr>
+                )}
                 <tr>
                     <th scope="row">1</th>
                     <td>Complete Web Developer</td>
@@ -90,4 +113,4 @@ class StudentDashboard extends Component {
     }
 }
  
-export default StudentDashboard;
+export default ApplicantDashboard;
