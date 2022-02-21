@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+    integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous" />
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+    integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+    crossorigin="anonymous"></script>
+
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+    integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+    crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <title>Document</title>
+  <link rel="stylesheet" href="../static/css/navbar.css">
+  <style>
+    /*body{
+            background: url("../static/GettyImages-938938858-7b656e6317ab4e2797556bdddce9595d.jpg");
+            background-size: cover;
+        }
+        form{
+            background-color: cadetblue;
+        }*/
+
+    /* index */
+
+    .grid-container {
+      display: grid;
+      grid-template-columns: 50% 50%;
+      grid-gap: 30px;
+      height: 50vh;
+    }
+
+    .grid-container>div {
+      background-color: rgba(255, 255, 255, 0.8);
+      text-align: center;
+      font-size: 30px;
+    }
+
+    #inner-div {
+      margin: 10% 15%;
+    }
+
+    .item1,
+    .item2{
+      background-color: rgba(0, 0, 0, 1) !important;
+
+      font-weight: 600;
+      opacity: 0.8;
+      border-radius: 10px;
+    }
+
+    .item1:hover,
+    .item2:hover{
+      background-color: rgba(0, 0, 0, 0.95) !important;
+      cursor: pointer;
+    }
+
+    .grid-container a {
+      position: relative;
+      color: whitesmoke;
+      top: 155px;
+    }
+
+    .grid-container a:hover {
+      text-decoration: none;
+    }
+
+    @keyframes NO {
+
+      from,
+      to {
+        -webkit-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+      }
+
+      10%,
+      30%,
+      50%,
+      70%,
+      90% {
+        -webkit-transform: translate3d(-10px, 0, 0);
+        transform: translate3d(-10px, 0, 0);
+      }
+
+      20%,
+      40%,
+      60%,
+      80% {
+        -webkit-transform: translate3d(10px, 0, 0);
+        transform: translate3d(10px, 0, 0);
+      }
+    }
+
+    @keyframes arrive {
+      0% {
+        opacity: 0;
+        transform: translate3d(0, 50px, 0);
+      }
+
+      100% {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+      }
+    }
+
+    @keyframes move {
+      0% {
+        background-position: 0 0;
+      }
+
+      50% {
+        background-position: 100% 0;
+      }
+
+      100% {
+        background-position: 0 0;
+      }
+    }
+
+    /* index end */
+  </style>
+
+
+</head>
+
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root"></div>
+    <!--
+      This HTML file is a template.
+      If you open it directly in the browser, you will see an empty page.
+
+      You can add webfonts, meta tags, or analytics to this file.
+      The build step will place the bundled scripts into the <body> tag.
+
+      To begin the development, run `npm start` or `yarn start`.
+      To create a production bundle, use `npm run build` or `yarn build`.
+    -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+  <!-- navbar script -->
+  <script>
+    let dropdowns = document.querySelectorAll(".navbar .dropdown-toggler");
+    let dropdownIsOpen = false;
+
+    // Handle dropdown menues
+    if (dropdowns.length) {
+      dropdowns.forEach((dropdown) => {
+          
+        dropdown.addEventListener("click", (event) => {
+          let target = document.querySelector(
+            "#" + event.target.dataset.dropdown
+          );
+
+          if (target) {
+            if (target.classList.contains("show")) {
+              target.classList.remove("show");
+              dropdownIsOpen = false;
+            } else {
+              target.classList.add("show");
+              dropdownIsOpen = true;
+            }
+          }
+        });
+      });
+    }
+    // Handle closing dropdowns if a user clicked the body
+    window.addEventListener("mouseup", (event) => {
+      if (dropdownIsOpen) {
+        dropdowns.forEach((dropdownButton) => {
+          let dropdown = document.querySelector(
+            "#" + dropdownButton.dataset.dropdown
+          );
+          let targetIsDropdown = dropdown == event.target;
+
+          if (dropdownButton == event.target) {
+            return;
+          }
+
+          if (!targetIsDropdown && !dropdown.contains(event.target)) {
+            dropdown.classList.remove("show");
+          }
+        });
+      }
+    });
+
+
+    // Open links in mobiles
+    function handleSmallScreens() {
+      document
+        .querySelector(".navbar-toggler")
+        .addEventListener("click", () => {
+          let navbarMenu = document.querySelector(".navbar-menu");
+
+          if (navbarMenu.style.display === "flex") {
+            navbarMenu.style.display = "none";
+            return;
+          }
+
+          navbarMenu.style.display = "flex";
+        });
+    }
+    handleSmallScreens();
+  </script>
+  </body>
+</html>

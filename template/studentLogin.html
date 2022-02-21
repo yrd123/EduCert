@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+    integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous" />
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+    integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+    integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+    crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+  <title>Login</title>
+  <link rel="stylesheet" type="text/css" href="../static/css/navbar.css" />
+  <link rel="stylesheet" type="text/css" href="../static/css/login.css" />
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  <script src="../static/js/login.js"></script>
+
+
+</head>
+
+<body>
+  <nav class="navbar">
+    <div class="container">
+      <div class="navbar-header">
+        <button class="navbar-toggler" data-toggle="open-navbar1">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+        <a href="#">
+          <h4>Block<span>CERT</span></h4>
+        </a>
+      </div>
+
+      <div class="navbar-menu" id="open-navbar1">
+        <ul class="navbar-nav">
+          <li>
+            <a href="index.html">Home</a>
+          </li>
+          <li><a href="organizationLogin.html">Organization</a></li>
+          <li class="navbar-dropdown active">
+            <a href="studentLogin.html" class="dropdown-toggler" data-dropdown="my-dropdown-id">
+              Student 
+            </a>
+          </li>
+          <li><a href="{% url 'profile' %}">About Us</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+
+  <div style="
+        min-height: 95vh;
+        background-repeat: no-repeat;
+        background-size: cover;
+        display: flex;
+        background-position: left top;
+        background-attachment: fixed;
+        background-image: url('login-background.jpg');
+      ">
+    <div class="forms">
+      <ul class="tab-group">
+        <li class="tab active" id="loginbutton">
+          <a href="#login">Log In</a>
+        </li>
+        <li class="tab" id="signupbutton"><a href="#signup">Sign Up</a></li>
+      </ul>
+
+      <!-- LOGIN FORM -->
+      <form action="/login" id="login" onsubmit="return validatelogin()" name="loginform" method="POST">
+        <h1>Student's Login</h1>
+        <hr />
+        <div id="loginwarning" class="warning">
+          <!-- INSERT LOGIN WARNINGS HERE -->
+        </div>
+        <div class="input-field">
+          <label for="email">UserId</label>
+          <input type="text" name="email" placeholder="sanyamgandhi00" />
+          <label for="password">Password</label>
+          <input type="password" name="password" placeholder="******" />
+          <a href="studentDashboard.html"><input type="submit" value="Login" class="button" /></a>
+
+          <p class="text-p">
+            Not Yet Registered? <a href="#signup" id="tosignup">Sign Up</a>
+          </p>
+        </div>
+      </form>
+
+      <!-- SIGNUP FORM -->
+
+      <form action="/signup" id="signup" onsubmit="return validatesignup()" name="signupform" method="POST">
+        <h1>Sign Up as a Student</h1>
+        <hr />
+        <div id="signupwarning" class="warning">
+          <!-- INSERT SIGNUP WARNINGS HERE -->
+        </div>
+        <div class="input-field">
+          <label for="fullName">Name</label>
+          <input type="text" name="fullName" placeholder="John Doe" />
+          <label for="email">UserId</label>
+          <input type="text" name="email" placeholder="sanyamgandhi00" />
+          <label for="contactNumber">Mobile Number</label>
+          <input type="number" name="contactNumber" placeholder="9876543210" />
+          <!-- <div class="grid-container">
+          <label for="year" class="grid-item">Year of Study</label>
+          <label for="Branch" class="grid-item">Branch</label>
+          <select id="year" name="year" class="grid-item">
+            <option value="-1">Select Year</option>
+            <option value="fy">First Year</option>
+            <option value="sy">Second Year</option>
+            <option value="ty">Third Year</option>
+            <option value="ly">Fourth Year</option>
+          </select>
+          <select id="branch" name="branch" class="grid-item">
+            <option value="-1">Select Branch</option>
+            <option value="comps">COMPS</option>
+            <option value="etrx">ETRX</option>
+            <option value="extc">EXTC</option>
+            <option value="it">IT</option>
+            <option value="mech">MECH</option>
+          </select>
+        </div> -->
+          <label for="password">Password</label>
+          <p class="muted-text">
+            (Password Must be Atleast 6 Characters Long)
+          </p>
+          <input type="password" name="password" placeholder="******" />
+          <label for="confirmPassword">Confirm Password</label>
+          <p class="muted-text">
+            (Password and Confirm Password Fields Must Match)
+          </p>
+          <input type="password" name="confirmPassword" placeholder="******" />
+          <input type="submit" value="Sign up" class="button" />
+          <p class="text-p">
+            Already Registered? <a href="#login" id="tologin">Login</a>
+          </p>
+        </div>
+      </form>
+    </div>
+  </div>
+  <script>
+    /*
+    $(document).ready(function () {
+      $("#signupbutton").addClass("active");
+      $("#loginbutton").removeClass("active");
+
+      var href = $("#signupbutton > a").attr("href");
+      $(".forms > form").hide();
+      $(href).fadeIn(500);
+    });
+    document.getElementById("signupwarning").innerHTML =
+      "Email already taken. Try a different one.";
+  
+    document.getElementById("loginwarning").innerHTML =
+      "Your account has been deleted.";
+ 
+    document.getElementById("loginwarning").innerHTML =
+      "Input correct email and password";
+      */
+  </script>
+  
+    <!-- navbar script -->
+    <script>
+      let dropdowns = document.querySelectorAll(".navbar .dropdown-toggler");
+      let dropdownIsOpen = false;
+  
+      // Handle dropdown menues
+      if (dropdowns.length) {
+        dropdowns.forEach((dropdown) => {
+            
+          dropdown.addEventListener("click", (event) => {
+            let target = document.querySelector(
+              "#" + event.target.dataset.dropdown
+            );
+  
+            if (target) {
+              if (target.classList.contains("show")) {
+                target.classList.remove("show");
+                dropdownIsOpen = false;
+              } else {
+                target.classList.add("show");
+                dropdownIsOpen = true;
+              }
+            }
+          });
+        });
+      }
+      // Handle closing dropdowns if a user clicked the body
+      window.addEventListener("mouseup", (event) => {
+        if (dropdownIsOpen) {
+          dropdowns.forEach((dropdownButton) => {
+            let dropdown = document.querySelector(
+              "#" + dropdownButton.dataset.dropdown
+            );
+            let targetIsDropdown = dropdown == event.target;
+  
+            if (dropdownButton == event.target) {
+              return;
+            }
+  
+            if (!targetIsDropdown && !dropdown.contains(event.target)) {
+              dropdown.classList.remove("show");
+            }
+          });
+        }
+      });
+  
+  
+      // Open links in mobiles
+      function handleSmallScreens() {
+        document
+          .querySelector(".navbar-toggler")
+          .addEventListener("click", () => {
+            let navbarMenu = document.querySelector(".navbar-menu");
+  
+            if (navbarMenu.style.display === "flex") {
+              navbarMenu.style.display = "none";
+              return;
+            }
+  
+            navbarMenu.style.display = "flex";
+          });
+      }
+      handleSmallScreens();
+    </script>
+</body>
+
+</html>

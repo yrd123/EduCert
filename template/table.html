@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <title>YASH MADARCHOD</title>
+</head>
+<body>
+    <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">No.</th>
+            <th scope="col">Document Name</th>
+            <th scope="col">Issued by</th>
+            <th scope="col">Date of Issue</th>
+            <th scope="col">Type of Document</th>
+            <th scope="col">Status</th>
+            <th scope="col">Preview</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">1</th>
+            <td>Complete Web Developer</td>
+            <td>Udemy</td>
+            <td>23/11/2021</td>
+            <td>MOOC Certificate</td>
+            <td><p class = "badge badge-success">Verified</p></td>
+            <td><button type="button" class="btn btn-dark" data-toggle="modal" data-target="#exampleModal">
+                Preview
+              </button></td>
+          </tr>
+
+          <tr>
+            <th scope="row">2</th>
+            <td>U&I Volunteering 2021</td>
+            <td>U&I</td>
+            <td>18/09/2021</td>
+            <td>Professional Certificate</td>
+            <td><p class = "badge badge-success">Verified</p></td>
+            <td><button type="button" class="btn btn-dark" data-toggle="modal" data-target="#exampleModal">
+                Preview
+              </button></td>
+          </tr>
+
+          <tr>
+            <th scope="row">3</th>
+            <td>KJSCE Transcripts - 3rd year</td>
+            <td>K.J. Somaiya College of Engineering</td>
+            <td>02/08/2021</td>
+            <td>Transcripts</td>
+            <td><p class = "badge badge-secondary">Self-uploaded</p></td>
+            <td><button type="button" class="btn btn-dark" data-toggle="modal" data-target="#exampleModal">
+                Preview
+              </button></td>
+          </tr>
+
+          <tr>
+            <th scope="row">4</th>
+            <td>Deep Learning A-Z</td>
+            <td>Udemy</td>
+            <td>08/02/2021</td>
+            <td>MOOC Certificate</td>
+            <td><p class = "badge badge-success">Verified</p></td>
+            <td><button type="button" class="btn btn-dark" data-toggle="modal" data-target="#exampleModal">
+                Preview
+              </button></td>
+          </tr>
+
+          <tr>
+            <th scope="row">5</th>
+            <td>IBM Data Scientist</td>
+            <td>IBM@Coursera</td>
+            <td>11/12/2020</td>
+            <td>Professional Certificate</td>
+            <td><p class = "badge badge-success">Verified</p></td>
+            <td><button type="button" class="btn btn-dark" data-toggle="modal" data-target="#exampleModal">
+                Preview
+              </button></td>
+          </tr>
+
+        </tbody>
+      </table>
+
+      <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Certificate</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+               <center> <img src="cert.PNG" width = "450", height = "254"> </center> 
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-dark">Download</button>
+            </div>
+          </div>
+        </div>
+      </div>
+</body>
+</html>
