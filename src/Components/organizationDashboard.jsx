@@ -2,20 +2,25 @@ import React, { Component } from 'react';
 import Navbar from './navbar';
 import { getDocumentsByOrganizationId } from '../services/documentService';
 import Pagination from './common/pagination';
+import { paginate } from '../utils/paginate';
 
 class OrganizationDashboard extends Component {
     state = { 
         documents : getDocumentsByOrganizationId("orgid1"),
-        pageSize : 2
+        currentPage : 1,
+        pageSize : 1
     };
 
-    handlePageChange(page){
-        console.log(page);
+    handlePageChange = page => {
+        this.setState({currentPage : page});
     }
 
     render() { 
+        const {currentPage, pageSize, documents} = this.state;
+        const filteredDocuments = paginate(documents, currentPage, pageSize);
         return (
             <>
+                
                 <Navbar/>
                 <div style={{margin: 10, backgroundColor: 'white', padding: 10}}>
                     <table className="table table-striped">
@@ -31,7 +36,7 @@ class OrganizationDashboard extends Component {
                         </tr>
                         </thead>
                         <tbody>    
-                        { this.state.documents.map(document => 
+                        { filteredDocuments.map(document => 
                             <tr key={document._id}>
                                 <th scope="row">1</th>
                                 <td>{document.documentName}</td>
@@ -46,70 +51,15 @@ class OrganizationDashboard extends Component {
                                 </td>
                             </tr>
                         )}
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>Complete Web Developer</td>
-                                <td>#123</td>
-                                <td>Yash Deorah</td>
-                                <td>23/11/2021</td>
-                                <td>MOOC Certificate</td>
-                                <td><button type="button" className="btn btn-dark" data-toggle="modal" data-target="#exampleModal">
-                                    Preview
-                                </button></td>
-                            </tr>
-
-                            <tr>
-                                <th scope="row">2</th>
-                                <td>U&I Volunteering 2021</td>
-                                <td>#124</td>
-                                <td>Ronak Desai</td>
-                                <td>18/09/2021</td>
-                                <td>Professional Certificate</td>
-                                <td><button type="button" className="btn btn-dark" data-toggle="modal" data-target="#exampleModal">
-                                    Preview
-                                </button></td>
-                            </tr>
-
-                            <tr>
-                                <th scope="row">3</th>
-                                <td>KJSCE Transcripts - 3rd year</td>
-                                <td>#523</td>
-                                <td>Sanyam Gandhi</td>
-                                <td>02/08/2021</td>
-                                <td>Transcripts</td>
-                                <td><button type="button" className="btn btn-dark" data-toggle="modal" data-target="#exampleModal">
-                                    Preview
-                                </button></td>
-                            </tr>
-
-                            <tr>
-                                <th scope="row">4</th>
-                                <td>Deep Learning A-Z</td>
-                                <td>#512</td>
-                                <td>Manish Parihar</td>
-                                <td>08/02/2021</td>
-                                <td>MOOC Certificate</td>
-                                <td><button type="button" className="btn btn-dark" data-toggle="modal" data-target="#exampleModal">
-                                    Preview
-                                </button></td>
-                            </tr>
-
-                            <tr>
-                                <th scope="row">5</th>
-                                <td>IBM Data Scientist</td>
-                                <td>#881</td>
-                                <td>Jay Maru</td>
-                                <td>11/12/2020</td>
-                                <td>Professional Certificate</td>
-                                <td><button type="button" className="btn btn-dark" data-toggle="modal" data-target="#exampleModal">
-                                    Preview
-                                </button></td>
-                            </tr>
-
+                                                    
                         </tbody>
                     </table>
                 </div>
-                <Pagination itemsCount={this.state.documents.length} pageSize={this.state.pageSize} onPageChange={this.handlePageChange}/>
+                <Pagination 
+                    itemsCount={documents.length} 
+                    pageSize={pageSize} 
+                    currentPage={currentPage}
+                    onPageChange={this.handlePageChange}/>
             </>
         );
     }

@@ -1,0 +1,44 @@
+.box {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
+      0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    background-color: white;
+  }
+
+  p,
+  h3,
+  h2,
+  h4,
+  h5,
+  h1 {
+    font-family: "Bitter", serif;
+  }
+
+  p {
+    font-size: 18px;
+    color: #84817a;
+  }
+
+  #submitbutton, #create_pdf {
+    border: 1px solid #2c3e50;
+    padding: 10px;
+    width: 50%;
+    border-radius: 20px;
+    background-color: #40407a;
+    color: white;
+    outline: none;
+  }
+
+  .navbar .navbar-menu {
+    padding: 1.15rem 1rem !important;
+
+    font-size: 1.1em !important;
+  }
+
+  @media only screen and (max-width: 768px) {
+
+    /* For mobile phones: */
+    input,
+    button {
+      width: 100%;
+    }
+  }

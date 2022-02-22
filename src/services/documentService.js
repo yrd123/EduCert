@@ -1,14 +1,16 @@
 const documents = [
     {
-        _id:"docid1",
-        documentName:"docname1",
-        applicantId:"applicantid1",
-        applicantName:"appname1",
+        _id:"docid1", 
+        documentName:"docname1", //
+        applicantId:"applicantid1", //
+        applicantName:"appname1", //
         organizationId:"orgid1",
-        organizationName:"orgname1",
-        dateOfIssue:"12-1-22",
-        typeOfCertificate:"cert1",
-        status:"Verified"
+        organizationName:"orgname1", //
+        dateOfIssue:"12-1-22", //
+        typeOfCertificate:"cert1", //
+        status:"Verified" ,
+        description: "10th std certif" ,
+        documentUrl : "https://abc.com"
     },
     {
         _id:"docid2",
@@ -19,7 +21,10 @@ const documents = [
         organizationName:"orgname2",
         dateOfIssue:"13-1-22",
         typeOfCertificate:"cert3",
-        status:"Verified"
+        status:"Verified",
+        description: "10th std certif" ,
+        documentUrl : "https://abc.com"
+
     },
     {
         _id:"docid3",
@@ -30,7 +35,10 @@ const documents = [
         organizationName:"orgname3",
         dateOfIssue:"32-3-22",
         typeOfCertificate:"cert3",
-        status:"Self-uploaded"
+        status:"Self-uploaded",
+        description: "10th std certif" ,
+        documentUrl : "https://abc.com"
+
     },
     {
         _id:"docid4",
@@ -41,7 +49,10 @@ const documents = [
         organizationName:"orgname4",
         dateOfIssue:"42-4-22",
         typeOfCertificate:"cert4",
-        status:"Verified"
+        status:"Verified",
+        description: "10th std certif" ,
+        documentUrl : "https://abc.com"
+
     },
     {
         _id:"docid5",
@@ -52,7 +63,10 @@ const documents = [
         organizationName:"orgname5",
         dateOfIssue:"52-5-22",
         typeOfCertificate:"cert5",
-        status:"Self-uploaded"
+        status:"Self-uploaded",
+        description: "10th std certif" ,
+        documentUrl : "https://abc.com"
+
     },
     {
         _id:"docid6",
@@ -63,7 +77,10 @@ const documents = [
         organizationName:"orgname6",
         dateOfIssue:"62-6-22",
         typeOfCertificate:"cert6",
-        status:"Self-uploaded"
+        status:"Self-uploaded",
+        description: "10th std certif" ,
+        documentUrl : "https://abc.com"
+
     },
     {
         _id:"docid7",
@@ -74,7 +91,10 @@ const documents = [
         organizationName:"orgname7",
         dateOfIssue:"72-7-22",
         typeOfCertificate:"cert7",
-        status:"Self-uploaded"
+        status:"Self-uploaded",
+        description: "10th std certif" ,
+        documentUrl : "https://abc.com"
+
     },
     {
         _id:"docid8",
@@ -85,7 +105,10 @@ const documents = [
         organizationName:"orgname8",
         dateOfIssue:"82-8-22",
         typeOfCertificate:"cert8",
-        status:"Self-uploaded"
+        status:"Self-uploaded",
+        description: "10th std certif" ,
+        documentUrl : "https://abc.com"
+
     }
 ]
 

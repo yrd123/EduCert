@@ -19,7 +19,6 @@ export default class Main extends Component {
               <Route exact path="organization/login" element={<OrganizationLogin />} />  
               <Route exact path="organization/dashboard" element={<OrganizationDashboard />} />
               <Route exact path="organization/uploadDocument" element={<OrganizationUploadDocument />} />
-
               <Route exact path="applicant/login" element={<ApplicantLogin />} />
               <Route exact path="applicant/dashboard" element={<ApplicantDashboard />} />
               <Route exact path="applicant/uploadDocument" element={<ApplicantUploadDocument />} />
