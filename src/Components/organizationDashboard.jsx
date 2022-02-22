@@ -1,16 +1,20 @@
 import React, { Component } from 'react';
 import Navbar from './navbar';
 import { getDocumentsByOrganizationId } from '../services/documentService';
+import Pagination from './common/pagination';
 
 class OrganizationDashboard extends Component {
     state = { 
-        documents : getDocumentsByOrganizationId("orgid1")
+        documents : getDocumentsByOrganizationId("orgid1"),
+        pageSize : 2
     };
 
+    handlePageChange(page){
+        console.log(page);
+    }
+
     render() { 
-        console.log(this.state.documents);
         return (
-            
             <>
                 <Navbar/>
                 <div style={{margin: 10, backgroundColor: 'white', padding: 10}}>
@@ -28,7 +32,7 @@ class OrganizationDashboard extends Component {
                         </thead>
                         <tbody>    
                         { this.state.documents.map(document => 
-                            <tr>
+                            <tr key={document._id}>
                                 <th scope="row">1</th>
                                 <td>{document.documentName}</td>
                                 <td>{document.applicantId}</td>
@@ -105,6 +109,7 @@ class OrganizationDashboard extends Component {
                         </tbody>
                     </table>
                 </div>
+                <Pagination itemsCount={this.state.documents.length} pageSize={this.state.pageSize} onPageChange={this.handlePageChange}/>
             </>
         );
     }

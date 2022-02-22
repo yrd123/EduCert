@@ -1,14 +1,20 @@
 import React, { Component } from 'react';
 import { getDocumentsByApplicantId } from '../services/documentService';
 import Navbar from './navbar';
+import Pagination from './common/pagination';
 
 class ApplicantDashboard extends Component {
     state = { 
-        documents : getDocumentsByApplicantId("applicantid1")
+        documents : getDocumentsByApplicantId("applicantid1"),
+        pageSize : 2
     };
 
     getStatusClass(status){
         return status === "Verified" ? "badge badge-success" : "badge badge-warning";
+    }
+
+    handlePageChange = page => {
+        console.log(page);
     }
 
     render() { 
@@ -30,7 +36,7 @@ class ApplicantDashboard extends Component {
                 </thead>
                 <tbody>
                 { this.state.documents.map(document => 
-                    <tr>
+                    <tr key={document._id}>
                         <th scope="row">1</th>
                         <td>{document.documentName}</td>
                         <td>{document.organizationName}</td>
@@ -107,6 +113,7 @@ class ApplicantDashboard extends Component {
                 </tbody>
             </table>
             </div>
+            <Pagination itemsCount={this.state.documents.length} pageSize={this.state.pageSize} onPageChange={this.handlePageChange}/>
         </>
 
         );
