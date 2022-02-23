@@ -1,16 +1,18 @@
 const documents = [
     {
         _id:"docid1", 
-        documentName:"docname1", //
+        documentHash:"",
+        documentName:"docname8", //
         applicantId:"applicantid1", //
+        applicantOrganizationIdentificationNumber:"applicantIdentificationNumber", 
         applicantName:"appname1", //
         organizationId:"orgid1",
         organizationName:"orgname1", //
         dateOfIssue:"12-1-22", //
-        typeOfCertificate:"cert1", //
+        typeOfDocument:"cert3", //
         status:"Verified" ,
         description: "10th std certif" ,
-        documentUrl : "https://abc.com"
+        documentUrl : "D:\\Practice\\Mega Proj\\Educert\\React\\MegaProject\\template\\cert.PNG"
     },
     {
         _id:"docid2",
@@ -20,7 +22,7 @@ const documents = [
         organizationId:"orgid1",
         organizationName:"orgname2",
         dateOfIssue:"13-1-22",
-        typeOfCertificate:"cert3",
+        typeOfDocument:"cert3",
         status:"Verified",
         description: "10th std certif" ,
         documentUrl : "https://abc.com"
@@ -34,8 +36,8 @@ const documents = [
         organizationId:"orgid3",
         organizationName:"orgname3",
         dateOfIssue:"32-3-22",
-        typeOfCertificate:"cert3",
-        status:"Self-uploaded",
+        typeOfDocument:"cert3",
+        status:"Self-Uploaded",
         description: "10th std certif" ,
         documentUrl : "https://abc.com"
 
@@ -48,7 +50,7 @@ const documents = [
         organizationId:"orgid4",
         organizationName:"orgname4",
         dateOfIssue:"42-4-22",
-        typeOfCertificate:"cert4",
+        typeOfDocument:"cert4",
         status:"Verified",
         description: "10th std certif" ,
         documentUrl : "https://abc.com"
@@ -62,8 +64,8 @@ const documents = [
         organizationId:"orgid5",
         organizationName:"orgname5",
         dateOfIssue:"52-5-22",
-        typeOfCertificate:"cert5",
-        status:"Self-uploaded",
+        typeOfDocument:"cert5",
+        status:"Self-Uploaded",
         description: "10th std certif" ,
         documentUrl : "https://abc.com"
 
@@ -76,8 +78,8 @@ const documents = [
         organizationId:"orgid1",
         organizationName:"orgname6",
         dateOfIssue:"62-6-22",
-        typeOfCertificate:"cert6",
-        status:"Self-uploaded",
+        typeOfDocument:"cert6",
+        status:"Self-Uploaded",
         description: "10th std certif" ,
         documentUrl : "https://abc.com"
 
@@ -90,8 +92,8 @@ const documents = [
         organizationId:"orgid7",
         organizationName:"orgname7",
         dateOfIssue:"72-7-22",
-        typeOfCertificate:"cert7",
-        status:"Self-uploaded",
+        typeOfDocument:"cert7",
+        status:"Self-Uploaded",
         description: "10th std certif" ,
         documentUrl : "https://abc.com"
 
@@ -104,8 +106,8 @@ const documents = [
         organizationId:"orgid8",
         organizationName:"orgname8",
         dateOfIssue:"82-8-22",
-        typeOfCertificate:"cert8",
-        status:"Self-uploaded",
+        typeOfDocument:"cert8",
+        status:"Self-Uploaded",
         description: "10th std certif" ,
         documentUrl : "https://abc.com"
 
