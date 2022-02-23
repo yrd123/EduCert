@@ -6,6 +6,8 @@ import { paginate } from '../utils/paginate';
 import _ from 'lodash';
 import CustomModal from './common/modal';
 import CenteredTabs from './common/tabs';
+import SearchBar from './common/searchBar';
+
 
 class OrganizationDashboard extends Component {
     state = { 
@@ -13,12 +15,13 @@ class OrganizationDashboard extends Component {
         documentsStatus : "All",
         currentPage : 1,
         pageSize : 1,
-        sorting : { property : "documentName", order : "asc" }
+        sorting : { property : "documentName", order : "asc" },
+        searchText  : ""
     };
 
     
     handleTabChange = tab =>{
-        this.setState({documentsStatus : tab});
+        this.setState({documentsStatus : tab, searchText : ""});
     }
 
     handlePageChange = page => {
@@ -44,12 +47,22 @@ class OrganizationDashboard extends Component {
         return status === "Verified" ? "badge badge-success" : "badge badge-warning";
     }
     
+    search = searchText => {
+        console.log(searchText);
+        this.setState({searchText});
+    }
 
     render() { 
-        const {currentPage, documentsStatus, pageSize, documents, sorting} = this.state;
+        const {currentPage, documentsStatus, pageSize, documents, sorting, searchText} = this.state;
         let filteredDocuments = documents;
         if(documentsStatus !== "All")
             filteredDocuments = documents.filter(document => document.status === documentsStatus);
+        filteredDocuments = filteredDocuments.filter(document => {
+            for(let property in document){
+                if(document[property].includes(searchText)) return true;
+            }
+            return false;
+        })
         const sortedDocuments = _.orderBy(filteredDocuments,[sorting.property],[sorting.order]);
         const paginatedDocuments = paginate(sortedDocuments, currentPage, pageSize);
         
@@ -57,6 +70,8 @@ class OrganizationDashboard extends Component {
             <>
                 <Navbar/>
                 <div style={{margin: 10, backgroundColor: 'white', padding: 10}}>
+                <SearchBar search={this.search} searchInput={searchText} />
+
                     <CenteredTabs tabs={["All","Verified","Self-Uploaded"]} handleTabChange={this.handleTabChange} /><br />
                     <table className="table table-striped">
                         <thead>
