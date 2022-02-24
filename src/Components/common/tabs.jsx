@@ -12,9 +12,9 @@ const CenteredTabs = props => {
 
   return (
     <Box sx={{ width: '100%', bgcolor: 'background.paper' }}>
-      <Tabs value={value} onChange={handleChange} centered>
+      <Tabs value={value} onChange={handleChange}  TabIndicatorProps={{style: {backgroundColor: "black"}}} centered>
         {props.tabs.map(tab => 
-        <Tab key={tab} label={tab} onClick={() => props.handleTabChange(tab)} />
+        <Tab key={tab} label={<span style={{color:"black", fontSize:17, fontWeight:400}}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{tab}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>} onClick={() => props.handleTabChange(tab)} />
         )}
       </Tabs>
     </Box>

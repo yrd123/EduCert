@@ -1,26 +1,38 @@
 import React, { Component } from 'react';
 import './login.css';
 import Navbar from './navbar';
+import CenteredTabs from './common/tabs';
 
 
 
 export default class ApplicantLogin extends Component {
+    state = {
+      currentTab : "Log In"
+    }
+
+    handleTabChange = tab =>{
+      this.setState({currentTab : tab});
+    }
+
     render() {
       return  (
         <div>
         <Navbar/>
-        <div style={{minHeight: '95vh', backgroundRepeat: 'no-repeat', backgroundSize: 'cover', display: 'flex', backgroundPosition: 'left top', backgroundAttachment: 'fixed', backgroundImage: 'url("login-background.jpg")'}}>
+        <div>
           <div className="forms">
-            <ul className="tab-group">
+            {/* <ul className="tab-group">
               <li className="tab active" id="loginbutton">
                 <a href="#login">Log In</a>
               </li>
               <li className="tab" id="signupbutton"><a href="#signup">Sign Up</a></li>
-            </ul>
+            </ul> */}
+
+            <CenteredTabs tabs={["Log In","Sign Up"]} handleTabChange={this.handleTabChange} /><br />
+
+
             {/* LOGIN FORM */}
-            <form action="/login" id="login" onsubmit="return validatelogin()" name="loginform" method="POST">
-              <h1>Applicant's Login</h1>
-              <hr />
+            <form action="/login" id="login" style={{display: this.state.currentTab==='Log In' ? 'block' : 'none' }} onsubmit="return validatelogin()" name="loginform" method="POST">
+              <br/>
               <div id="loginwarning" className="warning">
                 {/* INSERT LOGIN WARNINGS HERE */}
               </div>
@@ -36,9 +48,7 @@ export default class ApplicantLogin extends Component {
               </div>
             </form>
             {/* SIGNUP FORM */}
-            <form action="/signup" id="signup" onsubmit="return validatesignup()" name="signupform" method="POST">
-              <h1>Sign Up as a Applicant</h1>
-              <hr />
+            <form action="/signup" id="signup" style={{display: this.state.currentTab==='Sign Up' ? 'block' : 'none' }} onsubmit="return validatesignup()" name="signupform" method="POST">
               <div id="signupwarning" className="warning">
                 {/* INSERT SIGNUP WARNINGS HERE */}
               </div>

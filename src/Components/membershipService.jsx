@@ -17,13 +17,12 @@ export default class MembershipService extends Component {
     render() {
         return (
             <React.Fragment>
-
+                <Navbar />
                 <div className="loginDiv" style={{}}>
-                    <div className="forms ">
+                    <div className="forms">
                         {/* LOGIN FORM */}
                         <form id="login" onsubmit="" name="membershipserviceform" >
-                            <h1>Membership Service</h1>
-                            <hr />
+                            <br />
                             <div id="loginwarning" className="warning">
                                 {/* INSERT LOGIN WARNINGS HERE */}
                             </div>
