@@ -9,6 +9,7 @@ import OrganizationUploadDocument from './components/organizationUploadDocument'
 import ApplicantLogin from './components/applicantLogin';
 import ApplicantDashboard from './components/applicantDashboard';
 import ApplicantUploadDocument from './components/applicantUploadDocument';
+import MembershipService from './components/membershipService';
 
 export default class Main extends Component {
     render() {
@@ -22,6 +23,8 @@ export default class Main extends Component {
               <Route exact path="applicant/login" element={<ApplicantLogin />} />
               <Route exact path="applicant/dashboard" element={<ApplicantDashboard />} />
               <Route exact path="applicant/uploadDocument" element={<ApplicantUploadDocument />} />
+              
+              <Route exact path="admin/membershipService" element={<MembershipService />} />
           </Routes>
         </BrowserRouter>
       );
