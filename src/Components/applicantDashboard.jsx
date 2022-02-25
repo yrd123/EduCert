@@ -105,13 +105,14 @@ class ApplicantDashboard extends Component {
                 
                 </tbody>
             </table>
-            </div>
             <Pagination 
                 itemsCount={filteredDocuments.length} 
                 pageSize={pageSize} 
                 currentPage={currentPage}
                 onPageChange={this.handlePageChange}
-            />            
+            />   
+            </div>
+                     
         </>
 
         );

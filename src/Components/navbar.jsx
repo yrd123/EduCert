@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
+import './navbar.css';
 
 class Navbar extends Component {
     render() { 
         return (
-        <nav className="navbar">
+        /*<nav className="navbar">
           <div className="container">
             <div className="navbar-header">
               <button className="navbar-toggler" data-toggle="open-navbar1">
@@ -32,8 +33,19 @@ class Navbar extends Component {
               </ul>
             </div>
           </div>
-        </nav>
-        
+        </nav>*/
+
+        <header>
+          <h1><img src="https://www.formationsco.com/wp-content/uploads/2017/12/certificate_icon.png" class="logoImg" /> EduCert</h1>
+          <div class="nav-div">
+            <a><button class="navBtn active">Home</button></a>
+            <a href="/applicant/login"><button class="navBtn">Applicant</button></a>
+            <a href="/organization/login"><button class="navBtn">Organization</button></a>
+            <a href="/applicant/dashboard"><button class="navBtn">Applicant Dashboard</button></a>
+            <a href="/organization/dashboard"><button class="navBtn">Organization Dashboard</button></a>
+           </div> 
+        </header>
+                
         );
     }
 }

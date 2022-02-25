@@ -104,12 +104,13 @@ class OrganizationDashboard extends Component {
                         )}
                         </tbody>
                     </table>
+                    
+                    <Pagination 
+                        itemsCount={filteredDocuments.length} 
+                        pageSize={this.state.pageSize} 
+                        currentPage={currentPage}
+                        onPageChange={this.handlePageChange}/>
                 </div>
-                <Pagination 
-                    itemsCount={filteredDocuments.length} 
-                    pageSize={this.state.pageSize} 
-                    currentPage={currentPage}
-                    onPageChange={this.handlePageChange}/>
             </>
         );
     }
