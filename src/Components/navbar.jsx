@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { NavLink } from 'react-router-dom';
 import './navbar.css';
 
 class Navbar extends Component {
@@ -38,11 +39,11 @@ class Navbar extends Component {
         <header>
           <h1><img src="https://www.formationsco.com/wp-content/uploads/2017/12/certificate_icon.png" class="logoImg" /> EduCert</h1>
           <div class="nav-div">
-            <a><button class="navBtn active">Home</button></a>
-            <a href="/applicant/login"><button class="navBtn">Applicant</button></a>
-            <a href="/organization/login"><button class="navBtn">Organization</button></a>
-            <a href="/applicant/dashboard"><button class="navBtn">Applicant Dashboard</button></a>
-            <a href="/organization/dashboard"><button class="navBtn">Organization Dashboard</button></a>
+          <NavLink to="/"> <button class="navBtn active">Home</button> </NavLink>
+            <NavLink to="/applicant/login"><button class="navBtn">Applicant</button></NavLink>
+            <NavLink to="/organization/login"><button class="navBtn">Organization</button></NavLink>
+            <NavLink to="/applicant/dashboard"><button class="navBtn">Applicant Dashboard</button></NavLink>
+            <NavLink to="/organization/dashboard"><button class="navBtn">Organization Dashboard</button></NavLink>
            </div> 
         </header>
                 
