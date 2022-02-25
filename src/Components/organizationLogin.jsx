@@ -11,8 +11,9 @@ export default class OrganizationLogin extends Component {
             <div className="forms">
               {/* LOGIN FORM */}
               <form action="/login" id="login" onsubmit="return validatelogin()" name="loginform" method="POST">
-                <h1>Organization's Login</h1>
-                <hr />
+                <br />
+                <br />
+                <br />
                 <div id="loginwarning" className="warning">
                   {/* INSERT LOGIN WARNINGS HERE */}
                 </div>

@@ -73,6 +73,7 @@ class ApplicantDashboard extends Component {
             <Navbar/>
             <div style={{margin:10, backgroundColor: 'white', padding: 10}}>
             <SearchBar search={this.search} searchInput={searchText} />
+            <br />
             <CenteredTabs tabs={["All","Verified","Self-Uploaded"]} handleTabChange={this.handleTabChange} /><br />
             <table className="table table-striped">
                 <thead>
@@ -104,13 +105,14 @@ class ApplicantDashboard extends Component {
                 
                 </tbody>
             </table>
-            </div>
             <Pagination 
                 itemsCount={filteredDocuments.length} 
                 pageSize={pageSize} 
                 currentPage={currentPage}
                 onPageChange={this.handlePageChange}
-            />            
+            />   
+            </div>
+                     
         </>
 
         );
