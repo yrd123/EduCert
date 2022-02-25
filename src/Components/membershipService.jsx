@@ -7,6 +7,10 @@ export default class MembershipService extends Component {
         orginfo: { name: '', address: '', email: '', password: '', type: '', contact: '' }
     };
 
+           
+
+ 
+
     handleChange = e =>{
         const orginfo = {...this.state.orginfo} ;
         orginfo[e.currentTarget.name] = e.currentTarget.value ;
