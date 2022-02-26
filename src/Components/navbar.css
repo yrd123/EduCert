@@ -29,21 +29,25 @@ header h1 {
 }
 
 .navBtn {
-  height: 90px;
+  height: 80px;
   margin: 0;
   background-color: #fff;
   border: 0;
   padding-left: 20px;
   padding-right: 20px;
   font-family: "montserrat";
-  box-shadow: inset 0 0 0 0 rgb(240 240 256);
   transition: 0.4s ease-out;
 }
+
+.active > button:hover {
+  box-shadow: inset 0 0 0 0 rgb(240 240 256) !important;
+}
+
 .navBtn:hover {
   box-shadow: inset 0 40px 40px 0 rgb(240 240 256);
 }
 
-.navBtn.active {
+.active > button {
   background-color: black;
   color: white;
 }
