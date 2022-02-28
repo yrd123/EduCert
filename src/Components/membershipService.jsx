@@ -32,9 +32,9 @@ export default class MembershipService extends Component {
             errors["address"] = "Address Cannot be empty";
           }
           else if (typeof orginfo["address"] !== "undefined") {
-            if (!orginfo["address"].match(/^[a-zA-Z ]*$/)) {
+            if (!orginfo["address"].match(/^[a-zA-Z0-9 ]*$/)) {
               formIsValid = false;
-              errors["address"] = "Organization Address should contain only Letters and spaces";
+              errors["address"] = "Organization Address should contain only Letters and spaces and numbers";
             }
           }
       

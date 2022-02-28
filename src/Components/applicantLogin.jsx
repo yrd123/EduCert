@@ -7,12 +7,83 @@ import CenteredTabs from './common/tabs';
 
 export default class ApplicantLogin extends Component {
     state = {
-      currentTab : "Log In"
+      currentTab : "Log In" ,
+      applicantinfo: {
+        id: "",
+        password: "",
+        
+      },
+      errors: {},
     }
 
     handleTabChange = tab =>{
       this.setState({currentTab : tab});
     }
+
+    
+  handleChange = (e) => {
+    const applicantinfo = { ...this.state.applicantinfo };
+    applicantinfo[e.currentTarget.name] = e.currentTarget.value;
+    this.setState({ applicantinfo });
+    console.log(applicantinfo);
+  };
+
+  handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (this.handleValidation()) {
+    } else {
+      return;
+    }
+
+    console.log(this.state.errors);
+  };
+
+  handleValidation() {
+    let applicantinfo = this.state.applicantinfo;
+    let errors = {};
+    let formIsValid = true;
+
+    //Id
+    if (!applicantinfo["id"]) {
+      formIsValid = false;
+      errors["id"] = "Id Cannot be empty";
+    }
+    else if (typeof applicantinfo["id"] !== "undefined") {
+      if (!applicantinfo["id"].match(/^[a-zA-Z0-9]*$/)) {
+        formIsValid = false;
+        errors["id"] = "Id should contain only Letters and numbers";
+      }
+    }
+
+
+
+        //Password
+    if (!applicantinfo["password"]) {
+      formIsValid = false;
+      errors["password"] = "Cannot be empty";
+    } else if (typeof applicantinfo["password"] !== "undefined") {
+      var minNumberofChars = 6;
+      var maxNumberofChars = 16;
+      var newPassword = applicantinfo["password"];
+      if (
+        newPassword.length < minNumberofChars ||
+        newPassword.length > maxNumberofChars
+      ) {
+        formIsValid = false;
+        errors["password"] = "Password should be between 6 to 16 char";
+      }
+      if (!applicantinfo["password"].match(/^[a-zA-Z0-9!@#$%^&*]{6,16}$/)) {
+        formIsValid = false;
+        errors["password"] =
+          "password should contain atleast one number and one special character";
+      }
+    }
+
+
+    this.setState({ errors: errors });
+    return formIsValid;
+  } ;
 
     render() {
       return  (
@@ -31,17 +102,31 @@ export default class ApplicantLogin extends Component {
 
 
             {/* LOGIN FORM */}
-            <form action="/login" id="login" style={{display: this.state.currentTab==='Log In' ? 'block' : 'none' }} onsubmit="return validatelogin()" name="loginform" method="POST">
+            <form  id="login" style={{display: this.state.currentTab==='Log In' ? 'block' : 'none' }} onSubmit={this.handleSubmit} name="loginform" method="POST">
               <br/>
               <div id="loginwarning" className="warning">
                 {/* INSERT LOGIN WARNINGS HERE */}
               </div>
               <div className="input-field">
-                <label htmlFor="email">UserId</label>
-                <input type="text" name="email" placeholder="sanyamgandhi00" />
+                <label htmlFor="id">UserId</label>
+                <input type="text" name="id" id = "id" onChange={this.handleChange} value = {this.state.applicantinfo.id} placeholder="sanyamgandhi00" />
+                { this.state.errors['id'] && 
+                                <div class="alert alert-danger" role="alert">
+                                {  this.state.errors["id"]}
+                                </div>
+                                }
+                                
                 <label htmlFor="password">Password</label>
-                <input type="password" name="password" placeholder="******" />
-                <a href="applicant/dashboard"><input type="submit" defaultValue="Login" className="button" /></a>
+                <input type="password" name="password" id = "password" onChange={this.handleChange} value = {this.state.applicantinfo.password}  placeholder="******" />
+                { this.state.errors['password'] && 
+                                <div class="alert alert-danger" role="alert">
+                                {  this.state.errors["password"]}
+                                </div>
+                                }
+                                
+                {/* <a href="applicant/dashboard"> */}
+                  <input type="submit" defaultValue="Login" className="button" />
+                  {/* </a> */}
                 <p className="text-p">
                   Not Yet Registered? <a href="#signup" id="tosignup">Sign Up</a>
                 </p>
