@@ -3,7 +3,6 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
-import PreviewCertificate from './previewCertificate';
 
 const style = {
   position: 'absolute',
@@ -24,7 +23,7 @@ const CustomModal = (props) => {
 
   return (
     <div>
-      <Button onClick={handleOpen}>Open modal</Button>
+      <Button onClick={handleOpen}>{props.modalButtonLabel}</Button>
       <Modal
         open={open}
         onClose={handleClose}
@@ -35,7 +34,8 @@ const CustomModal = (props) => {
           <Typography id="modal-modal-title" variant="h6" component="h2">
           </Typography>
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            <PreviewCertificate document={props.modalBody} />
+            {/* <PreviewCertificate document={props.modalBody} /> */}
+            {props.modalBody}
           </Typography>
         </Box>
       </Modal>

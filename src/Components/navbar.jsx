@@ -37,13 +37,13 @@ class Navbar extends Component {
       </nav>*/
 
       <header>
-        <h1><img src="https://www.formationsco.com/wp-content/uploads/2017/12/certificate_icon.png" class="logoImg" /> EduCert</h1>
-        <div class="nav-div">
-          <NavLink to="/"> <button class="navBtn ">Home</button></NavLink>
-          <NavLink to="/applicant/login"><button class="navBtn">Applicant</button></NavLink>
-          <NavLink to="/organization/login"><button class="navBtn">Organization</button></NavLink>
-          <NavLink to="/applicant/dashboard"><button class="navBtn">Applicant Dashboard</button></NavLink>
-          <NavLink to="/organization/dashboard"><button class="navBtn">Organization Dashboard</button></NavLink>
+        <h1><img src="https://www.formationsco.com/wp-content/uploads/2017/12/certificate_icon.png" className="logoImg" /> EduCert</h1>
+        <div className="nav-div">
+          <NavLink to="/"> <button className="navBtn ">Home</button></NavLink>
+          <NavLink to="/applicant/login"><button className="navBtn">Applicant</button></NavLink>
+          <NavLink to="/organization/login"><button className="navBtn">Organization</button></NavLink>
+          <NavLink to="/applicant/dashboard"><button className="navBtn">Applicant Dashboard</button></NavLink>
+          <NavLink to="/organization/dashboard"><button className="navBtn">Organization Dashboard</button></NavLink>
         </div>
       </header>
 

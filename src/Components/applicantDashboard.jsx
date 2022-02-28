@@ -7,6 +7,7 @@ import _ from 'lodash';
 import CustomModal from './common/modal';
 import CenteredTabs from './common/tabs';
 import SearchBar from './common/searchBar';
+import PreviewCertificate from './common/previewCertificate';
 
 class ApplicantDashboard extends Component {
     state = { 
@@ -84,7 +85,7 @@ class ApplicantDashboard extends Component {
                     <th className="clickable" onClick={() => this.sort("dateOfIssue")}  scope="col">Date of Issue {this.renderSortIcon("dateOfIssue")}</th>
                     <th className="clickable" onClick={() => this.sort("typeOfDocument")}  scope="col">Type of Document {this.renderSortIcon("typeOfDocument")}</th>
                     <th  className="clickable" onClick={() => this.sort("status")} scope="col">Status {this.renderSortIcon("status")}</th>
-                    <th scope="col">Preview</th>
+                    <th scope="col"></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -97,7 +98,7 @@ class ApplicantDashboard extends Component {
                         <td>{document.typeOfDocument}</td>
                         <td><span className={this.getStatusClass(document.status)}>{document.status}</span></td>
                         <td>
-                            <CustomModal modalBody={document} /> 
+                            <CustomModal modalBody={<PreviewCertificate document={document} />} modalButtonLabel="View"/> 
                         </td> 
                                             
                     </tr>

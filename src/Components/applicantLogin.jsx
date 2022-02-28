@@ -100,7 +100,6 @@ export default class ApplicantLogin extends Component {
 
             <CenteredTabs tabs={["Log In","Sign Up"]} handleTabChange={this.handleTabChange} /><br />
 
-
             {/* LOGIN FORM */}
             <form  id="login" style={{display: this.state.currentTab==='Log In' ? 'block' : 'none' }} onSubmit={this.handleSubmit} name="loginform" method="POST">
               <br/>
@@ -138,12 +137,22 @@ export default class ApplicantLogin extends Component {
                 {/* INSERT SIGNUP WARNINGS HERE */}
               </div>
               <div className="input-field">
+                <label htmlFor="email">Email</label>
+                <input type="email" name="email" placeholder="sanyamgandhi@gmail.com" />
                 <label htmlFor="fullName">Name</label>
                 <input type="text" name="fullName" placeholder="John Doe" />
-                <label htmlFor="email">UserId</label>
-                <input type="text" name="email" placeholder="sanyamgandhi00" />
+                <label htmlFor="address">Address</label>
+                <input type="text" name="address" placeholder="John Doe" />
+                <label htmlFor="pincode">Pin/Zip Code</label>
+                <input type="text" name="pincode" placeholder="John Doe" />
+                <label htmlFor="state">State</label>
+                <input type="text" name="state" placeholder="John Doe" />
+                <label htmlFor="country">Country</label>
+                <input type="text" name="country" placeholder="John Doe" />
                 <label htmlFor="contactNumber">Mobile Number</label>
                 <input type="number" name="contactNumber" placeholder={9876543210} />
+                <label htmlFor="dob">Date of Birth</label>
+                <input type="date" name="dob" placeholder="22/12/2000" />
                 {/* <div class="grid-container">
           <label for="year" class="grid-item">Year of Study</label>
           <label for="Branch" class="grid-item">Branch</label>
@@ -174,9 +183,6 @@ export default class ApplicantLogin extends Component {
                 </p>
                 <input type="password" name="confirmPassword" placeholder="******" />
                 <input type="submit" defaultValue="Sign up" className="button" />
-                <p className="text-p">
-                  Already Registered? <a href="#login" id="tologin">Login</a>
-                </p>
               </div>
             </form>
           </div>
