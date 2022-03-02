@@ -119,8 +119,9 @@ export default class MembershipService extends Component {
     e.preventDefault();
 
     if (this.handleValidation()) {
-
+        console.log("valid")
     } else {
+      console.log("invalid");
       return;
     }
 

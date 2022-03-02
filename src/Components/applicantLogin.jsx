@@ -14,6 +14,7 @@ export default class ApplicantLogin extends Component {
         
       },
       errors: {},
+      signupErrors :{} 
     }
 
     handleTabChange = tab =>{
@@ -153,25 +154,7 @@ export default class ApplicantLogin extends Component {
                 <input type="number" name="contactNumber" placeholder={9876543210} />
                 <label htmlFor="dob">Date of Birth</label>
                 <input type="date" name="dob" placeholder="22/12/2000" />
-                {/* <div class="grid-container">
-          <label for="year" class="grid-item">Year of Study</label>
-          <label for="Branch" class="grid-item">Branch</label>
-          <select id="year" name="year" class="grid-item">
-            <option value="-1">Select Year</option>
-            <option value="fy">First Year</option>
-            <option value="sy">Second Year</option>
-            <option value="ty">Third Year</option>
-            <option value="ly">Fourth Year</option>
-          </select>
-          <select id="branch" name="branch" class="grid-item">
-            <option value="-1">Select Branch</option>
-            <option value="comps">COMPS</option>
-            <option value="etrx">ETRX</option>
-            <option value="extc">EXTC</option>
-            <option value="it">IT</option>
-            <option value="mech">MECH</option>
-          </select>
-        </div> */}
+                
                 <label htmlFor="password">Password</label>
                 <p className="muted-text">
                   (Password Must be Atleast 6 Characters Long)

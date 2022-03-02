@@ -15,11 +15,57 @@ class OrganizationUploadDocument extends Component {
         openCertificateModal : false,
         applicant : {
           _id:'', email:'', name:''
-        }
+        },
+        errors : {}
     };
+
+    handleValidation() {
+      let info = this.state.info;
+      let errors = {};
+      let formIsValid = true;
+  
+  
+      //applicantOrganizationId
+      if (!info["applicantOrganizationId"]) {
+        formIsValid = false;
+        errors["applicantOrganizationId"] = "applicantOrganizationId Cannot be empty";
+      }
+      else if (typeof info["applicantOrganizationId"] !== "undefined") {
+        if (!info["applicantOrganizationId"].match(/^[a-zA-Z0-9]*$/)) {
+          formIsValid = false;
+          errors["applicantOrganizationId"] = "ApplicantOrganizationId should contain only Letters and numbers";
+        }
+      }
+
+      //documentName
+      if (!info["documentName"]) {
+        formIsValid = false;
+        errors["documentName"] = "DocumentName Cannot be empty";
+      }
+
+      //applicantId
+      if (!info["applicantId"]) {
+        formIsValid = false;
+        errors["applicantId"] = "applicantId Cannot be empty";
+      }
+  
+      this.setState({ errors: errors });
+      return formIsValid;
+    };
+
 
     handleSubmit = e => {
         e.preventDefault();
+
+        if (this.handleValidation()) {
+          
+      console.log("valid") ;
+        } else {
+          
+      console.log("invalid") ;
+          return;
+        }
+
         //call the server
         console.log(this.state.info);
     };
@@ -69,7 +115,7 @@ class OrganizationUploadDocument extends Component {
                 <Navbar />
                 <div className="forms">
                     <br />
-                    <form onSubmit={this.handleSubmit}> 
+                    <form onSubmit={this.handleSubmit}>  
                         <label>Organization Id</label>{/*autofilled*/}   
                         <div className='row'> 
                           <div className="col-8">
@@ -111,16 +157,26 @@ class OrganizationUploadDocument extends Component {
                           <div className="col-8">
                             <input className="form-control" value={this.state.info.applicantId} name="applicantId" placeholder={123456789} type="number" id="applicantId" onChange={this.handleChange} required />
                           </div>
+
                           <div className="col-4">
                             <button type="button" onClick={this.handleOpenApplicantPreviewModal} className="btn btn-success">&nbsp;&nbsp;&nbsp;&nbsp;Applicant Details&nbsp;&nbsp;&nbsp;&nbsp;</button>
                           </div>
                         </div>
+                        {
+                          this.state.errors["applicantId"] &&
+                          <div class="alert alert-danger" role="alert">
+                            {this.state.errors["applicantId"]}
+                          </div>
+                        }
+
+
                         <Modal
                           open={this.state.openApplicantPreviewModal}
                           onClose={this.handleCloseApplicantPreviewModal}
                           aria-labelledby="modal-modal-title"
                           aria-describedby="modal-modal-description"
-                        >
+                 
+                 >
                           <Box sx={modalPreviewStyle}>
                             <Typography id="modal-modal-title" variant="h6" component="h2">
                               <center><h4>Applicant Details</h4></center>
@@ -141,12 +197,27 @@ class OrganizationUploadDocument extends Component {
 
                         <label>Applicant Organization Identification Number</label>
                         <input className="form-control" value={this.state.info.applicantOrganizationId} name="applicantOrganizationId" placeholder={"Roll No, Seat No, etc"} type="text" id="applicantOrganizationId" onChange={this.handleChange} required />
+                        {
+                          this.state.errors["applicantOrganizationId"] &&
+                          <div class="alert alert-danger" role="alert">
+                            {this.state.errors["applicantOrganizationId"]}
+                          </div>
+                        }
 
 
                         <br/><center><h4> Document Details </h4></center><br/>
 
                         <label>Document Name</label>
                         <input className="form-control" value={this.state.info.documentName} name="documentName" type="text" placeholder="Marksheet" onChange={this.handleChange} id="documentName" required />
+                        {
+                          this.state.errors["documentName"] &&
+                          <div class="alert alert-danger" role="alert">
+                            {this.state.errors["documentName"]}
+                          </div>
+                        }
+
+
+
 
                         <label>Document Description</label>
                         <input className="form-control" value={this.state.info.documentDescription} name="documentDescription" type="Text Area" onChange={this.handleChange} placeholder="Has secured rank1 in 10th std" id="desc" />
@@ -159,7 +230,7 @@ class OrganizationUploadDocument extends Component {
                                                 
                         <label>Percentage/GPA</label>
                         <input className="form-control" value={this.state.info.percentage} name="percentage" type="number" placeholder="90/3.8" onChange={this.handleChange} id="percentage" />
-                        
+                
                         <label>Out of Percentage/GPA</label>
                         <input className="form-control" value={this.state.info.outOfPercentage} name="outOfPercentage" type="number" placeholder="100/4" onChange={this.handleChange} id="outOfPercentage" />
                         
@@ -171,7 +242,7 @@ class OrganizationUploadDocument extends Component {
                         </center>
 
                         <center>
-                            <input type="submit" onClick={this.handleOpenPreviewModal} className="button" value="Send For Verification" />
+                            <input type="submit" onClick={this.handleSubmit}  className="button" value="Submit" />
                         </center>
 
                         <Modal
