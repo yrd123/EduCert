@@ -18,7 +18,7 @@ import ApplicantDashboard from './components/applicantDashboard';
 import ApplicantProfile from './components/applicant/applicantProfile';
 import ApplicantUploadDocument from './components/applicantUploadDocument';
 
-import MembershipService from './components/membershipService';
+import AddOrganization from './components/admin/addOrganization';
 
 export default class Main extends Component {
     render() {
@@ -40,7 +40,7 @@ export default class Main extends Component {
               <Route exact path="applicant/dashboard" element={<ApplicantDashboard />} />
               <Route exact path="applicant/profile" element={<ApplicantProfile />} />
               <Route exact path="applicant/uploadDocument" element={<ApplicantUploadDocument />} />
-              <Route exact path="admin/membershipService" element={<MembershipService />} />
+              <Route exact path="admin/addOrganization" element={<AddOrganization />} />
           </Routes>
         </BrowserRouter>
       );

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './login.css';
 import Navbar from './navbar';
 
-export default class MembershipService extends Component {
+export default class AddOrganization extends Component {
   state = {
     orginfo: { name: '', address: '', email: '', password: '', type: '', contact: '' },
     errors: {}
