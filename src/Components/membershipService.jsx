@@ -137,7 +137,7 @@ export default class MembershipService extends Component {
           <div className="forms">
             {/* LOGIN FORM */}
             <form id="login" onSubmit={this.handleSubmit} name="membershipserviceform" >
-              <br />
+              <center><h4> Add Organization </h4></center><br/>
               <div id="loginwarning" className="warning">
                 {/* INSERT LOGIN WARNINGS HERE */}
               </div>

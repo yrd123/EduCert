@@ -3,10 +3,10 @@ const documents = [
         _id:"docid1", 
         documentHash:"",
         documentName:"docname8", //
-        applicantId:"applicantid1", //
+        applicantId:"1814073", //
         applicantOrganizationIdentificationNumber:"applicantIdentificationNumber", 
         applicantName:"appname1", //
-        organizationId:"orgid1",
+        organizationId:"54321",
         organizationName:"orgname1", //
         dateOfIssue:"12-1-22", //
         typeOfDocument:"cert3", //
@@ -19,7 +19,7 @@ const documents = [
         documentName:"docname2",
         applicantId:"applicantid2",
         applicantName:"appname2",
-        organizationId:"orgid1",
+        organizationId:"54321",
         organizationName:"orgname2",
         dateOfIssue:"13-1-22",
         typeOfDocument:"cert3",
@@ -75,7 +75,7 @@ const documents = [
         documentName:"docname6",
         applicantId:"applicantid6",
         applicantName:"appname6",
-        organizationId:"orgid1",
+        organizationId:"54321",
         organizationName:"orgname6",
         dateOfIssue:"62-6-22",
         typeOfDocument:"cert6",
@@ -87,7 +87,7 @@ const documents = [
     {
         _id:"docid7",
         documentName:"docname7",
-        applicantId:"applicantid1",
+        applicantId:"1814073",
         applicantName:"appname7",
         organizationId:"orgid7",
         organizationName:"orgname7",
@@ -101,7 +101,7 @@ const documents = [
     {
         _id:"docid8",
         documentName:"docname8",
-        applicantId:"applicantid1",
+        applicantId:"1814073",
         applicantName:"appname8",
         organizationId:"orgid8",
         organizationName:"orgname8",

@@ -44,6 +44,13 @@ class Navbar extends Component {
           <NavLink to="/organization/login"><button className="navBtn">Organization</button></NavLink>
           <NavLink to="/applicant/dashboard"><button className="navBtn">Applicant Dashboard</button></NavLink>
           <NavLink to="/organization/dashboard"><button className="navBtn">Organization Dashboard</button></NavLink>
+          {/* <button className="navBtn navbar-dropdown">Organization
+          <ul class="dropdown">
+            <li><a href="#">Sub-1</a></li>
+            <li><a href="#">Sub-2</a></li>
+            <li><a href="#">Sub-3</a></li>
+          </ul>
+          </button> */}
         </div>
       </header>
 

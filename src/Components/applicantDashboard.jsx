@@ -8,15 +8,22 @@ import CustomModal from './common/modal';
 import CenteredTabs from './common/tabs';
 import SearchBar from './common/searchBar';
 import PreviewCertificate from './common/previewCertificate';
+import { getOrganizationById } from '../services/organizationService';
+
+import Modal from '@mui/material/Modal';
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
 
 class ApplicantDashboard extends Component {
     state = { 
-        documents : getDocumentsByApplicantId("applicantid1"),
+        documents : getDocumentsByApplicantId("1814073"),
         documentsStatus : "All",
         currentPage : 1,
         pageSize : 2,
         sorting : { property : "documentName", order : "asc" },
-        searchText  : ""
+        searchText  : "",
+        openOrganizationModal: false,
+        organization:{}
     };
     
     handleTabChange = tab =>{
@@ -54,7 +61,8 @@ class ApplicantDashboard extends Component {
         this.setState({searchText});
     }
 
-
+    handleOpenOrganizationModal = organizationId => this.setState({openOrganizationModal:true, organization: getOrganizationById(organizationId)});
+    handleCloseOrganizationModal = () => this.setState({openOrganizationModal:false});
     
     render() { 
         const {currentPage, documentsStatus, pageSize, documents, sorting, searchText} = this.state;
@@ -69,10 +77,24 @@ class ApplicantDashboard extends Component {
         })
         const sortedDocuments = _.orderBy(filteredDocuments,[sorting.property],[sorting.order]);
         const paginatedDocuments = paginate(sortedDocuments, currentPage, pageSize);
+
+        const modalStyle = {
+            position: 'absolute',
+            top: '55%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+            width: 600,
+            bgcolor: 'background.paper',
+            border: '2px solid #000',
+            boxShadow: 24,
+            p: 4,
+            overflow:'scroll',
+            height:'70%'
+          };
         
         return (<>
             <Navbar/>
-            <div style={{margin:10, backgroundColor: 'white', padding: 10}}>
+            <div style={{margin:10, backgroundColor: 'white', padding: 40, paddingLeft: 120, paddingRight:120}}>
             <SearchBar search={this.search} searchInput={searchText} />
             <br />
             <CenteredTabs tabs={["All","Verified","Self-Uploaded"]} handleTabChange={this.handleTabChange} /><br />
@@ -81,7 +103,8 @@ class ApplicantDashboard extends Component {
                 <tr>
                     <th scope="col">No.</th>
                     <th className="clickable" onClick={() => this.sort("documentName")}  scope="col">Document Name {this.renderSortIcon("documentName")}</th>
-                    <th className="clickable" onClick={() => this.sort("organizationName")}  scope="col">Issued by {this.renderSortIcon("organizationName")}</th>
+                    <th className="clickable" onClick={() => this.sort("organizationId")}  scope="col">Organization Id {this.renderSortIcon("organizationId")}</th>
+                    <th className="clickable" onClick={() => this.sort("organizationName")}  scope="col">Organization Name {this.renderSortIcon("organizationName")}</th>
                     <th className="clickable" onClick={() => this.sort("dateOfIssue")}  scope="col">Date of Issue {this.renderSortIcon("dateOfIssue")}</th>
                     <th className="clickable" onClick={() => this.sort("typeOfDocument")}  scope="col">Type of Document {this.renderSortIcon("typeOfDocument")}</th>
                     <th  className="clickable" onClick={() => this.sort("status")} scope="col">Status {this.renderSortIcon("status")}</th>
@@ -93,14 +116,14 @@ class ApplicantDashboard extends Component {
                     <tr key={document._id}>
                         <th scope="row">{(currentPage-1)*pageSize+index+1}</th>
                         <td>{document.documentName}</td>
+                        <td><span style={{cursor:'pointer'}} onClick={() => this.handleOpenOrganizationModal(document.organizationId)}>{document.organizationId}</span></td>
                         <td>{document.organizationName}</td>
                         <td>{document.dateOfIssue}</td>
                         <td>{document.typeOfDocument}</td>
                         <td><span className={this.getStatusClass(document.status)}>{document.status}</span></td>
                         <td>
                             <CustomModal modalBody={<PreviewCertificate document={document} />} modalButtonLabel="View"/> 
-                        </td> 
-                                            
+                        </td>                 
                     </tr>
                 )}
                 
@@ -112,6 +135,31 @@ class ApplicantDashboard extends Component {
                 currentPage={currentPage}
                 onPageChange={this.handlePageChange}
             />   
+
+            <Modal
+                open={this.state.openOrganizationModal}
+                onClose={this.handleCloseOrganizationModal}
+                aria-labelledby="modal-modal-title"
+                aria-describedby="modal-modal-description"
+            >
+                <Box sx={modalStyle}>
+                <Typography id="modal-modal-title" variant="h6" component="h2">
+                    <center><h4>Organization Details</h4></center>
+                </Typography>
+                <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                <div className="forms" style={{margin : 0, width:'100%'}}>
+                    <form> 
+                    <label>Organization Id</label>{/*autofilled*/}    
+                    <input className="form-control" value={this.state.organization._id} name="organizationId" placeholder="112345" type="number" id="organizationId" required disabled/>
+                    <label>Organization Email</label> 
+                    <input className="form-control" value={this.state.organization.email} name="organizationEmail" placeholder="a@gmail.com" type="email" id="organizationEmail" required />
+                    <br />
+                    </form>
+                </div>
+                </Typography>
+                </Box>
+            </Modal>
+
             </div>
                      
         </>

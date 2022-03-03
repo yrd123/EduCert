@@ -1,29 +1,34 @@
 import React, { Component } from 'react';
-import Navbar from './navbar';
-import { getDocumentsByOrganizationId } from '../services/documentService';
-import Pagination from './common/pagination';
-import { paginate } from '../utils/paginate';
+import Navbar from '../navbar';
+import Pagination from '../common/pagination';
+import { paginate } from '../../utils/paginate';
 import _ from 'lodash';
-import CustomModal from './common/modal';
-import CenteredTabs from './common/tabs';
-import SearchBar from './common/searchBar';
-import PreviewCertificate from './common/previewCertificate';
-import { getApplicantById } from '../services/applicantService';
+import CustomModal from '../common/modal';
+import CenteredTabs from '../common/tabs';
+import SearchBar from '../common/searchBar';
+import PreviewCertificate from '../common/previewCertificate';
+
+import { getApplicantById } from '../../services/applicantService';
+import { getOrganizationById } from '../../services/organizationService';
+
 
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
+import { getAllDocuments } from '../../services/documentService';
 
-class OrganizationDashboard extends Component {
+class ViewDocuments extends Component {
     state = { 
-        documents : getDocumentsByOrganizationId("54321"),
+        documents : getAllDocuments(),
         documentsStatus : "All",
         currentPage : 1,
-        pageSize : 2,
+        pageSize : 4,
         sorting : { property : "documentName", order : "asc" },
         searchText  : "",
         openApplicantModal: false,
-        applicant:{}
+        applicant:{},
+        openOrganizationModal: false,
+        organization:{}
     };
 
     
@@ -62,6 +67,9 @@ class OrganizationDashboard extends Component {
     handleOpenApplicantModal = applicantId => this.setState({openApplicantModal:true, applicant: getApplicantById(applicantId)});
     handleCloseApplicantModal = () => this.setState({openApplicantModal:false});
 
+    handleOpenOrganizationModal = organizationId => this.setState({openOrganizationModal:true, organization: getOrganizationById(organizationId)});
+    handleCloseOrganizationModal = () => this.setState({openOrganizationModal:false});
+
     render() { 
         const {currentPage, documentsStatus, pageSize, documents, sorting, searchText} = this.state;
         let filteredDocuments = documents;
@@ -93,7 +101,7 @@ class OrganizationDashboard extends Component {
         return (
             <>
                 <Navbar/>
-                <div style={{margin: 10, backgroundColor: 'white', padding: 40, paddingLeft: 120, paddingRight:120}}>
+                <div style={{margin: 10, backgroundColor: 'white', padding: 40}}>
                 <SearchBar search={this.search} searchInput={searchText} />
                     <br />
                     <CenteredTabs tabs={["All","Verified","Self-Uploaded"]} handleTabChange={this.handleTabChange} /><br />
@@ -101,7 +109,10 @@ class OrganizationDashboard extends Component {
                         <thead>
                         <tr>
                             <th scope="col">No.</th>
+                            <th className="clickable" onClick={() => this.sort("_id")} scope="col">Document Id {this.renderSortIcon("_id")}</th>
                             <th className="clickable" onClick={() => this.sort("documentName")} scope="col">Document Name {this.renderSortIcon("documentName")}</th>
+                            <th className="clickable" onClick={() => this.sort("organizationId")} scope="col">Organization Id {this.renderSortIcon("organizationId")}</th>
+                            <th className="clickable" onClick={() => this.sort("organizationName")} scope="col">Organization Name {this.renderSortIcon("organizationName")}</th>
                             <th className="clickable" onClick={() => this.sort("applicantId")} scope="col">Applicant Id {this.renderSortIcon("applicantId")}</th>
                             <th className="clickable" onClick={() => this.sort("applicantName")} scope="col">Applicant Name {this.renderSortIcon("applicantName")}</th>
                             <th className="clickable" onClick={() => this.sort("dateOfIssue")} scope="col">Date of Issue {this.renderSortIcon("dateOfIssue")}</th>
@@ -115,7 +126,10 @@ class OrganizationDashboard extends Component {
                         { paginatedDocuments.map((document,index) => 
                             <tr key={document._id}>
                                 <th scope="row">{(currentPage-1)*pageSize+index+1}</th>
+                                <td>{document._id}</td>
                                 <td>{document.documentName}</td>
+                                <td><span style={{cursor:'pointer'}} onClick={() => this.handleOpenOrganizationModal(document.organizationId)}>{document.organizationId}</span></td>
+                                <td>{document.organizationName}</td>
                                 <td><span style={{cursor:'pointer'}} onClick={() => this.handleOpenApplicantModal(document.applicantId)}>{document.applicantId}</span></td>
                                 <td>{document.applicantName}</td>
                                 <td>{document.dateOfIssue}</td>
@@ -158,6 +172,30 @@ class OrganizationDashboard extends Component {
                         </Typography>
                         </Box>
                     </Modal>
+
+                    <Modal
+                        open={this.state.openOrganizationModal}
+                        onClose={this.handleCloseOrganizationModal}
+                        aria-labelledby="modal-modal-title"
+                        aria-describedby="modal-modal-description"
+                    >
+                        <Box sx={modalStyle}>
+                        <Typography id="modal-modal-title" variant="h6" component="h2">
+                            <center><h4>Organization Details</h4></center>
+                        </Typography>
+                        <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                        <div className="forms" style={{margin : 0, width:'100%'}}>
+                            <form> 
+                            <label>Organization Id</label>{/*autofilled*/}    
+                            <input className="form-control" value={this.state.organization._id} name="organizationId" placeholder="112345" type="number" id="organizationId" required disabled/>
+                            <label>Organization Email</label> 
+                            <input className="form-control" value={this.state.organization.email} name="organizationEmail" placeholder="a@gmail.com" type="email" id="organizationEmail" required />
+                            <br />
+                            </form>
+                        </div>
+                        </Typography>
+                        </Box>
+                    </Modal>
                 </div>
 
             </>
@@ -165,4 +203,4 @@ class OrganizationDashboard extends Component {
     }
 }
  
-export default OrganizationDashboard;
+export default ViewDocuments;
