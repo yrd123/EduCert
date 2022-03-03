@@ -42,15 +42,29 @@ class Navbar extends Component {
           <NavLink to="/"> <button className="navBtn ">Home</button></NavLink>
           <NavLink to="/applicant/login"><button className="navBtn">Applicant</button></NavLink>
           <NavLink to="/organization/login"><button className="navBtn">Organization</button></NavLink>
-          <NavLink to="/applicant/dashboard"><button className="navBtn">Applicant Dashboard</button></NavLink>
-          <NavLink to="/organization/dashboard"><button className="navBtn">Organization Dashboard</button></NavLink>
-          {/* <button className="navBtn navbar-dropdown">Organization
-          <ul class="dropdown">
+          <button className="navBtn dropdown">Organization
+            <ul class="dropdown-menu">
+              <NavLink className="nav-link" to="/organization/dashboard">Dashboard</NavLink>
+              <NavLink className="nav-link" to="/organization/uploadDocument">Send for Verification</NavLink>
+              <NavLink className="nav-link" to="/organization/profile">Profile</NavLink>
+              <NavLink className="nav-link" to="/organization/login">Requests</NavLink>
+              <NavLink className="nav-link" to="/organization/login">Log Out</NavLink>
+            </ul>
+          </button>
+          <button className="navBtn dropdown">Applicant
+          {/* <ul class="dropdown">
             <li><a href="#">Sub-1</a></li>
             <li><a href="#">Sub-2</a></li>
             <li><a href="#">Sub-3</a></li>
-          </ul>
-          </button> */}
+          </ul> */}
+
+            <ul class="dropdown-menu">
+              <NavLink className="nav-link" to="/applicant/dashboard">Dashboard</NavLink>
+              <NavLink className="nav-link" to="/applicant/uploadDocument">Send for Verification</NavLink>
+              <NavLink className="nav-link" to="/applicant/profile">Profile</NavLink>
+              <NavLink className="nav-link" to="/applicant/login">Log Out</NavLink>
+            </ul>
+          </button>
         </div>
       </header>
 

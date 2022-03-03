@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import './login.css';
-import Navbar from './navbar';
+import '../login.css';
+import Navbar from '../navbar';
 
 export default class AddOrganization extends Component {
   state = {

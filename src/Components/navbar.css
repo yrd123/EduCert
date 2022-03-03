@@ -52,10 +52,8 @@ header h1 {
   color: white;
 }
 
-/*.nav-div .navbar-dropdown > ul {
+/*.nav-div .navbar-dropdown ul {
   background: white;
-  visibility: hidden;
-  opacity: 0;
   min-width: 8rem;
   position: relative;
   transition: all 0.5s ease;
@@ -67,11 +65,35 @@ header h1 {
 
 .nav-div .navbar-dropdown:hover > ul,
 .nav-div .navbar-dropdown > ul:hover {
-  visibility: visible;
-  opacity: 1;
   display: block;
 }
 
 .nav-div .navbar-dropdown > ul li {
   clear: both;
-}*/
+}
+*/
+.dropdown-menu {
+  width: 200px;
+  text-decoration: none;
+}
+
+.dropdown-menu .nav-link {
+  text-align: left;
+  color: black;
+}
+
+.dropdown-menu .active {
+  background-color: black;
+  color: white;
+}
+
+.dropdown-menu .nav-link:hover {
+  text-decoration: none;
+  background-color: black;
+  color: white;
+}
+
+.dropdown:hover .dropdown-menu {
+  display: block;
+  margin-top: 0;
+}

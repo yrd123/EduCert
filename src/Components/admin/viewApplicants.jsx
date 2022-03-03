@@ -57,10 +57,12 @@ class ViewApplicants extends Component {
             <>
                 <Navbar/>
                 <div style={{margin: 10, backgroundColor: 'white', padding: 40}}>
+                <center><h4> Applicants</h4></center><br/>
+
                 <SearchBar search={this.search} searchInput={searchText} />
                     <br />
                     <table className="table table-striped">
-                        <thead>
+                        <thead className=''>
                         <tr>
                             <th scope="col">No.</th>
                             <th className="clickable" onClick={() => this.sort("_id")} scope="col">Document Id {this.renderSortIcon("_id")}</th>
