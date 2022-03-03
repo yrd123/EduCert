@@ -13,6 +13,7 @@ export default class ApplicantLogin extends Component {
         password: "",
         
       },
+      applicantinfoSignup :{ email :'' , fullName : '' , address :'' , pincode : '', stateOfApplicant : '', country : '', contactNumber: '' , dob :''  } ,
       errors: {},
       signupErrors :{} 
     }
@@ -27,6 +28,24 @@ export default class ApplicantLogin extends Component {
     applicantinfo[e.currentTarget.name] = e.currentTarget.value;
     this.setState({ applicantinfo });
     console.log(applicantinfo);
+  };
+
+  handleChangeSignup = (e) => {
+    const applicantinfoSignup = { ...this.state.applicantinfoSignup };
+    applicantinfoSignup[e.currentTarget.name] = e.currentTarget.value;
+    this.setState({ applicantinfoSignup });
+    console.log(applicantinfoSignup);
+  };
+  
+  handleSubmitSignup = (e) => {
+    e.preventDefault();
+
+    if (this.handleValidationSignup()) {
+    } else {
+      return;
+    }
+
+    console.log(this.state.errors);
   };
 
   handleSubmit = (e) => {
@@ -139,21 +158,21 @@ export default class ApplicantLogin extends Component {
               </div>
               <div className="input-field">
                 <label htmlFor="email">Email</label>
-                <input type="email" name="email" placeholder="sanyamgandhi@gmail.com" />
+                <input type="email" id="email"name="email" onChange={this.handleChangeSignup} value = {this.state.applicantinfoSignup.email} placeholder="sanyamgandhi@gmail.com" />
                 <label htmlFor="fullName">Name</label>
-                <input type="text" name="fullName" placeholder="John Doe" />
+                <input type="text" id = "fullName" name="fullName" onChange={this.handleChangeSignup} value = {this.state.applicantinfoSignup.fullName} placeholder="John Doe" />
                 <label htmlFor="address">Address</label>
-                <input type="text" name="address" placeholder="John Doe" />
+                <input type="text" id="address" name="address" onChange={this.handleChangeSignup} value = {this.state.applicantinfoSignup.address} placeholder="c8 sambhav appt" />
                 <label htmlFor="pincode">Pin/Zip Code</label>
-                <input type="text" name="pincode" placeholder="John Doe" />
+                <input type="text" id="pincode" name="pincode" onChange={this.handleChangeSignup} value = {this.state.applicantinfoSignup.pincode} placeholder="John Doe" />
                 <label htmlFor="state">State</label>
-                <input type="text" name="state" placeholder="John Doe" />
+                <input type="text" id="stateOfApplicant" name="stateOfApplicant" onChange={this.handleChangeSignup} value = {this.state.applicantinfoSignup.stateOfApplicant} placeholder="John Doe" />
                 <label htmlFor="country">Country</label>
-                <input type="text" name="country" placeholder="John Doe" />
+                <input type="text" id = "country" name="country" onChange={this.handleChangeSignup} value = {this.state.applicantinfoSignup.country} placeholder="John Doe" />
                 <label htmlFor="contactNumber">Mobile Number</label>
-                <input type="number" name="contactNumber" placeholder={9876543210} />
+                <input type="number" id="contactNumber" name="contactNumber" onChange={this.handleChangeSignup} value = {this.state.applicantinfoSignup.contactNumber} placeholder={9876543210} />
                 <label htmlFor="dob">Date of Birth</label>
-                <input type="date" name="dob" placeholder="22/12/2000" />
+                <input type="date" id="dob" name="dob" placeholder="22/12/2000" />
                 
                 <label htmlFor="password">Password</label>
                 <p className="muted-text">
