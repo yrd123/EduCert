@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Navbar from '../navbar';
 import Pagination from '../common/pagination';
 import { paginate } from '../../utils/paginate';
 import _ from 'lodash';
@@ -53,7 +52,6 @@ class ViewOrganizations extends Component {
           
         return (
             <>
-                <Navbar/>
                 <div style={{margin: 10, backgroundColor: 'white', padding: 40}}>
                 <SearchBar search={this.search} searchInput={searchText} />
                     <br />

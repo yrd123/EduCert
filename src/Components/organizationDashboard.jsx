@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Navbar from './navbar';
 import { getDocumentsByOrganizationId } from '../services/documentService';
 import Pagination from './common/pagination';
 import { paginate } from '../utils/paginate';
@@ -9,7 +8,9 @@ import CenteredTabs from './common/tabs';
 import SearchBar from './common/searchBar';
 import PreviewCertificate from './common/previewCertificate';
 import { getApplicantById } from '../services/applicantService';
+import { Link, useNavigate } from 'react-router-dom';
 
+import VerifyDocument from './organization/verifyDocument';
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
@@ -25,6 +26,7 @@ class OrganizationDashboard extends Component {
         openApplicantModal: false,
         applicant:{}
     };
+
 
     
     handleTabChange = tab =>{
@@ -57,6 +59,11 @@ class OrganizationDashboard extends Component {
     search = searchText => {
         console.log(searchText);
         this.setState({searchText});
+    }
+
+    redirectToVerify = document =>{
+        const navigate = useNavigate();
+        navigate({pathname:'/organization/verify',state:{document}});
     }
 
     handleOpenApplicantModal = applicantId => this.setState({openApplicantModal:true, applicant: getApplicantById(applicantId)});
@@ -92,7 +99,6 @@ class OrganizationDashboard extends Component {
           
         return (
             <>
-                <Navbar/>
                 <div style={{margin: 10, backgroundColor: 'white', padding: 40, paddingLeft: 120, paddingRight:120}}>
                 <SearchBar search={this.search} searchInput={searchText} />
                     <br />
@@ -107,7 +113,6 @@ class OrganizationDashboard extends Component {
                             <th className="clickable" onClick={() => this.sort("dateOfIssue")} scope="col">Date of Issue {this.renderSortIcon("dateOfIssue")}</th>
                             <th className="clickable" onClick={() => this.sort("typeOfDocument")} scope="col">Type of Document {this.renderSortIcon("typeOfDocument")}</th>
                             <th className="clickable" onClick={() => this.sort("status")} scope="col">Status {this.renderSortIcon("status")}</th>
-
                             <th scope="col"></th>
                         </tr>
                         </thead>
@@ -122,7 +127,14 @@ class OrganizationDashboard extends Component {
                                 <td>{document.typeOfDocument}</td>
                                 <td><span className={this.getStatusClass(document.status)}>{document.status}</span></td>
                                 <td>
-                                    <CustomModal modalBody={<PreviewCertificate document={document} />} modalButtonLabel="View"/> 
+                                {   
+                                    document.status === "Verified" ? <CustomModal modalBody={<PreviewCertificate document={document} />} modalButtonLabel="&nbsp;View&nbsp;"/> :
+                                    <Link
+                                    to="/organization/verify" state={{document:document}}                         
+                                    >
+                                    <button className="btn btn-secondary" >Verify</button>
+                                    </Link>
+                                }
                                 </td>
                             </tr>
                         )}
@@ -159,7 +171,6 @@ class OrganizationDashboard extends Component {
                         </Box>
                     </Modal>
                 </div>
-
             </>
         );
     }

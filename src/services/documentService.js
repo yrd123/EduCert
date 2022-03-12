@@ -2,16 +2,18 @@ const documents = [
     {
         _id:"docid1", 
         documentHash:"",
-        documentName:"docname8", //
         applicantId:"1814073", //
-        applicantOrganizationIdentificationNumber:"applicantIdentificationNumber", 
         applicantName:"appname1", //
+        applicantOrganizationId:"applicantIdentificationNumber", 
         organizationId:"54321",
         organizationName:"orgname1", //
-        dateOfIssue:"12-1-22", //
-        typeOfDocument:"cert3", //
+        documentName:"docname8", //
+        description: "10th std certif",
+        dateOfAccomplishment:"12-25-2022",
+        tenure:"3",
+        percentage:"50",
+        outOfPercentage:"100",
         status:"Verified" ,
-        description: "10th std certif" ,
         documentUrl : "D:\\Practice\\Mega Proj\\Educert\\React\\MegaProject\\template\\cert.PNG"
     },
     {
@@ -22,7 +24,6 @@ const documents = [
         organizationId:"54321",
         organizationName:"orgname2",
         dateOfIssue:"13-1-22",
-        typeOfDocument:"cert3",
         status:"Verified",
         description: "10th std certif" ,
         documentUrl : "https://abc.com"
@@ -36,7 +37,6 @@ const documents = [
         organizationId:"orgid3",
         organizationName:"orgname3",
         dateOfIssue:"32-3-22",
-        typeOfDocument:"cert3",
         status:"Self-Uploaded",
         description: "10th std certif" ,
         documentUrl : "https://abc.com"
@@ -50,7 +50,6 @@ const documents = [
         organizationId:"orgid4",
         organizationName:"orgname4",
         dateOfIssue:"42-4-22",
-        typeOfDocument:"cert4",
         status:"Verified",
         description: "10th std certif" ,
         documentUrl : "https://abc.com"
@@ -64,7 +63,6 @@ const documents = [
         organizationId:"orgid5",
         organizationName:"orgname5",
         dateOfIssue:"52-5-22",
-        typeOfDocument:"cert5",
         status:"Self-Uploaded",
         description: "10th std certif" ,
         documentUrl : "https://abc.com"
@@ -77,8 +75,8 @@ const documents = [
         applicantName:"appname6",
         organizationId:"54321",
         organizationName:"orgname6",
+        applicantOrganizationId:"applicantIdentificationNumber", 
         dateOfIssue:"62-6-22",
-        typeOfDocument:"cert6",
         status:"Self-Uploaded",
         description: "10th std certif" ,
         documentUrl : "https://abc.com"
@@ -92,7 +90,6 @@ const documents = [
         organizationId:"orgid7",
         organizationName:"orgname7",
         dateOfIssue:"72-7-22",
-        typeOfDocument:"cert7",
         status:"Self-Uploaded",
         description: "10th std certif" ,
         documentUrl : "https://abc.com"
@@ -106,7 +103,6 @@ const documents = [
         organizationId:"orgid8",
         organizationName:"orgname8",
         dateOfIssue:"82-8-22",
-        typeOfDocument:"cert8",
         status:"Self-Uploaded",
         description: "10th std certif" ,
         documentUrl : "https://abc.com"

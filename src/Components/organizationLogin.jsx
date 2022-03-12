@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import "./login.css";
-import Navbar from "./navbar";
 
 export default class OrganizationLogin extends Component {
   state = {
@@ -88,7 +87,6 @@ export default class OrganizationLogin extends Component {
   render() {
     return (
       <React.Fragment>
-        <Navbar />
         <div className="loginDiv" style={{}}>
           <div className="forms">
             {/* LOGIN FORM */}

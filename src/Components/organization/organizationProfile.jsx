@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { getOrganizationById } from '../../services/organizationService';
 import '../login.css'
-import Navbar from '../navbar';
 
 class OrganizationProfile extends Component {
     state = {
@@ -12,7 +11,6 @@ class OrganizationProfile extends Component {
         const { organization } = this.state;
         return (
             <React.Fragment>
-                <Navbar />
                 <div className="forms">
                     <form>
                     <center><h4> Profile </h4></center><br/>

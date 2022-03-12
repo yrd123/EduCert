@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import '../login.css';
-import Navbar from '../navbar';
 
 export default class AddOrganization extends Component {
   state = {
@@ -132,7 +131,6 @@ export default class AddOrganization extends Component {
   render() {
     return (
       <React.Fragment>
-        <Navbar />
         <div className="loginDiv" style={{}}>
           <div className="forms">
             {/* LOGIN FORM */}
@@ -180,7 +178,7 @@ export default class AddOrganization extends Component {
                 <input type="text" name="country" placeholder="John Doe" />
 
                 <label htmlFor="type">Type</label>
-                <select className="custom-select" onChange={this.handleChange} value={this.state.orginfo.type} id="type" name="type" id="cars">
+                <select className="custom-select" onChange={this.handleChange} value={this.state.orginfo.type} id="type" name="type">
                   <option value="School">School</option>
                   <option value="School">Jr College</option>
                   <option value="College">College</option>

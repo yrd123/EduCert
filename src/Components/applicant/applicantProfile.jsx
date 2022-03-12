@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { getApplicantById } from '../../services/applicantService';
 import '../login.css'
-import Navbar from '../navbar';
 
 class ApplicantProfile extends Component {
     state = {
@@ -12,7 +11,6 @@ class ApplicantProfile extends Component {
         const { applicant } = this.state;
         return (
             <React.Fragment>
-                <Navbar />
                 <div className="forms">
                     <form>
                     <center><h4> Profile </h4></center><br/>

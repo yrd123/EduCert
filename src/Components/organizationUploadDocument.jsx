@@ -3,7 +3,6 @@ import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import './login.css'
-import Navbar from './navbar';
 import { getApplicantById } from '../services/applicantService';
 
 
@@ -112,14 +111,13 @@ class OrganizationUploadDocument extends Component {
       
         return (
             <React.Fragment>
-                <Navbar />
                 <div className="forms">
                     <br />
                     <form onSubmit={this.handleSubmit}>  
                         <label>Organization Id</label>{/*autofilled*/}   
                         <div className='row'> 
                           <div className="col-8">
-                          <input className="form-control" value={this.state.info.organizationId} name="organizationId" placeholder="112345" type="number" id="organizationId" required />
+                          <input className="form-control" value={this.state.info.organizationId} name="organizationId" placeholder="112345" id="organizationId" disabled />
                           </div>
                           <div className="col-4">
                             <button type="button" onClick={this.handleOpenOrganizationPreviewModal} className="btn btn-success">&nbsp;&nbsp;Organization Details&nbsp;&nbsp;</button>

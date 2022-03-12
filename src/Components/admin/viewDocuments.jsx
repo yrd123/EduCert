@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Navbar from '../navbar';
 import Pagination from '../common/pagination';
 import { paginate } from '../../utils/paginate';
 import _ from 'lodash';
@@ -100,8 +99,7 @@ class ViewDocuments extends Component {
           
         return (
             <>
-                <Navbar/>
-                <div style={{margin: 10, backgroundColor: 'white', padding: 40}}>
+                <div class="table-responsive" style={{margin: 10, backgroundColor: 'white', padding: 40, paddingLeft:120, paddingRight:120}}>
                 <SearchBar search={this.search} searchInput={searchText} />
                     <br />
                     <CenteredTabs tabs={["All","Verified","Self-Uploaded"]} handleTabChange={this.handleTabChange} /><br />
@@ -136,13 +134,12 @@ class ViewDocuments extends Component {
                                 <td>{document.typeOfDocument}</td>
                                 <td><span className={this.getStatusClass(document.status)}>{document.status}</span></td>
                                 <td>
-                                    <CustomModal modalBody={<PreviewCertificate document={document} />} modalButtonLabel="View"/> 
+                                    <CustomModal modalBody={<PreviewCertificate document={document} />} modalButtonLabel=" View "/> 
                                 </td>
                             </tr>
                         )}
                         </tbody>
                     </table>
-                    
                     <Pagination 
                         itemsCount={filteredDocuments.length} 
                         pageSize={this.state.pageSize} 

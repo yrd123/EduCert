@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import './login.css';
-import Navbar from './navbar';
 import CenteredTabs from './common/tabs';
 
 
@@ -108,8 +107,6 @@ export default class ApplicantLogin extends Component {
     render() {
       return  (
         <div>
-        <Navbar/>
-        <div>
           <div className="forms">
             {/* <ul className="tab-group">
               <li className="tab active" id="loginbutton">
@@ -189,7 +186,6 @@ export default class ApplicantLogin extends Component {
             </form>
           </div>
         </div>
-      </div>
 
       );
     }

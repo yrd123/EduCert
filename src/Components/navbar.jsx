@@ -42,8 +42,8 @@ class Navbar extends Component {
           <NavLink to="/"> <button className="navBtn ">Home</button></NavLink>
           <NavLink to="/applicant/login"><button className="navBtn">Applicant</button></NavLink>
           <NavLink to="/organization/login"><button className="navBtn">Organization</button></NavLink>
-          <button className="navBtn dropdown">Organization
-            <ul class="dropdown-menu">
+          <button className="navBtn dropdown">Organization <i className="fa fa-angle-down"></i>
+            <ul className="dropdown-menu">
               <NavLink className="nav-link" to="/organization/dashboard">Dashboard</NavLink>
               <NavLink className="nav-link" to="/organization/uploadDocument">Send for Verification</NavLink>
               <NavLink className="nav-link" to="/organization/profile">Profile</NavLink>
@@ -51,14 +51,14 @@ class Navbar extends Component {
               <NavLink className="nav-link" to="/organization/login">Log Out</NavLink>
             </ul>
           </button>
-          <button className="navBtn dropdown">Applicant
+          <button className="navBtn dropdown">Applicant <i className="fa fa-angle-down"></i>
           {/* <ul class="dropdown">
             <li><a href="#">Sub-1</a></li>
             <li><a href="#">Sub-2</a></li>
             <li><a href="#">Sub-3</a></li>
           </ul> */}
 
-            <ul class="dropdown-menu">
+            <ul className="dropdown-menu">
               <NavLink className="nav-link" to="/applicant/dashboard">Dashboard</NavLink>
               <NavLink className="nav-link" to="/applicant/uploadDocument">Send for Verification</NavLink>
               <NavLink className="nav-link" to="/applicant/profile">Profile</NavLink>

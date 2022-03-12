@@ -23,7 +23,7 @@ const CustomModal = (props) => {
 
   return (
     <div>
-      <Button onClick={handleOpen}>{props.modalButtonLabel}</Button>
+      <button className="btn btn-secondary" onClick={handleOpen}>{props.modalButtonLabel}</button>
       <Modal
         open={open}
         onClose={handleClose}

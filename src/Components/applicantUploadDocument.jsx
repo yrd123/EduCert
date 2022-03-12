@@ -3,7 +3,6 @@ import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import './login.css'
-import Navbar from './navbar';
 import { getOrganizationById } from '../services/organizationService';
 
 
@@ -71,7 +70,6 @@ class ApplicantUploadDocument extends Component {
       
         return (
             <React.Fragment>
-                <Navbar />
                 <div className="forms">
                     <br />
                     <form onSubmit={this.handleSubmit}> 

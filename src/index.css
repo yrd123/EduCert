@@ -15,3 +15,8 @@ code {
 .clickable {
   cursor: pointer;
 }
+
+::selection {
+  color: white;
+  background-color: black;
+}

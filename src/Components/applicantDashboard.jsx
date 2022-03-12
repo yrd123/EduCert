@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { getDocumentsByApplicantId } from '../services/documentService';
-import Navbar from './navbar';
 import Pagination from './common/pagination';
 import { paginate } from '../utils/paginate';
 import _ from 'lodash';
@@ -93,7 +92,6 @@ class ApplicantDashboard extends Component {
           };
         
         return (<>
-            <Navbar/>
             <div style={{margin:10, backgroundColor: 'white', padding: 40, paddingLeft: 120, paddingRight:120}}>
             <SearchBar search={this.search} searchInput={searchText} />
             <br />
