@@ -9,7 +9,7 @@ const applicants = [
         country:"India",
         contact:"1234567077",
         dateOfBirth:"12/11/2000",
-        document:["docid1","docid3"],
+        documents:["docid1","docid3"],
         permissionGranted:["orgid1","orgid3","orgid5"]
     },
     {

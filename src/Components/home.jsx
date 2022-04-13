@@ -1,6 +1,15 @@
 import React, { Component } from 'react';
 class Home extends Component {
-    state = {  } 
+    state = { 
+      applicant:{}
+    } 
+
+    componentDidMount(){
+      fetch("localhost:4000/getApplicant/1814073/search?org=Org1MSP&userId=bistril")
+      .then(response => response.json())
+      .then((applicant) => this.setState({applicant}));
+  }
+
     render() { 
         return (
         <div id="inner-div">
