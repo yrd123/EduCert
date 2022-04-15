@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './login.css';
 import CenteredTabs from './common/tabs';
+import axios from 'axios';
 
 
 
@@ -12,7 +13,7 @@ export default class ApplicantLogin extends Component {
         password: "",
         
       },
-      applicantinfoSignup :{ email :'' , fullName : '' , address :'' , pincode : '', stateOfApplicant : '', country : '', contactNumber: '' , dob :''  } ,
+      applicantinfoSignup :{ applicantId:'', email :'' , fullName : '' , address :'' , pincode : '', stateOfApplicant : '', country : '', contactNumber: '' , dob :''  } ,
       errors: {},
       signupErrors :{} 
     }
@@ -51,6 +52,17 @@ export default class ApplicantLogin extends Component {
     e.preventDefault();
 
     if (this.handleValidation()) {
+        const base_url="http://127.0.0.1:4000/createApplicant"
+        const data={applicantinfoSignup:this.state.applicantinfoSignup}
+        axios.post(base_url,data)
+        .then(response =>{
+            console.log(response)
+        })
+        .catch(error =>{
+            console.log(error.response)
+        })
+        console.log(JSON.stringify(data))
+
     } else {
       return;
     }
@@ -251,6 +263,9 @@ export default class ApplicantLogin extends Component {
                 {/* INSERT SIGNUP WARNINGS HERE */}
               </div>
               <div className="input-field">
+              <label htmlFor="applicantId">Applicant Id</label>
+                <input type="text" id="applicantId" name="applicantId" onChange={this.handleChangeSignup} value = {this.state.applicantinfoSignup.applicantId} placeholder="1234" />
+                
                 <label htmlFor="email">Email</label>
                 <input type="email" id="email"name="email" onChange={this.handleChangeSignup} value = {this.state.applicantinfoSignup.email} placeholder="sanyamgandhi@gmail.com" />
                 {
@@ -259,6 +274,13 @@ export default class ApplicantLogin extends Component {
                     {this.state.signupErrors["email"]}
                   </div>
                 }
+
+                <label htmlFor="password">Password</label>
+                <p className="muted-text">
+                  (Password Must be Atleast 6 Characters Long)
+                </p>
+                <input type="password" name="password" placeholder="******" />
+
                 <label htmlFor="fullName">Name</label>
                 <input type="text" id = "fullName" name="fullName" onChange={this.handleChangeSignup} value = {this.state.applicantinfoSignup.fullName} placeholder="John Doe" />
                 {
@@ -292,20 +314,9 @@ export default class ApplicantLogin extends Component {
                   </div>
                 }
                 
-                
                 <label htmlFor="dob">Date of Birth</label>
                 <input type="date" id="dob" name="dob" placeholder="22/12/2000" />
-                
-                <label htmlFor="password">Password</label>
-                <p className="muted-text">
-                  (Password Must be Atleast 6 Characters Long)
-                </p>
-                <input type="password" name="password" placeholder="******" />
-                <label htmlFor="confirmPassword">Confirm Password</label>
-                <p className="muted-text">
-                  (Password and Confirm Password Fields Must Match)
-                </p>
-                <input type="password" name="confirmPassword" placeholder="******" />
+
                 <input type="submit" defaultValue="Sign up" className="button" />
               </div>
             </form>
