@@ -5,7 +5,8 @@ class Home extends Component {
      } 
     componentDidMount(){
       fetch("http://localhost:4000/getApplicant/1814073/search?org=Org1MSP&userId=bistril")
-      .then(response => console.log(response))
+      .then(response => response.json()).then((data)=>console.log(data.email));
+
      // .then((applicant) => this.setState({applicant}));
     }
 
@@ -14,12 +15,13 @@ class Home extends Component {
             method:"POST",
             body:JSON.stringify({
               "org":"Org1MSP",
-              "userId":"greventem",
+              "userId":"panchute",
               "data":{"documentId":"docid1"}
             }),
             headers:{"Content-Type" : "application/json"}
         })
-        .then(response => console.log(response))
+      .then(response => response.json()).then((data)=>console.log(data));
+        
     }
     
     render() { 
