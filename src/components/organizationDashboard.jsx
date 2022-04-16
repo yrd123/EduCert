@@ -99,7 +99,7 @@ class OrganizationDashboard extends Component {
           
         return (
             <>
-                <div style={{margin: 10, backgroundColor: 'white', padding: 40, paddingLeft: 120, paddingRight:120}}>
+                <div style={{margin: 10, backgroundColor: 'white', padding: 30, paddingLeft: 5, paddingRight:5}}>
                 <SearchBar search={this.search} searchInput={searchText} />
                     <br />
                     <CenteredTabs tabs={["All","Verified","Self-Uploaded"]} handleTabChange={this.handleTabChange} /><br />
@@ -107,24 +107,34 @@ class OrganizationDashboard extends Component {
                         <thead>
                         <tr>
                             <th scope="col">No.</th>
-                            <th className="clickable" onClick={() => this.sort("documentName")} scope="col">Document Name {this.renderSortIcon("documentName")}</th>
-                            <th className="clickable" onClick={() => this.sort("applicantId")} scope="col">Applicant Id {this.renderSortIcon("applicantId")}</th>
-                            <th className="clickable" onClick={() => this.sort("applicantName")} scope="col">Applicant Name {this.renderSortIcon("applicantName")}</th>
-                            <th className="clickable" onClick={() => this.sort("dateOfIssue")} scope="col">Date of Issue {this.renderSortIcon("dateOfIssue")}</th>
-                            <th className="clickable" onClick={() => this.sort("typeOfDocument")} scope="col">Type of Document {this.renderSortIcon("typeOfDocument")}</th>
-                            <th className="clickable" onClick={() => this.sort("status")} scope="col">Status {this.renderSortIcon("status")}</th>
+                            <th className="clickable" onClick={() => this.sort("documentId")} scope="col">documentId {this.renderSortIcon("documentName")}</th>
+                            <th className="clickable" onClick={() => this.sort("applicantId")} scope="col">applicantId{this.renderSortIcon("documentName")}</th>
+                            <th className="clickable" onClick={() => this.sort("applicantName")} scope="col">applicantName {this.renderSortIcon("documentName")}</th>
+                            <th className="clickable" onClick={() => this.sort("applicantOrganizationNumber")} scope="col">rollNo {this.renderSortIcon("documentName")}</th>
+                            <th className="clickable" onClick={() => this.sort("description")} scope="col">description {this.renderSortIcon("documentName")}</th>
+                            <th className="clickable" onClick={() => this.sort("dateOfAccomplishment")} scope="col">dateOfAccomplishment {this.renderSortIcon("documentName")}</th>
+
+                            <th className="clickable" onClick={() => this.sort("tenure")} scope="col">tenure {this.renderSortIcon("applicantId")}</th>
+                            <th className="clickable" onClick={() => this.sort("percentage")} scope="col">percentage {this.renderSortIcon("applicantName")}</th>
+                            <th className="clickable" onClick={() => this.sort("updatedBy")} scope="col">updatedBy {this.renderSortIcon("typeOfDocument")}</th>
+                            <th className="clickable" onClick={() => this.sort("status")} scope="col">status {this.renderSortIcon("dateOfIssue")}</th>
                             <th scope="col"></th>
                         </tr>
                         </thead>
                         <tbody>    
                         { paginatedDocuments.map((document,index) => 
-                            <tr key={document._id}>
+                            <tr key={document.documentId}>
                                 <th scope="row">{(currentPage-1)*pageSize+index+1}</th>
-                                <td>{document.documentName}</td>
+                                <td>{document.documentId}</td>
                                 <td><span style={{cursor:'pointer'}} onClick={() => this.handleOpenApplicantModal(document.applicantId)}>{document.applicantId}</span></td>
                                 <td>{document.applicantName}</td>
-                                <td>{document.dateOfIssue}</td>
-                                <td>{document.typeOfDocument}</td>
+                                <td>{document.applicantOrganizationNumber}</td>
+                                <td>{document.description}</td>
+                                <td>{document.dateOfAccomplishment}</td>
+                                
+                                <td>{document.tenure}</td>
+                                <td>{document.percentage}</td>
+                                <td>{document.updatedBy}</td>
                                 <td><span className={this.getStatusClass(document.status)}>{document.status}</span></td>
                                 <td>
                                 {   
@@ -136,6 +146,8 @@ class OrganizationDashboard extends Component {
                                     </Link>
                                 }
                                 </td>
+                                
+                                
                             </tr>
                         )}
                         </tbody>

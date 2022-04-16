@@ -20,6 +20,7 @@ import ApplicantUploadDocument from './components/applicantUploadDocument';
 import Home from './components/home';
 import VerifyDocument from './components/organization/verifyDocument';
 import { getDocumentById } from './services/documentService';
+import ViceAdminSignUp from './components/viceAdminSignUp';
 
 function App() {
   return (
@@ -40,6 +41,7 @@ function App() {
                 <Route exact path="organization/uploadDocument" element={<OrganizationUploadDocument />} />
                 <Route exact path="organization/verify" element={<VerifyDocument />} />
                 <Route exact path="login" element={<Login />} />
+                <Route exact path="viceAdminSignUp" element={<ViceAdminSignUp />} />
                 
                 <Route exact path="applicant/signUp" element={<ApplicantSignUp />} />
                 <Route exact path="applicant/dashboard" element={<ApplicantDashboard />} />
