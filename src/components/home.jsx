@@ -5,7 +5,7 @@ class Home extends Component {
      } 
     componentDidMount(){
       fetch("http://localhost:4000/getApplicant/1814073/search?org=Org1MSP&userId=bistril")
-      .then(response => console.log(response.json()))
+      .then(response => console.log(response))
      // .then((applicant) => this.setState({applicant}));
     }
 
@@ -19,8 +19,7 @@ class Home extends Component {
             }),
             headers:{"Content-Type" : "application/json"}
         })
-        .then(response => response.json)
-        .then((data) => console.log(data));
+        .then(response => console.log(response))
     }
     
     render() { 
