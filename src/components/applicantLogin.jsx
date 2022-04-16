@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import './login.css';
 import CenteredTabs from './common/tabs';
-import axios from 'axios';
 
 
 
@@ -11,7 +10,6 @@ export default class ApplicantLogin extends Component {
       applicantinfo: {
         id: "",
         password: "",
-        
       },
       applicantinfoSignup :{ applicantId:'', email :'' , fullName : '' , address :'' , pincode : '', stateOfApplicant : '', country : '', contactNumber: '' , dob :''  } ,
       errors: {},
@@ -45,7 +43,7 @@ export default class ApplicantLogin extends Component {
       return;
     }
 
-    console.log(this.state.errors);
+    console.log(this.state.errors); 
   };
 
   handleSubmit = (e) => {
@@ -54,14 +52,7 @@ export default class ApplicantLogin extends Component {
     if (this.handleValidation()) {
         const base_url="http://127.0.0.1:4000/createApplicant"
         const data={applicantinfoSignup:this.state.applicantinfoSignup}
-        axios.post(base_url,data)
-        .then(response =>{
-            console.log(response)
-        })
-        .catch(error =>{
-            console.log(error.response)
-        })
-        console.log(JSON.stringify(data))
+        
 
     } else {
       return;

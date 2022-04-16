@@ -8,6 +8,21 @@ class Home extends Component {
       .then(response => console.log(response.json()))
      // .then((applicant) => this.setState({applicant}));
     }
+
+    verifyDocument = () =>{
+      fetch("http://localhost:4000/verifyDocument", {
+            method:"POST",
+            body:JSON.stringify({
+              "org":"Org1MSP",
+              "userId":"greventem",
+              "data":{"documentId":"docid1"}
+            }),
+            headers:{"Content-Type" : "application/json"}
+        })
+        .then(response => response.json)
+        .then((data) => console.log(data));
+    }
+    
     render() { 
         return (
         <div id="inner-div">
@@ -19,6 +34,7 @@ class Home extends Component {
               <a href="applicanttLogin.html">APPLICANT &nbsp;<i className="fa fa-user" aria-hidden="true" /></a>
             </div>
           </div>
+          <button onClick={this.verifyDocument} className="btn-primary">Post request</button>
         </div>
         );
     }
