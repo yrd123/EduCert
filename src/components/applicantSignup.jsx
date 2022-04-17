@@ -7,7 +7,6 @@ import CenteredTabs from './common/tabs';
 export default class ApplicantSignUp extends Component {
     state = {
       currentTab : "Sign Up" ,
-      
       applicantinfoSignup :{ applicantId:'', email :'' , fullName : '' , address :'' , pincode : '', stateOfApplicant : '', country : '', contactNumber: '' , dob :''  } ,
       errors: {},
       signupErrors :{} 
@@ -28,11 +27,12 @@ export default class ApplicantSignUp extends Component {
     e.preventDefault();
 
     if (this.handleSignUpValidation()) {
+
+     console.log(this.state.applicantinfoSignup);
     } else {
       return;
     }
 
-    console.log(this.state.errors); 
   };
 
   
@@ -40,6 +40,12 @@ export default class ApplicantSignUp extends Component {
     let applicantinfoSignup = this.state.applicantinfoSignup;
     let signupErrors = {};
     let formIsValid = true;
+
+    if (!applicantinfoSignup["applicantId"]) {
+      formIsValid = false;
+      signupErrors["applicantId"] = "Cannot be empty";
+    }
+
 
 
     //Email
@@ -65,6 +71,25 @@ export default class ApplicantSignUp extends Component {
         signupErrors["email"] = "Email is not valid";
       }
     }
+
+    //state
+    if (!applicantinfoSignup["stateOfApplicant"]) {
+      formIsValid = false;
+      signupErrors["stateOfApplicant"] = "Cannot be empty";
+    }
+
+    //pincode
+    if (!applicantinfoSignup["pincode"]) {
+      formIsValid = false;
+      signupErrors["pincode"] = "Cannot be empty";
+    }
+
+    //country
+    if (!applicantinfoSignup["country"]) {
+      formIsValid = false;
+      signupErrors["country"] = "Cannot be empty";
+    }
+    
 
     //Contact 
     if (!applicantinfoSignup["contactNumber"]) {
@@ -103,29 +128,6 @@ export default class ApplicantSignUp extends Component {
 
 
 
-     //Password
-    if (!applicantinfoSignup["password"]) {
-      formIsValid = false;
-      signupErrors["password"] = "Cannot be empty";
-    } else if (typeof applicantinfoSignup["password"] !== "undefined") {
-      var minNumberofChars = 6;
-      var maxNumberofChars = 16;
-      var newPassword = applicantinfoSignup["password"];
-      if (
-        newPassword.length < minNumberofChars ||
-        newPassword.length > maxNumberofChars
-      ) {
-        formIsValid = false;
-        signupErrors["password"] = "Password should be between 6 to 16 char";
-      }
-      if (!applicantinfoSignup["password"].match(/^[a-zA-Z0-9!@#$%^&*]{6,16}$/)) {
-        formIsValid = false;
-        signupErrors["password"] =
-          "password should contain atleast one number and one special character";
-      }
-    }
-
-
     this.setState({ signupErrors: signupErrors });
     return formIsValid;
   } ;
@@ -151,7 +153,12 @@ export default class ApplicantSignUp extends Component {
               <div className="input-field">
               <label htmlFor="applicantId">Applicant Id</label>
                 <input type="text" id="applicantId" name="applicantId" onChange={this.handleChangeSignup} value = {this.state.applicantinfoSignup.applicantId} placeholder="1234" />
-                
+                {
+                  this.state.signupErrors["applicantId"] &&
+                  <div class="alert alert-danger" role="alert">
+                    {this.state.signupErrors["applicantId"]}
+                  </div>
+                }
                 <label htmlFor="email">Email</label>
                 <input type="email" id="email"name="email" onChange={this.handleChangeSignup} value = {this.state.applicantinfoSignup.email} placeholder="sanyamgandhi@gmail.com" />
                 {
@@ -161,12 +168,7 @@ export default class ApplicantSignUp extends Component {
                   </div>
                 }
 
-                <label htmlFor="password">Password</label>
-                <p className="muted-text">
-                  (Password Must be Atleast 6 Characters Long)
-                </p>
-                <input type="password" name="password" placeholder="******" />
-
+                
                 <label htmlFor="fullName">Name</label>
                 <input type="text" id = "fullName" name="fullName" onChange={this.handleChangeSignup} value = {this.state.applicantinfoSignup.fullName} placeholder="John Doe" />
                 {
@@ -187,11 +189,29 @@ export default class ApplicantSignUp extends Component {
                 
                 <label htmlFor="pincode">Pin/Zip Code</label>
                 <input type="text" id="pincode" name="pincode" onChange={this.handleChangeSignup} value = {this.state.applicantinfoSignup.pincode} placeholder="John Doe" />
-                <label htmlFor="state">State</label>
+                {
+                  this.state.signupErrors["pincode"] &&
+                  <div class="alert alert-danger" role="alert">
+                    {this.state.signupErrors["pincode"]}
+                  </div>
+                }
+                <label htmlFor="stateOfApplicant">State</label>
                 <input type="text" id="stateOfApplicant" name="stateOfApplicant" onChange={this.handleChangeSignup} value = {this.state.applicantinfoSignup.stateOfApplicant} placeholder="John Doe" />
+                {
+                  this.state.signupErrors["stateOfApplicant"] &&
+                  <div class="alert alert-danger" role="alert">
+                    {this.state.signupErrors["stateOfApplicant"]}
+                  </div>
+                }
                 <label htmlFor="country">Country</label>
                 <input type="text" id = "country" name="country" onChange={this.handleChangeSignup} value = {this.state.applicantinfoSignup.country} placeholder="John Doe" />
-                <label htmlFor="contactNumber">Mobile Number</label>
+                {
+                  this.state.signupErrors["country"] &&
+                  <div class="alert alert-danger" role="alert">
+                    {this.state.signupErrors["country"]}
+                  </div>
+                }
+                <label htmlFor="contactNumber">Contact Number</label>
                 <input type="number" id="contactNumber" name="contactNumber" onChange={this.handleChangeSignup} value = {this.state.applicantinfoSignup.contactNumber} placeholder={9876543210} />
                 {
                   this.state.signupErrors["contactNumber"] &&
@@ -201,7 +221,7 @@ export default class ApplicantSignUp extends Component {
                 }
                 
                 <label htmlFor="dob">Date of Birth</label>
-                <input type="date" id="dob" name="dob" placeholder="22/12/2000" />
+                <input type="date" id="dob"name="dob" onChange={this.handleChangeSignup} value = {this.state.applicantinfoSignup.dob}  placeholder="22/12/2000" />
 
                 <input type="submit" defaultValue="Sign up" className="button" />
               </div>

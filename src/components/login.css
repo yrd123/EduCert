@@ -14,6 +14,18 @@
   zoom: 0.9;
 }
 
+.vice{
+  margin-left: 200px;
+  margin-bottom: 30px;
+}
+
+#rowId{
+  background-color: #000000;
+  color: white;
+  margin: 5px;
+  width: 40%;
+}
+
 #role{
 
   width: 100%;

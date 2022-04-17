@@ -6,7 +6,7 @@ import ViewDocuments from './components/admin/viewDocuments';
 import ViewOrganizations from './components/applicant/viewOrganizations';
 import ViewApplicants from './components/admin/viewApplicants';
 import AddOrganization from './components/admin/addOrganization';
-
+import ViewViceAdmins from './components/admin/viewViceAdmins';
 import OrganizationLogin from './components/organizationLogin';
 import OrganizationDashboard from './components/organization/organizationDashboard';
 import OrganizationProfile from './components/organization/organizationProfile';
@@ -36,6 +36,7 @@ function App() {
                 <Route exact path="admin/viewOrganizations" element={<ViewOrganizations />} />
                 <Route exact path="admin/viewApplicants" element={<ViewApplicants />} />
                 <Route exact path="applicant/viewOrganizations" element={<ViewOrganizations />} />
+                <Route exact path="admin/viewViceAdmins" element={<ViewViceAdmins />} />
               
                 <Route exact path="organization/login" element={<OrganizationLogin />} />  
                 <Route exact path="organization/dashboard" element={<OrganizationDashboard />} />
