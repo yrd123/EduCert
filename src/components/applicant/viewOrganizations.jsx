@@ -1,21 +1,21 @@
 import React, { Component } from 'react';
-import { getDocumentsByOrganizationId } from '../services/documentService';
-import Pagination from './common/pagination';
-import { paginate } from '../utils/paginate';
+import { getDocumentsByOrganizationId } from '../../services/documentService';
+import Pagination from '../common/pagination';
+import { paginate } from '../../utils/paginate';
 import _ from 'lodash';
-import CustomModal from './common/modal';
-import CenteredTabs from './common/tabs';
-import SearchBar from './common/searchBar';
-import PreviewCertificate from './common/previewCertificate';
-import { getApplicantById } from '../services/applicantService';
+import CustomModal from '../common/modal';
+import CenteredTabs from '../common/tabs';
+import SearchBar from '../common/searchBar';
+import PreviewCertificate from '../common/previewCertificate';
+import { getApplicantById } from '../../services/applicantService';
 import { Link, useNavigate } from 'react-router-dom';
 
-import VerifyDocument from './organization/verifyDocument';
+import VerifyDocument from '../organization/verifyDocument';
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 
-class OrganizationDashboard extends Component {
+class ViewOrganizations extends Component {
     state = { 
         documents : getDocumentsByOrganizationId("54321"),
         documentsStatus : "All",
@@ -99,54 +99,27 @@ class OrganizationDashboard extends Component {
           
         return (
             <>
-                <div style={{margin: 10, backgroundColor: 'white', padding: 30, paddingLeft: 5, paddingRight:5}}>
+                <div style={{margin: 10, backgroundColor: 'white', padding: 40, paddingLeft: 120, paddingRight:120}}>
                 <SearchBar search={this.search} searchInput={searchText} />
                     <br />
-                    <CenteredTabs tabs={["All","Verified","Self-Uploaded"]} handleTabChange={this.handleTabChange} /><br />
                     <table className="table table-striped">
                         <thead>
                         <tr>
-                            <th scope="col">No.</th>
-                            <th className="clickable" onClick={() => this.sort("documentId")} scope="col">documentId {this.renderSortIcon("documentName")}</th>
-                            <th className="clickable" onClick={() => this.sort("applicantId")} scope="col">applicantId{this.renderSortIcon("documentName")}</th>
-                            <th className="clickable" onClick={() => this.sort("applicantName")} scope="col">applicantName {this.renderSortIcon("documentName")}</th>
-                            <th className="clickable" onClick={() => this.sort("applicantOrganizationNumber")} scope="col">rollNo {this.renderSortIcon("documentName")}</th>
-                            <th className="clickable" onClick={() => this.sort("description")} scope="col">description {this.renderSortIcon("documentName")}</th>
-                            <th className="clickable" onClick={() => this.sort("dateOfAccomplishment")} scope="col">dateOfAccomplishment {this.renderSortIcon("documentName")}</th>
-
-                            <th className="clickable" onClick={() => this.sort("tenure")} scope="col">tenure {this.renderSortIcon("applicantId")}</th>
-                            <th className="clickable" onClick={() => this.sort("percentage")} scope="col">percentage {this.renderSortIcon("applicantName")}</th>
-                            <th className="clickable" onClick={() => this.sort("updatedBy")} scope="col">updatedBy {this.renderSortIcon("typeOfDocument")}</th>
-                            <th className="clickable" onClick={() => this.sort("status")} scope="col">status {this.renderSortIcon("dateOfIssue")}</th>
-                            <th scope="col"></th>
+                            <th className="clickable" onClick={() => this.sort("documentId")} scope="col">OrganizationId {this.renderSortIcon("documentName")}</th>
+                            <th className="clickable" onClick={() => this.sort("applicantId")} scope="col">Organization Name{this.renderSortIcon("documentName")}</th>
+                            <th className="clickable" onClick={() => this.sort("status")} scope="col">Access {this.renderSortIcon("dateOfIssue")}</th>
+                            
                         </tr>
                         </thead>
+                        <br></br>
                         <tbody>    
                         { paginatedDocuments.map((document,index) => 
-                            <tr key={document.documentId}>
-                                <th scope="row">{(currentPage-1)*pageSize+index+1}</th>
-                                <td>{document.documentId}</td>
-                                <td><span style={{cursor:'pointer'}} onClick={() => this.handleOpenApplicantModal(document.applicantId)}>{document.applicantId}</span></td>
-                                <td>{document.applicantName}</td>
-                                <td>{document.applicantOrganizationNumber}</td>
-                                <td>{document.description}</td>
-                                <td>{document.dateOfAccomplishment}</td>
+                            <tr key={document.organizationId}>
                                 
-                                <td>{document.tenure}</td>
-                                <td>{document.percentage}</td>
-                                <td>{document.updatedBy}</td>
-                                <td><span className={this.getStatusClass(document.status)}>{document.status}</span></td>
-                                <td>
-                                {   
-                                    document.status === "Verified" ? <CustomModal modalBody={<PreviewCertificate document={document} />} modalButtonLabel="&nbsp;View&nbsp;"/> :
-                                    <Link
-                                    to="/organization/verify" state={{document:document}}                         
-                                    >
-                                    <button className="btn btn-secondary" >Verify</button>
-                                    </Link>
-                                }
-                                </td>
-                                
+                                <td>{document.organizationId}</td>
+                                <td>{document.organizationName}</td>
+                                <td><button type="button" class="btn btn-success">Grant</button></td>
+                                <td> <button type="button" class="btn btn-danger">Revoke</button></td>
                                 
                             </tr>
                         )}
@@ -188,4 +161,4 @@ class OrganizationDashboard extends Component {
     }
 }
  
-export default OrganizationDashboard;
+export default ViewOrganizations;

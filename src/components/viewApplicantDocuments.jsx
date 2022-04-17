@@ -5,7 +5,6 @@ import { paginate } from '../utils/paginate';
 import _ from 'lodash';
 import CustomModal from './common/modal';
 import CenteredTabs from './common/tabs';
-import SearchBar from './common/searchBar';
 import PreviewCertificate from './common/previewCertificate';
 import { getOrganizationById } from '../services/organizationService';
 
@@ -13,16 +12,19 @@ import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 
-class ApplicantDashboard extends Component {
+class ViewApplicantDocuments extends Component {
     state = { 
-        documents : getDocumentsByApplicantId("1814073"),
+         
+        applicantId : '' ,
+        aId : '',
+        documents : getDocumentsByApplicantId('1814073'),
         documentsStatus : "All",
         currentPage : 1,
         pageSize : 2,
         sorting : { property : "documentName", order : "asc" },
         searchText  : "",
         openOrganizationModal: false,
-        organization:{}
+        organization:{} 
     };
     
     handleTabChange = tab =>{
@@ -60,12 +62,32 @@ class ApplicantDashboard extends Component {
         this.setState({searchText});
     }
 
+    
+  handleChange = (e) => {
+    let applicantId = this.state.applicantId ;
+    applicantId = e.currentTarget.value;
+    this.setState({ applicantId });
+    console.log(applicantId);
+  };
+
+  
+  handleSubmit = (e) => {
+    e.preventDefault();
+
+    let applicantId = this.state.applicantId ;
+    let aId = applicantId;
+    this.setState({ aId });
+    console.log(applicantId);
+
+  };
+
+
     handleOpenOrganizationModal = organizationId => this.setState({openOrganizationModal:true, organization: getOrganizationById(organizationId)});
     handleCloseOrganizationModal = () => this.setState({openOrganizationModal:false});
     
     render() { 
         const {currentPage, documentsStatus, pageSize, documents, sorting, searchText} = this.state;
-        let filteredDocuments = documents;
+        let filteredDocuments = getDocumentsByApplicantId(this.state.aId);
         if(documentsStatus !== "All")
             filteredDocuments = documents.filter(document => document.status === documentsStatus);
         filteredDocuments = filteredDocuments.filter(document => {
@@ -93,8 +115,22 @@ class ApplicantDashboard extends Component {
         
         return (<>
             <div style={{margin:10, backgroundColor: 'white', padding: 40, paddingLeft: 10, paddingRight:10}}>
-            <SearchBar search={this.search} searchInput={searchText} />
+            {/* <SearchBar search={this.search} searchInput={searchText} /> */}
             <br />
+
+
+
+        <form onSubmit={this.handleSubmit}>
+        <div className="form-group">
+          <label htmlFor="applicantId">Applicant ID</label>
+          <input type="text" name="applicantId" id = "applicantId" onChange={this.handleChange} value = {this.state.applicantId} className="form-control" placeholder="Enter ApplicantId" />
+          </div>
+        <button type="submit" className="btn btn-primary">Submit</button>
+        </form>
+
+
+
+
             <CenteredTabs tabs={["All","Verified","Self-Uploaded"]} handleTabChange={this.handleTabChange} /><br />
             <table className="table table-striped">
                 <thead>
@@ -115,7 +151,8 @@ class ApplicantDashboard extends Component {
                     <th scope="col"></th>
                 </tr>
                 </thead>
-                <tbody>    { paginatedDocuments.map((document,index) => 
+                <tbody>
+                { paginatedDocuments.map((document,index) => 
                     <tr key={document.documentId}>
                     <th scope="row">{(currentPage-1)*pageSize+index+1}</th>
                     <td>{document.documentId}</td>
@@ -182,4 +219,4 @@ class ApplicantDashboard extends Component {
     }
 }
  
-export default ApplicantDashboard;
+export default ViewApplicantDocuments;

@@ -3,12 +3,12 @@ import {BrowserRouter, Route , Routes } from 'react-router-dom';
 import Navbar from './components/navbar';
 
 import ViewDocuments from './components/admin/viewDocuments';
-import ViewOrganizations from './components/admin/viewOrganizations';
+import ViewOrganizations from './components/applicant/viewOrganizations';
 import ViewApplicants from './components/admin/viewApplicants';
 import AddOrganization from './components/admin/addOrganization';
 
 import OrganizationLogin from './components/organizationLogin';
-import OrganizationDashboard from './components/organizationDashboard';
+import OrganizationDashboard from './components/organization/organizationDashboard';
 import OrganizationProfile from './components/organization/organizationProfile';
 import OrganizationUploadDocument from './components/organizationUploadDocument';
 
@@ -21,6 +21,7 @@ import Home from './components/home';
 import VerifyDocument from './components/organization/verifyDocument';
 import { getDocumentById } from './services/documentService';
 import ViceAdminSignUp from './components/viceAdminSignUp';
+import ViewApplicantDocuments from './components/viewApplicantDocuments';
 
 function App() {
   return (
@@ -34,7 +35,8 @@ function App() {
                 <Route exact path="admin/viewDocuments" element={<ViewDocuments />} />
                 <Route exact path="admin/viewOrganizations" element={<ViewOrganizations />} />
                 <Route exact path="admin/viewApplicants" element={<ViewApplicants />} />
-
+                <Route exact path="applicant/viewOrganizations" element={<ViewOrganizations />} />
+              
                 <Route exact path="organization/login" element={<OrganizationLogin />} />  
                 <Route exact path="organization/dashboard" element={<OrganizationDashboard />} />
                 <Route exact path="organization/profile" element={<OrganizationProfile />} />
@@ -43,6 +45,7 @@ function App() {
                 <Route exact path="login" element={<Login />} />
                 <Route exact path="viceAdminSignUp" element={<ViceAdminSignUp />} />
                 
+                <Route exact path="/viewApplicantDocuments" element={<ViewApplicantDocuments />} />
                 <Route exact path="applicant/signUp" element={<ApplicantSignUp />} />
                 <Route exact path="applicant/dashboard" element={<ApplicantDashboard />} />
                 <Route exact path="applicant/profile" element={<ApplicantProfile />} />
