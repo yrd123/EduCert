@@ -79,6 +79,14 @@ class ViewApplicantDocuments extends Component {
     this.setState({ aId });
     console.log(applicantId);
 
+    fetch("http://localhost:4000/getAllDocumentsByApplicantId", {
+        method:"POST",
+        body:JSON.stringify(this.state.aId),
+        headers:{"Content-Type" : "application/json","token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJicmlubWFyIiwib3JnYW5pemF0aW9uIjoiT3JnMU1TUCIsInJvbGUiOiJ2aWNlQWRtaW4iLCJpYXQiOjE2NTAyOTM3MTJ9.-Cnc6oDAobZjx8gunG5Mos8VXkk_gQODsbeW8B4Esj8"}
+    })
+    .then(response => response.json())
+    .then((data) => console.log(data));
+
   };
 
 
