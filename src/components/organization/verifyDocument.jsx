@@ -20,15 +20,24 @@ import {useLocation} from 'react-router-dom'
 import Modal from '@mui/material/Modal';
 import React from 'react';
 
+
+
 export default function VerifyDocument() {
     let location = useLocation();
     const { document } = location.state;
     console.log(document);
+
+    let handleSubmit = (e) => {
+      e.preventDefault() ;
+      
+      console.log(document);
+    }
+   
     return (
         <React.Fragment>
             <div className="forms">
                     <br />
-                    <form>  
+                    <form onSubmit={handleSubmit}>  
                         <label>Organization Id</label> 
                         <div className='row'> 
                           <div className="col-12">
@@ -61,7 +70,7 @@ export default function VerifyDocument() {
                         <input className="form-control" value={document.documentName} name="documentName" type="text" placeholder="Marksheet"  id="documentName" disabled />
 
                         <label>Document Description</label>
-                        <input className="form-control" value={document.documentDescription} name="documentDescription" type="Text Area"  placeholder="Has secured rank1 in 10th std" id="desc" />
+                        <input className="form-control" value={document.documentDescription} name="documentDescription" type="Text Area"  placeholder="Has secured rank1 in 10th std" id="desc" disabled/>
                         
                         <label>Date Of Accomplishment(End Date)</label>
                         <input className="form-control" value={document.dateOfAccomplishment} name="dateOfAccomplishment" type="date"  id="dateOfAccomplishment" disabled />
@@ -75,9 +84,7 @@ export default function VerifyDocument() {
                         <label>Out of Percentage/GPA</label>
                         <input className="form-control" value={document.outOfPercentage} name="outOfPercentage" type="number" placeholder="100/4"  id="outOfPercentage" />
                         
-                        <label>Softcopy Of Document</label>
-                        <input type="file" className="form-control" name="type" placeholder={'Submit Copy Of Document'} id="type" disabled />
-                        
+                       
                         <center>
                             <input type="submit"  className="button" value="Verify" />
                         </center>

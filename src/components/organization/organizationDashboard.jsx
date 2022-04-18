@@ -112,11 +112,11 @@ class OrganizationDashboard extends Component {
                             <th className="clickable" onClick={() => this.sort("applicantName")} scope="col">Applicant Name {this.renderSortIcon("documentName")}</th>
                             <th className="clickable" onClick={() => this.sort("applicantOrganizationNumber")} scope="col">Roll No {this.renderSortIcon("documentName")}</th>
                             <th className="clickable" onClick={() => this.sort("description")} scope="col">Description {this.renderSortIcon("documentName")}</th>
-                            <th className="clickable" onClick={() => this.sort("dateOfAccomplishment")} scope="col">Date Of Accomplishment {this.renderSortIcon("documentName")}</th>
+                            <th className="clickable" onClick={() => this.sort("dateOfAccomplishment")} scope="col">Completed On{this.renderSortIcon("documentName")}</th>
 
                             <th className="clickable" onClick={() => this.sort("tenure")} scope="col">Tenure {this.renderSortIcon("applicantId")}</th>
                             <th className="clickable" onClick={() => this.sort("percentage")} scope="col">Percentage {this.renderSortIcon("applicantName")}</th>
-                            <th className="clickable" onClick={() => this.sort("percentage")} scope="col">Out Of Percentage {this.renderSortIcon("applicantName")}</th>
+                            <th className="clickable" onClick={() => this.sort("percentage")} scope="col">Out Of {this.renderSortIcon("applicantName")}</th>
                             <th className="clickable" onClick={() => this.sort("updatedBy")} scope="col">Updated By {this.renderSortIcon("typeOfDocument")}</th>
                             <th className="clickable" onClick={() => this.sort("status")} scope="col">Status {this.renderSortIcon("dateOfIssue")}</th>
                             <th scope="col"></th>
@@ -135,6 +135,8 @@ class OrganizationDashboard extends Component {
                                 
                                 <td>{document.tenure}</td>
                                 <td>{document.percentage}</td>
+                                
+                                <td>{document.outOfPercentage}</td>
                                 <td>{document.updatedBy}</td>
                                 <td><span className={this.getStatusClass(document.status)}>{document.status}</span></td>
                                 <td>

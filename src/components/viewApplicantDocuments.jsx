@@ -138,14 +138,13 @@ class ViewApplicantDocuments extends Component {
                     <th scope="col">No.</th>
                     <th className="clickable" onClick={() => this.sort("documentId")} scope="col">Document Id {this.renderSortIcon("documentName")}</th>
                     <th className="clickable" onClick={() => this.sort("organizationId")} scope="col">Organization Id{this.renderSortIcon("documentName")}</th>
-                    <th className="clickable" onClick={() => this.sort("organizationName")} scope="col">Organization Name {this.renderSortIcon("documentName")}</th>
                     <th className="clickable" onClick={() => this.sort("applicantOrganizationNumber")} scope="col">Roll No {this.renderSortIcon("documentName")}</th>
                     <th className="clickable" onClick={() => this.sort("description")} scope="col">Description {this.renderSortIcon("documentName")}</th>
-                    <th className="clickable" onClick={() => this.sort("dateOfAccomplishment")} scope="col">Date Of Accomplishment {this.renderSortIcon("documentName")}</th>
+                    <th className="clickable" onClick={() => this.sort("dateOfAccomplishment")} scope="col">Completion Date {this.renderSortIcon("documentName")}</th>
 
                     <th className="clickable" onClick={() => this.sort("tenure")} scope="col">Tenure {this.renderSortIcon("applicantId")}</th>
                     <th className="clickable" onClick={() => this.sort("percentage")} scope="col">Percentage {this.renderSortIcon("applicantName")}</th>
-                    <th className="clickable" onClick={() => this.sort("percentage")} scope="col">Out Of Percentage {this.renderSortIcon("applicantName")}</th>
+                    <th className="clickable" onClick={() => this.sort("percentage")} scope="col">Out Of  {this.renderSortIcon("applicantName")}</th>
                     <th className="clickable" onClick={() => this.sort("updatedBy")} scope="col">Updated By {this.renderSortIcon("typeOfDocument")}</th>
                     <th className="clickable" onClick={() => this.sort("status")} scope="col">Status {this.renderSortIcon("dateOfIssue")}</th>
                     <th scope="col"></th>
@@ -156,8 +155,7 @@ class ViewApplicantDocuments extends Component {
                     <tr key={document.documentId}>
                     <th scope="row">{(currentPage-1)*pageSize+index+1}</th>
                     <td>{document.documentId}</td>
-                    <td><span style={{cursor:'pointer'}} onClick={() => this.handleOpenApplicantModal(document.applicantId)}>{document.applicantId}</span></td>
-                    <td>{document.applicantName}</td>
+                    <td><span> {document.applicantId}</span></td>
                     <td>{document.applicantOrganizationNumber}</td>
                     <td>{document.description}</td>
                     <td>{document.dateOfAccomplishment}</td>

@@ -46,7 +46,7 @@ function App() {
                 <Route exact path="login" element={<Login />} />
                 <Route exact path="viceAdminSignUp" element={<ViceAdminSignUp />} />
                 
-                <Route exact path="/viewApplicantDocuments" element={<ViewApplicantDocuments />} />
+                <Route exact path="organization/viewApplicantDocuments" element={<ViewApplicantDocuments />} />
                 <Route exact path="applicant/signUp" element={<ApplicantSignUp />} />
                 <Route exact path="applicant/dashboard" element={<ApplicantDashboard />} />
                 <Route exact path="applicant/profile" element={<ApplicantProfile />} />

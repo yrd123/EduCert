@@ -106,8 +106,7 @@ class ViewOrganizations extends Component {
                         <thead>
                         <tr>
                             <th className="clickable" onClick={() => this.sort("documentId")} scope="col">OrganizationId {this.renderSortIcon("documentName")}</th>
-                            <th className="clickable" onClick={() => this.sort("applicantId")} scope="col">Organization Name{this.renderSortIcon("documentName")}</th>
-                            <th className="clickable" onClick={() => this.sort("status")} scope="col">Access {this.renderSortIcon("dateOfIssue")}</th>
+                                <th className="clickable" onClick={() => this.sort("status")} scope="col">Access {this.renderSortIcon("dateOfIssue")}</th>
                             
                         </tr>
                         </thead>
@@ -117,7 +116,6 @@ class ViewOrganizations extends Component {
                             <tr key={document.organizationId}>
                                 
                                 <td>{document.organizationId}</td>
-                                <td>{document.organizationName}</td>
                                 <td><button type="button" class="btn btn-success">Grant</button></td>
                                 <td> <button type="button" class="btn btn-danger">Revoke</button></td>
                                 
