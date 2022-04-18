@@ -3,7 +3,7 @@ import { getApplicantById } from '../../services/applicantService';
 import '../login.css'
 import { NavLink } from 'react-router-dom';
 
-class ApplicantProfile extends Component {
+class ViewApplicantProfile extends Component {
     state = {
         applicant : getApplicantById("11111")
     };
@@ -19,24 +19,23 @@ class ApplicantProfile extends Component {
                         <label htmlFor="id">Id</label>
                         <input type="id" name="id" value={applicant._id} disabled/>
                         <label htmlFor="email">Email</label>
-                        <input type="email" name="email" value={applicant.email} disabled/>
+                        <input type="email" name="email" value={applicant.email} />
                         <label htmlFor="fullName">Name</label>
                         <input type="text" name="fullName" value={applicant.name} disabled/>
                         <label htmlFor="address">Address</label>
-                        <input type="text" name="address" value={""} disabled/>
+                        <input type="text" name="address" value={""} />
                         <label htmlFor="pincode">Pin/Zip Code</label>
-                        <input type="text" name="pincode" value={""} disabled/>
+                        <input type="text" name="pincode" value={""} />
                         <label htmlFor="state">State</label>
-                        <input type="text" name="state" value={""} disabled/>
+                        <input type="text" name="state" value={""} />
                         <label htmlFor="country">Country</label>
-                        <input type="text" name="country" value={""} disabled/>
+                        <input type="text" name="country" value={""} />
                         <label htmlFor="contactNumber">Mobile Number</label>
-                        <input type="number" name="contactNumber" value={""} disabled/>
+                        <input type="number" name="contactNumber" value={""} />
                         <label htmlFor="dob">Date of Birth</label>
-                        <input type="date" name="dob" value={""} disabled/>
+                        <input type="date" name="dob" value={""} />
 
-                        <NavLink className="nav-link" to="/applicant/profileUpdate">
-                        <input type="submit" value="UPDATE" className="button" /></NavLink>
+                        <input type="submit" value="CHANGE CURRENT ORGANIZATION" className="button" />
               
                     </div>
                     </form>
@@ -46,4 +45,4 @@ class ApplicantProfile extends Component {
     }
 }
 
-export default ApplicantProfile;
+export default ViewApplicantProfile;

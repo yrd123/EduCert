@@ -11,7 +11,8 @@ import OrganizationLogin from './components/organizationLogin';
 import OrganizationDashboard from './components/organization/organizationDashboard';
 import OrganizationProfile from './components/organization/organizationProfile';
 import OrganizationUploadDocument from './components/organizationUploadDocument';
-
+import ApplicantProfileUpdate from './components/applicant/applicantProfileUpdate' ;
+import ViewApplicantProfile from './components/organization/getPermissionedApplicant';
 import Login from './components/login';
 import ApplicantSignUp from './components/applicantSignUp'
 import ApplicantDashboard from './components/applicantDashboard';
@@ -41,6 +42,7 @@ function App() {
                 <Route exact path="organization/login" element={<OrganizationLogin />} />  
                 <Route exact path="organization/dashboard" element={<OrganizationDashboard />} />
                 <Route exact path="organization/profile" element={<OrganizationProfile />} />
+                <Route exact path="organization/viewApplicantProfile" element={<ViewApplicantProfile />} />
                 <Route exact path="organization/uploadDocument" element={<OrganizationUploadDocument />} />
                 <Route exact path="organization/verify" element={<VerifyDocument />} />
                 <Route exact path="login" element={<Login />} />
@@ -50,6 +52,7 @@ function App() {
                 <Route exact path="applicant/signUp" element={<ApplicantSignUp />} />
                 <Route exact path="applicant/dashboard" element={<ApplicantDashboard />} />
                 <Route exact path="applicant/profile" element={<ApplicantProfile />} />
+                <Route exact path="applicant/profileUpdate" element={<ApplicantProfileUpdate />} />
                 <Route exact path="applicant/uploadDocument" element={<ApplicantUploadDocument />} />
                 <Route exact path="admin/addOrganization" element={<AddOrganization />} />
             </Routes>
