@@ -17,7 +17,7 @@ class ViewApplicantDocuments extends Component {
          
         applicantId : '' ,
         aId : '',
-        documents : getDocumentsByApplicantId('1814073'),
+        documents : [],
         documentsStatus : "All",
         currentPage : 1,
         pageSize : 2,
@@ -74,18 +74,15 @@ class ViewApplicantDocuments extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
 
-    let applicantId = this.state.applicantId ;
-    let aId = applicantId;
-    this.setState({ aId });
-    console.log(applicantId);
+    console.log(this.state.applicantId);
 
-    fetch("http://localhost:4000/getAllDocumentsByApplicantId", {
+    fetch("http://localhost:4000/getDocumentsByApplicantId", {
         method:"POST",
-        body:JSON.stringify(this.state.aId),
-        headers:{"Content-Type" : "application/json","token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJicmlubWFyIiwib3JnYW5pemF0aW9uIjoiT3JnMU1TUCIsInJvbGUiOiJ2aWNlQWRtaW4iLCJpYXQiOjE2NTAyOTM3MTJ9.-Cnc6oDAobZjx8gunG5Mos8VXkk_gQODsbeW8B4Esj8"}
+        body:JSON.stringify({"data":{"applicantId":this.state.applicantId}}),
+        headers:{"Content-Type" : "application/json","x-auth-token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJ5YXJ3aXR6Iiwib3JnYW5pemF0aW9uIjoiT3JnMU1TUCIsInJvbGUiOiJ2aWNlQWRtaW4iLCJpYXQiOjE2NTAzMDkwMjB9.0M-GGJicvYNRt4JRYtzVjayIXosWkwq4D2nrySStRac"}
     })
     .then(response => response.json())
-    .then((data) => console.log(data));
+    .then((data) => this.setState({documents:data}))
 
   };
 
@@ -95,15 +92,15 @@ class ViewApplicantDocuments extends Component {
     
     render() { 
         const {currentPage, documentsStatus, pageSize, documents, sorting, searchText} = this.state;
-        let filteredDocuments = getDocumentsByApplicantId(this.state.aId);
+        let filteredDocuments = documents;
         if(documentsStatus !== "All")
             filteredDocuments = documents.filter(document => document.status === documentsStatus);
-        filteredDocuments = filteredDocuments.filter(document => {
-            for(let property in document){
-                if(document[property].includes(searchText)) return true;
-            }
-            return false;
-        })
+        // filteredDocuments = filteredDocuments.filter(document => {
+        //     for(let property in document){
+        //         if(document[property].includes(searchText)) return true;
+        //     }
+        //     return false;
+        // })
         const sortedDocuments = _.orderBy(filteredDocuments,[sorting.property],[sorting.order]);
         const paginatedDocuments = paginate(sortedDocuments, currentPage, pageSize);
 
