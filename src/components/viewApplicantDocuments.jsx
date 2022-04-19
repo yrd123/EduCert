@@ -84,7 +84,7 @@ class ViewApplicantDocuments extends Component {
     .then(response => response.json())
     .then((data) => this.setState({documents:data}))
 
-  };
+  }; 
 
 
     handleOpenOrganizationModal = organizationId => this.setState({openOrganizationModal:true, organization: getOrganizationById(organizationId)});

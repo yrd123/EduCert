@@ -17,7 +17,7 @@ import Typography from '@mui/material/Typography';
 
 class OrganizationDashboard extends Component {
     state = { 
-        documents : getDocumentsByOrganizationId("54321"),
+        documents : [],
         documentsStatus : "All",
         currentPage : 1,
         pageSize : 2,
@@ -26,6 +26,19 @@ class OrganizationDashboard extends Component {
         openApplicantModal: false,
         applicant:{}
     };
+
+
+    componentDidMount() {
+
+        fetch("http://localhost:4000/getDocumentsSignedByOrganization", {
+        method:"POST",
+        headers:{"Content-Type" : "application/json","x-auth-token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJ5YXJ3aXR6Iiwib3JnYW5pemF0aW9uIjoiT3JnMU1TUCIsInJvbGUiOiJ2aWNlQWRtaW4iLCJpYXQiOjE2NTAzMDkwMjB9.0M-GGJicvYNRt4JRYtzVjayIXosWkwq4D2nrySStRac"}
+    })
+    .then(response => response.json())
+    .then((data) => this.setState({documents:data}))
+  
+    
+    }
 
 
     

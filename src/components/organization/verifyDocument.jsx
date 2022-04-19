@@ -30,7 +30,15 @@ export default function VerifyDocument() {
     let handleSubmit = (e) => {
       e.preventDefault() ;
       
-      console.log(document);
+      console.log(document); 
+      fetch("http://localhost:4000/verifyDocument", {
+        method:"POST",
+        body:JSON.stringify({"data":{"documentId":this.state.documentId}}),
+        headers:{"Content-Type" : "application/json","x-auth-token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJ5YXJ3aXR6Iiwib3JnYW5pemF0aW9uIjoiT3JnMU1TUCIsInJvbGUiOiJ2aWNlQWRtaW4iLCJpYXQiOjE2NTAzMDkwMjB9.0M-GGJicvYNRt4JRYtzVjayIXosWkwq4D2nrySStRac"}
+    })
+    .then(response => response.json())
+    .then((data) => this.setState({documents:data}))
+
     }
    
     return (

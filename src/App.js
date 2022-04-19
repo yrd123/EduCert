@@ -8,6 +8,7 @@ import ViewApplicants from './components/admin/viewApplicants';
 import AddOrganization from './components/admin/addOrganization';
 import ViewViceAdmins from './components/admin/viewViceAdmins';
 import OrganizationLogin from './components/organizationLogin';
+import CreateVerifiedDocuments from './components/organization/createDocument';
 import OrganizationDashboard from './components/organization/organizationDashboard';
 import OrganizationProfile from './components/organization/organizationProfile';
 import OrganizationUploadDocument from './components/organizationUploadDocument';
@@ -43,6 +44,7 @@ function App() {
                 <Route exact path="organization/dashboard" element={<OrganizationDashboard />} />
                 <Route exact path="organization/profile" element={<OrganizationProfile />} />
                 <Route exact path="organization/viewApplicantProfile" element={<ViewApplicantProfile />} />
+                <Route exact path="organization/addDocument" element={<CreateVerifiedDocuments />} />
                 <Route exact path="organization/uploadDocument" element={<OrganizationUploadDocument />} />
                 <Route exact path="organization/verify" element={<VerifyDocument />} />
                 <Route exact path="login" element={<Login />} />
