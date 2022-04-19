@@ -15,26 +15,23 @@ import Typography from '@mui/material/Typography';
 
 class ApplicantDashboard extends Component {
     state = { 
-        documents : getDocumentsByApplicantId("1814073"),
+        documents : [],
         documentsStatus : "All",
         currentPage : 1,
         pageSize : 2,
         sorting : { property : "documentName", order : "asc" },
         searchText  : "",
         openOrganizationModal: false,
-        organization:{} , 
-        myData : [] 
+        organization:{}
     };
 
     componentDidMount() {
         fetch("http://localhost:4000/getMyDocuments", {
         method:"POST",
-        headers:{"Content-Type" : "application/json","x-auth-token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJ5YXJ3aXR6Iiwib3JnYW5pemF0aW9uIjoiT3JnMU1TUCIsInJvbGUiOiJ2aWNlQWRtaW4iLCJpYXQiOjE2NTAzMDkwMjB9.0M-GGJicvYNRt4JRYtzVjayIXosWkwq4D2nrySStRac"}
+        headers:{"Content-Type" : "application/json","x-auth-token":localStorage.getItem("eduCertJwtToken")}
         })
         .then(response => response.json())
-        .then((data) => this.setState({myData:data}))
-    
-        
+        .then((data) => this.setState({documents:data}))
     }
     
     handleTabChange = tab =>{
@@ -127,20 +124,20 @@ class ApplicantDashboard extends Component {
                 </tr>
                 </thead>
                 <tbody>    { paginatedDocuments.map((document,index) => 
-                    <tr key={this.state.myData.documentId}>
+                    <tr key={document.documentId}>
                     <th scope="row">{(currentPage-1)*pageSize+index+1}</th>
-                    <td>{this.state.myData.documentId}</td>
-                    <td><span style={{cursor:'pointer'}} onClick={() => this.handleOpenApplicantModal(this.state.myData.organizationId)}>{document.applicantId}</span></td>
-                    <td>{this.state.myData.applicantOrganizationNumber}</td>
-                    <td>{this.state.myData.description}</td>
-                    <td>{this.state.myData.dateOfAccomplishment}</td>
+                    <td>{document.documentId}</td>
+                    <td><span style={{cursor:'pointer'}} onClick={() => this.handleOpenApplicantModal(document.organizationId)}>{document.applicantId}</span></td>
+                    <td>{document.applicantOrganizationNumber}</td>
+                    <td>{document.description}</td>
+                    <td>{document.dateOfAccomplishment}</td>
                     
-                    <td>{this.state.myData.tenure}</td>
-                    <td>{this.state.myData.percentage}</td>
+                    <td>{document.tenure}</td>
+                    <td>{document.percentage}</td>
                     
-                    <td>{this.state.myData.outOfPercentage}</td>
-                    <td>{this.state.myData.updatedBy}</td>
-                    <td><span className={this.getStatusClass(this.state.myData.status)}>{this.state.myData.status}</span></td>
+                    <td>{document.outOfPercentage}</td>
+                    <td>{document.updatedBy}</td>
+                    <td><span className={this.getStatusClass(document.status)}>{document.status}</span></td>
                                         
 <td>
 <CustomModal modalBody={<PreviewCertificate document={document} />} modalButtonLabel="View"/> 

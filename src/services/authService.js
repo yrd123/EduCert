@@ -6,7 +6,6 @@ export async function login(loginCredentials){
     body:JSON.stringify(loginCredentials)
     });
     let token = await promise.text();
-    console.log(token)
     // .then(response => console.log(response.json()))
     // .then(data => console.log(data));
     
