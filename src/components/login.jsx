@@ -19,12 +19,12 @@ export default class Login extends Component {
     this.setState({ loginCredentials });
   }
 
-  handleSubmit = (e) => {
+  handleSubmit = async (e) => {
     e.preventDefault();
     if (this.handleValidation()) {
-        let token = login(this.state.loginCredentials);
+        let token = await login(this.state.loginCredentials);
         localStorage.setItem('eduCertJwtToken', token);
-        // console.log(localStorage.getItem('eduCertJwtToken'));
+        console.log(localStorage.getItem('eduCertJwtToken'));
     } 
     else 
       return;
