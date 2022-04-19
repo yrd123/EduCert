@@ -2,13 +2,7 @@ import React, { Component } from 'react';
 
 class CreateVerifiedDocuments extends Component {
     state = {
-        openOrganizationPreviewModal : false, 
-        openApplicantPreviewModal : false,
-        organization : {
-            _id:'', email:'', name:''
-        },
         data :{ documentId:'', applicantId :'' , applicantName : '' , applicantOrganizationNumber :'' , organizationId : '', documentName : '', description : '', dateOfAccomplishment: '' , tenure :'' , percentage :'' , outOfPercentage : '' , documentUrl :''  } 
-      
     };
 
     handleChange = (e) => {
@@ -27,14 +21,9 @@ class CreateVerifiedDocuments extends Component {
         body:JSON.stringify({"data": this.state.data }),
         headers:{"Content-Type" : "application/json","x-auth-token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJ5YXJ3aXR6Iiwib3JnYW5pemF0aW9uIjoiT3JnMU1TUCIsInJvbGUiOiJ2aWNlQWRtaW4iLCJpYXQiOjE2NTAzMDkwMjB9.0M-GGJicvYNRt4JRYtzVjayIXosWkwq4D2nrySStRac"}})
         .then(response => response.json())
+        this.setState({ data :{ documentId:'', applicantId :'' , applicantName : '' , applicantOrganizationNumber :'' , organizationId : '', documentName : '', description : '', dateOfAccomplishment: '' , tenure :'' , percentage :'' , outOfPercentage : '' , documentUrl :''  } })
         
     };
-
-
-   
-
-   
-
 
     render() {
       

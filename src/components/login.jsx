@@ -10,6 +10,7 @@ export default class Login extends Component {
       applicantinfo: {
         id: "",
         password: "",
+        organization:""
       },
       errors: {},
     }
