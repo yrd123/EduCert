@@ -1,26 +1,19 @@
 import React, { Component } from 'react';
 import './login.css';
-import CenteredTabs from './common/tabs';
 
 
 
 export default class ViceAdminSignUp extends Component {
-    state = {
-      currentTab : "Log In" ,
-      applicantinfo: {
-          organization : "" ,
-        id: "",
-        password: "",
-        role : "viceAdmin"
-      },
-      errors: {},
-    }
+  state = {
+    applicantinfo: {
+      organization: "",
+      id: "",
+      password: "",
+      role: "viceAdmin"
+    },
+    errors: {},
+  }
 
-    handleTabChange = tab =>{
-      this.setState({currentTab : tab});
-    }
-
-    
   handleChange = (e) => {
     const applicantinfo = { ...this.state.applicantinfo };
     applicantinfo[e.currentTarget.name] = e.currentTarget.value;
@@ -28,15 +21,13 @@ export default class ViceAdminSignUp extends Component {
     console.log(applicantinfo);
   }
 
-  
-
   handleSubmit = (e) => {
     e.preventDefault();
 
     if (this.handleValidation()) {
-        const base_url="http://127.0.0.1:4000/createApplicant"
-        const data={applicantinfoSignup:this.state.applicantinfoSignup}
-        
+      const base_url = "http://127.0.0.1:4000/createApplicant"
+      const data = { applicantinfoSignup: this.state.applicantinfoSignup }
+
 
     } else {
       return;
@@ -62,9 +53,7 @@ export default class ViceAdminSignUp extends Component {
       }
     }
 
-
-
-        //Password
+    //Password
     if (!applicantinfo["password"]) {
       formIsValid = false;
       errors["password"] = "Cannot be empty";
@@ -86,18 +75,15 @@ export default class ViceAdminSignUp extends Component {
       }
     }
 
-
     this.setState({ errors: errors });
     return formIsValid;
-  } 
+  }
 
-
-  
-    render() {
-      return  (
-        <div>
-          <div className="forms">
-            {/* <ul className="tab-group">
+  render() {
+    return (
+      <div>
+        <div className="forms">
+          {/* <ul className="tab-group">
               <li className="tab active" id="loginbutton">
                 <a href="#login">Log In</a>
               </li>
@@ -105,52 +91,45 @@ export default class ViceAdminSignUp extends Component {
             </ul> */}
 
 
-            {/* LOGIN FORM */}
-            <form  id="login" style={{display: this.state.currentTab==='Log In' ? 'block' : 'none' }} onSubmit={this.handleSubmit} name="loginform" method="POST">
-              <br/>
-              <div id="loginwarning" className="warning">
-                {/* INSERT LOGIN WARNINGS HERE */}
-              </div>
-              <div className="input-field">
-                <label htmlFor="id">UserId</label>
-                <input type="text" name="id" id = "id" onChange={this.handleChange} value = {this.state.applicantinfo.id} placeholder="sanyamgandhi00" />
-                { this.state.errors['id'] && 
-                                <div class="alert alert-danger" role="alert">
-                                {  this.state.errors["id"]}
-                                </div>
-                                }
+          {/* LOGIN FORM */}
+          <form id="login" onSubmit={this.handleSubmit} name="loginform" method="POST">
+            <br />
+            <div id="loginwarning" className="warning">
+              {/* INSERT LOGIN WARNINGS HERE */}
+            </div>
+            <div className="input-field">
+              <label htmlFor="id">UserId</label>
+              <input type="text" name="id" id="id" onChange={this.handleChange} value={this.state.applicantinfo.id} placeholder="sanyamgandhi00" />
+              {this.state.errors['id'] &&
+                <div class="alert alert-danger" role="alert">
+                  {this.state.errors["id"]}
+                </div>
+              }
 
-                
-                                
-                <label htmlFor="password">Password</label>
-                <input type="password" name="password" id = "password" onChange={this.handleChange} value = {this.state.applicantinfo.password}  placeholder="******" />
-                { this.state.errors['password'] && 
-                    <div class="alert alert-danger" role="alert">
-                    {  this.state.errors["password"]}
-                    </div>
-                }
+              <label htmlFor="password">Password</label>
+              <input type="password" name="password" id="password" onChange={this.handleChange} value={this.state.applicantinfo.password} placeholder="******" />
+              {this.state.errors['password'] &&
+                <div class="alert alert-danger" role="alert">
+                  {this.state.errors["password"]}
+                </div>
+              }
 
+              <label htmlFor="id">Organization</label>
+              <input type="text" name="organization" id="organization" onChange={this.handleChange} value={this.state.applicantinfo.id} placeholder="Org1" />
+              {this.state.errors['organization'] &&
+                <div class="alert alert-danger" role="alert">
+                  {this.state.errors["organization"]}
+                </div>
+              }
 
-<label htmlFor="id">Organization</label>
-                <input type="text" name="organization" id = "organization" onChange={this.handleChange} value = {this.state.applicantinfo.id} placeholder="Org1" />
-                { this.state.errors['organization'] && 
-                                <div class="alert alert-danger" role="alert">
-                                {  this.state.errors["organization"]}
-                                </div>
-                                }
-                
-                                
-                {/* <a href="applicant/dashboard"> */}
-                  <input type="submit" defaultValue="Login" className="button" />
-                {/* </a> */}
-                
+              {/* <a href="applicant/dashboard"> */}
+              <input type="submit" defaultValue="Login" className="button" />
+              {/* </a> */}
 
-              </div>
-            </form>
-            
+            </div>
+          </form>
         </div>
-        </div>
-
-      );
-    }
+      </div>
+    );
+  }
 }
