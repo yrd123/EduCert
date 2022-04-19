@@ -33,11 +33,11 @@ export default function VerifyDocument() {
       console.log(document); 
       fetch("http://localhost:4000/verifyDocument", {
         method:"POST",
-        body:JSON.stringify({"data":{"documentId":this.state.documentId}}),
-        headers:{"Content-Type" : "application/json","x-auth-token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJ5YXJ3aXR6Iiwib3JnYW5pemF0aW9uIjoiT3JnMU1TUCIsInJvbGUiOiJ2aWNlQWRtaW4iLCJpYXQiOjE2NTAzMDkwMjB9.0M-GGJicvYNRt4JRYtzVjayIXosWkwq4D2nrySStRac"}
+        body:JSON.stringify({"data":{"documentId":document.documentId}}),
+        headers:{"Content-Type" : "application/json","x-auth-token":localStorage.getItem("eduCertJwtToken")}
     })
     .then(response => response.json())
-    .then((data) => this.setState({documents:data}))
+    .then((data) => this.setState({document:data}))
 
     }
    
@@ -49,7 +49,7 @@ export default function VerifyDocument() {
                         <label>Organization Id</label> 
                         <div className='row'> 
                           <div className="col-12">
-                            <input className="form-control" value={document.organizationId} name="organizationId" placeholder="112345" type="number" id="organizationId" disabled />
+                            <input className="form-control" value={document.organizationId} name="organizationId" id="organizationId" disabled />
                           </div>
                           {/* <div className="col-4">
                             <button type="button" onClick={this.handleOpenOrganizationPreviewModal} className="btn btn-success">&nbsp;&nbsp;Organization Details&nbsp;&nbsp;</button>
@@ -69,6 +69,9 @@ export default function VerifyDocument() {
                           </div> */}
                         </div>
 
+                        <label>Applicant Name</label>
+                        <input className="form-control" value={document.applicantName} name="applicantName" type="text" id="applicantName"  disabled />
+
                         <label>Applicant Organization Identification Number</label>
                         <input className="form-control" value={document.applicantOrganizationId} name="applicantOrganizationId" placeholder={"Roll No, Seat No, etc"} type="text" id="applicantOrganizationId"  disabled />
 
@@ -81,7 +84,7 @@ export default function VerifyDocument() {
                         <input className="form-control" value={document.documentDescription} name="documentDescription" type="Text Area"  placeholder="Has secured rank1 in 10th std" id="desc" disabled/>
                         
                         <label>Date Of Accomplishment(End Date)</label>
-                        <input className="form-control" value={document.dateOfAccomplishment} name="dateOfAccomplishment" type="date"  id="dateOfAccomplishment" disabled />
+                        <input className="form-control" value={document.dateOfAccomplishment} name="dateOfAccomplishment"  id="dateOfAccomplishment" disabled />
                         
                         <label>Tenure(In years)</label>
                         <input className="form-control" value={document.tenure} name="tenure" type="number" placeholder="2"  id="tenure" disabled />
