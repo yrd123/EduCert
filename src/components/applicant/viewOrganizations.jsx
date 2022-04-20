@@ -28,6 +28,28 @@ class ViewOrganizations extends Component {
         organizationId:''
     };
 
+    grantPermission = name => e =>{
+
+        fetch("http://localhost:4000/grantOrganizationAccess", {
+        method:"POST",
+        body:JSON.stringify({"data": name}),
+        headers:{"Content-Type" : "application/json","x-auth-token":localStorage.getItem("eduCertJwtToken")}})
+        .then(response => response.json())
+
+        alert(`granted, ${name}`);
+    };
+
+    
+    revokePermission = name => e =>{
+        fetch("http://localhost:4000/revokeOrganizationAccess", {
+            method:"POST",
+            body:JSON.stringify({"data": name}),
+            headers:{"Content-Type" : "application/json","x-auth-token":localStorage.getItem("eduCertJwtToken")}})
+            .then(response => response.json())
+    
+        alert(`revoked, ${name}`);
+    };
+
     handleGrant = (e) => {
         e.preventDefault();
         console.log(this.state.data) ;
@@ -126,14 +148,12 @@ class ViewOrganizations extends Component {
                         <tbody>    
                         { paginatedDocuments.map((document,index) => 
                             <tr key={document.organizationId}>
-                                <form onSubmit={this.handleGrant}>
-                                <td> <input type= 'text' name='organization' id='organization' value={document.organizationId}></input></td>
-                                    <td><button type="button" class="btn btn-success">Grant</button></td>
-                                </form>
-                                <form onSubmit={this.handleRevoke}>
-                                    <td><input type= 'text' name='organization' id='organization' value={document.organizationId}></input></td>
-                                    <td> <button type="button" class="btn btn-danger">Revoke</button></td>
-                                </form>
+
+                                <td> {document.organizationId}</td>
+                                <td><button  type="button" onClick={this.grantPermission(document.organizationId)} class="btn btn-success">Grant</button></td>
+                
+                                <td> <button type="button" onClick={this.grantPermission(document.organizationId)} class="btn btn-danger">Revoke</button></td>
+                               
                             </tr>
                         )}
                         </tbody>
