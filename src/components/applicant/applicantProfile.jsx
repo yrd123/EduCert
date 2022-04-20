@@ -6,7 +6,16 @@ import { NavLink } from 'react-router-dom';
 class ApplicantProfile extends Component {
     state = {
         applicant : {},
-        applicant : [] ,
+        data :{ email:'', password :'' , name : '' , pin :'' , state : '', country : '', contact : '' , dtaeOfBirth :'' } 
+  
+    }; 
+
+    
+    handleChange = (e) => {
+        const data = { ...this.state.data };
+        data[e.currentTarget.name] = e.currentTarget.value;
+        this.setState({ data });
+
     };
 
 
@@ -18,7 +27,7 @@ class ApplicantProfile extends Component {
         headers:{"Content-Type" : "application/json","x-auth-token":localStorage.getItem("eduCertJwtToken")}
         })
         .then(response => response.json())
-        .then((data) => this.setState({applicant:data}))
+        .then((data) => this.setState({data:data}))
     }
 
     handleSubmit = (e) => {
@@ -42,23 +51,27 @@ class ApplicantProfile extends Component {
                     <center><h4> Profile </h4></center><br/>
                     <div className="input-field">
                         <label htmlFor="id">Id</label>
-                        <input type="id" name="id" value={applicant.applicantId} disabled/>
+                        <input type="id" name="id"  value={applicant.applicantId} disabled/>
                         <label htmlFor="email">Email</label>
-                        <input type="email" name="email" value={applicant.email}/>
-                        <label htmlFor="fullName">Name</label>
-                        <input type="text" name="fullName" value={applicant.name}/>
-                        <label htmlFor="address">Address</label>
-                        <input type="text" name="address" value={applicant.address}/>
-                        <label htmlFor="pincode">Pin/Zip Code</label>
-                        <input type="text" name="pincode" value={applicant.pin}/>
-                        <label htmlFor="state">State</label>
-                        <input type="text" name="state" value={applicant.state}/>
-                        <label htmlFor="country">Country</label>
-                        <input type="text" name="country" value={applicant.country}/>
-                        <label htmlFor="contact">Mobile Number</label>
-                        <input type="text" name="contact" value={applicant.contact}/>
-                        <label htmlFor="dob">Date of Birth</label>
-                        <input type="text" name="dob" value={applicant.dateOfBirth} disabled/>
+                        <input className="form-control"  name="email" id = "email" onChange={this.handleChange} value = {this.state.data.email} type="text" placeholder="s@a.co" required />
+                        <label htmlFor="email">Password</label>
+                        <input className="form-control"  name="password" id = "password" onChange={this.handleChange} value = {this.state.data.passwword} type="text" placeholder="s@a.co" required />
+
+<label htmlFor="fullName">Name</label>
+<input className="form-control"  name="name" id = "name" onChange={this.handleChange} value = {this.state.data.name} type="text" placeholder="zergande" required />
+<label htmlFor="address">Address</label>
+<input className="form-control"  name="address" id = "address" onChange={this.handleChange} value = {this.state.data.address} type="text" placeholder="sambhav appt" required />
+<label htmlFor="pincode">Pin/Zip Code</label>
+<input className="form-control"  name="pin" id = "pin" onChange={this.handleChange} value = {this.state.data.pin} type="text" placeholder="s@a.co" required />
+<label htmlFor="state">State</label>
+
+<input className="form-control"  name="state" id = "state" onChange={this.handleChange} value = {this.state.data.state} type="text" placeholder="s@a.co" required />
+<label htmlFor="country">Country</label>
+<input className="form-control"  name="country" id = "country" onChange={this.handleChange} value = {this.state.data.country} type="text" placeholder="s@a.co" required />
+<label htmlFor="contact">Mobile Number</label>
+<input className="form-control"  name="contact" id = "contact" onChange={this.handleChange} value = {this.state.data.contact} type="text" placeholder="s@a.co" required />
+<label htmlFor="dob">Date of Birth</label>
+                        <input type="text" name="dob" value={this.state.data.dateOfBirth}  disabled/>
 
                         <input type="submit" value="UPDATE" className="button" />
               
