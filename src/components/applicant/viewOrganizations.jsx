@@ -30,39 +30,34 @@ class ViewOrganizations extends Component {
 
     grantPermission = name => e =>{
 
-        fetch("http://localhost:4000/grantOrganizationAccess", {
+        fetch("http://localhost:4000/grantAccessToOrganization", {
         method:"POST",
-        body:JSON.stringify({"data": name}),
+        body:JSON.stringify({
+            "data":{
+                "organizationId":name
+            }
+        }),
         headers:{"Content-Type" : "application/json","x-auth-token":localStorage.getItem("eduCertJwtToken")}})
         .then(response => response.json())
 
-        alert(`granted, ${name}`);
+        alert(`Granted ${name}`);
     };
 
     
     revokePermission = name => e =>{
-        fetch("http://localhost:4000/revokeOrganizationAccess", {
+        fetch("http://localhost:4000/revokeAccessFromOrganization", {
             method:"POST",
-            body:JSON.stringify({"data": name}),
+            body:JSON.stringify({
+                "data":{
+                    "organizationId":name
+                }
+            }),
             headers:{"Content-Type" : "application/json","x-auth-token":localStorage.getItem("eduCertJwtToken")}})
             .then(response => response.json())
     
-        alert(`revoked, ${name}`);
+        alert(`Revoked ${name}`);
     };
 
-    handleGrant = (e) => {
-        e.preventDefault();
-        console.log(this.state.data) ;
-        console.log(e.target.value) ;
-        this.setState({organizationId:e.target.value})
-        fetch("http://localhost:4000/grantOrganizationAccess", {
-        method:"POST",
-        body:JSON.stringify({"data": this.state.data }),
-        headers:{"Content-Type" : "application/json","x-auth-token":localStorage.getItem("eduCertJwtToken")}})
-        .then(response => response.json())
-        
-    };
-    
     handleTabChange = tab =>{
         this.setState({documentsStatus : tab, searchText : ""});
     }
@@ -152,7 +147,7 @@ class ViewOrganizations extends Component {
                                 <td> {document.organizationId}</td>
                                 <td><button  type="button" onClick={this.grantPermission(document.organizationId)} class="btn btn-success">Grant</button></td>
                 
-                                <td> <button type="button" onClick={this.grantPermission(document.organizationId)} class="btn btn-danger">Revoke</button></td>
+                                <td> <button type="button" onClick={this.revokePermission(document.organizationId)} class="btn btn-danger">Revoke</button></td>
                                
                             </tr>
                         )}
