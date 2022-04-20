@@ -6,7 +6,7 @@ import { NavLink } from 'react-router-dom';
 class ApplicantProfile extends Component {
     state = {
         applicant : {},
-        data :{ email:'', password :'' , name : '' , pin :'' , state : '', country : '', contact : '' , dtaeOfBirth :'' } 
+        data :{ applicantId:'', email:'', password :'' , name : '' , pin :'' , state : '', country : '', contact : '' , dtaeOfBirth :'' } 
   
     }; 
 
@@ -34,7 +34,7 @@ class ApplicantProfile extends Component {
         e.preventDefault();
         console.log(this.state.data) ;
 
-        fetch("http://localhost:4000/updatApplicantPersonalDetails", {
+        fetch("http://localhost:4000/updateApplicantPersonalDetails", {
         method:"POST",
         body:JSON.stringify({"data": this.state.data }),
         headers:{"Content-Type" : "application/json","x-auth-token":localStorage.getItem("eduCertJwtToken")}})
@@ -51,7 +51,7 @@ class ApplicantProfile extends Component {
                     <center><h4> Profile </h4></center><br/>
                     <div className="input-field">
                         <label htmlFor="id">Id</label>
-                        <input type="id" name="id"  value={applicant.applicantId} disabled/>
+                        <input type="id" name="id"  value={this.state.data.applicantId} disabled/>
                         <label htmlFor="email">Email</label>
                         <input className="form-control"  name="email" id = "email" onChange={this.handleChange} value = {this.state.data.email} type="text" placeholder="s@a.co" required />
                         <label htmlFor="email">Password</label>

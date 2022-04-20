@@ -17,17 +17,29 @@ import Typography from '@mui/material/Typography';
 
 class ViewOrganizations extends Component {
     state = { 
-        documents : getDocumentsByOrganizationId("54321"),
+        documents : [{"organizationId":"org1"},{"organizationId":"org2"}],
         documentsStatus : "All",
         currentPage : 1,
         pageSize : 2,
         sorting : { property : "documentName", order : "asc" },
         searchText  : "",
         openApplicantModal: false,
-        applicant:{}
+        applicant:{},
+        organizationId:''
     };
 
-
+    handleGrant = (e) => {
+        e.preventDefault();
+        console.log(this.state.data) ;
+        console.log(e.target.value) ;
+        this.setState({organizationId:e.target.value})
+        fetch("http://localhost:4000/grantOrganizationAccess", {
+        method:"POST",
+        body:JSON.stringify({"data": this.state.data }),
+        headers:{"Content-Type" : "application/json","x-auth-token":localStorage.getItem("eduCertJwtToken")}})
+        .then(response => response.json())
+        
+    };
     
     handleTabChange = tab =>{
         this.setState({documentsStatus : tab, searchText : ""});
@@ -114,11 +126,14 @@ class ViewOrganizations extends Component {
                         <tbody>    
                         { paginatedDocuments.map((document,index) => 
                             <tr key={document.organizationId}>
-                                
-                                <td>{document.organizationId}</td>
-                                <td><button type="button" class="btn btn-success">Grant</button></td>
-                                <td> <button type="button" class="btn btn-danger">Revoke</button></td>
-                                
+                                <form onSubmit={this.handleGrant}>
+                                <td> <input type= 'text' name='organization' id='organization' value={document.organizationId}></input></td>
+                                    <td><button type="button" class="btn btn-success">Grant</button></td>
+                                </form>
+                                <form onSubmit={this.handleRevoke}>
+                                    <td><input type= 'text' name='organization' id='organization' value={document.organizationId}></input></td>
+                                    <td> <button type="button" class="btn btn-danger">Revoke</button></td>
+                                </form>
                             </tr>
                         )}
                         </tbody>
