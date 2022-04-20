@@ -15,41 +15,52 @@ class ApplicantProfile extends Component {
         fetch("http://localhost:4000/getMyDetails", {
         method:"POST",
         // body:JSON.stringify({"data":{"applicantId":this.state.applicantId}}),
-        headers:{"Content-Type" : "application/json","x-auth-token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJkcmV2YW50ZW0xIiwib3JnYW5pemF0aW9uIjoiT3JnMU1TUCIsInJvbGUiOiJhcHBsaWNhbnQiLCJpYXQiOjE2NTAyOTM4MjJ9.S4wiaq_eg_ji3YRoj9ParN6TOspvSLgIWEzHvV-Ji-c"}
+        headers:{"Content-Type" : "application/json","x-auth-token":localStorage.getItem("eduCertJwtToken")}
         })
         .then(response => response.json())
         .then((data) => this.setState({applicant:data}))
     }
+
+    handleSubmit = (e) => {
+        e.preventDefault();
+        console.log(this.state.data) ;
+
+        fetch("http://localhost:4000/updatApplicantPersonalDetails", {
+        method:"POST",
+        body:JSON.stringify({"data": this.state.data }),
+        headers:{"Content-Type" : "application/json","x-auth-token":localStorage.getItem("eduCertJwtToken")}})
+        .then(response => response.json())
+        
+    };
     
     render() {
         const { applicant } = this.state;
         return (
             <React.Fragment>
                 <div className="forms">
-                    <form>
+                    <form onSubmit = {this.handleSubmit} >
                     <center><h4> Profile </h4></center><br/>
                     <div className="input-field">
                         <label htmlFor="id">Id</label>
                         <input type="id" name="id" value={applicant.applicantId} disabled/>
                         <label htmlFor="email">Email</label>
-                        <input type="email" name="email" value={applicant.email} disabled/>
+                        <input type="email" name="email" value={applicant.email}/>
                         <label htmlFor="fullName">Name</label>
-                        <input type="text" name="fullName" value={applicant.name} disabled/>
+                        <input type="text" name="fullName" value={applicant.name}/>
                         <label htmlFor="address">Address</label>
-                        <input type="text" name="address" value={applicant.address} disabled/>
+                        <input type="text" name="address" value={applicant.address}/>
                         <label htmlFor="pincode">Pin/Zip Code</label>
-                        <input type="text" name="pincode" value={applicant.pin} disabled/>
+                        <input type="text" name="pincode" value={applicant.pin}/>
                         <label htmlFor="state">State</label>
-                        <input type="text" name="state" value={applicant.state} disabled/>
+                        <input type="text" name="state" value={applicant.state}/>
                         <label htmlFor="country">Country</label>
-                        <input type="text" name="country" value={applicant.country} disabled/>
+                        <input type="text" name="country" value={applicant.country}/>
                         <label htmlFor="contact">Mobile Number</label>
-                        <input type="text" name="contact" value={applicant.contact} disabled/>
+                        <input type="text" name="contact" value={applicant.contact}/>
                         <label htmlFor="dob">Date of Birth</label>
                         <input type="text" name="dob" value={applicant.dateOfBirth} disabled/>
 
-                        <NavLink className="nav-link" to="/applicant/profileUpdate">
-                        <input type="submit" value="UPDATE" className="button" /></NavLink>
+                        <input type="submit" value="UPDATE" className="button" />
               
                     </div>
                     </form>
