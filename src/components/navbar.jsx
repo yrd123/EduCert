@@ -1,12 +1,23 @@
 import React, { Component } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import {logout} from '../services/authService';
 
 import './navbar.css';
 
-class Navbar extends Component {
-  render() {
-    let user = this.props.user;
+
+
+
+export default function Navbar(props)  {
+const navigate = useNavigate();
+
+  function logoutAndNavigate(){
+    console.log("hiiii");
+    logout();
+    navigate('/');
+    window.location.reload(false);
+  }
+  
+    let user = props.user;
     return (
       /*<nav className="navbar">
         <div className="container">
@@ -95,13 +106,10 @@ class Navbar extends Component {
           <NavLink to="/login"><button className="navBtn">Log In</button></NavLink>
           }
           { user &&
-          <NavLink to="/logout"><button className="navBtn" onClick={logout}>Log Out</button></NavLink>
+          <button className="navBtn" onClick={logoutAndNavigate}>Log Out</button>
           }
         </div>
       </header>
 
     );
-  }
 }
-
-export default Navbar;
