@@ -1,24 +1,12 @@
 import React, { Component } from 'react';
-import { getDocumentsByOrganizationId } from '../../services/documentService';
-import Pagination from '../common/pagination';
-import { paginate } from '../../utils/paginate';
 import _ from 'lodash';
 import SearchBar from '../common/searchBar';
-import PreviewCertificate from '../common/previewCertificate';
-import { getApplicantById } from '../../services/applicantService';
-import { Link, useNavigate } from 'react-router-dom';
-
-import VerifyDocument from '../organization/verifyDocument';
-import Modal from '@mui/material/Modal';
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
 
 class ViewOrganizations extends Component {
     state = { 
-        documents : [{"organizationId":"org1"},{"organizationId":"org2"}],
-        sorting : { property : "documentName", order : "asc" },
+        organizations : [{"organizationId":"org1"},{"organizationId":"org2"}],
+        sorting : { property : "organizationId", order : "asc" },
         searchText  : "",
-        openApplicantModal: false,
         organizationId:''
     };
 
@@ -51,7 +39,7 @@ class ViewOrganizations extends Component {
         alert(`Revoked ${organization}`);
     };
 
-    hasPermission = organization => {
+    hasPermission = async organization => {
         let promise = await fetch("http://localhost:4000/hasMyPermission", {
             method:"POST",
             body:JSON.stringify({
@@ -86,14 +74,14 @@ class ViewOrganizations extends Component {
     }
 
     render() { 
-        const { documents, sorting, searchText} = this.state;
-        filteredDocuments = documents.filter(document => {
-            for(let property in document){
-                if(document[property].includes(searchText)) return true;
+        const { organizations, sorting, searchText} = this.state;
+        let filteredOrganizations = organizations.filter(organization => {
+            for(let property in organization){
+                if(organization[property].includes(searchText)) return true;
             }
             return false;
         });
-        const sortedDocuments = _.orderBy(filteredDocuments,[sorting.property],[sorting.order]);
+        const sortedOrganizations = _.orderBy(filteredOrganizations,[sorting.property],[sorting.order]);
           
         return (
             <>
@@ -103,24 +91,24 @@ class ViewOrganizations extends Component {
                     <table className="table table-striped">
                         <thead>
                         <tr>
-                            <th className="clickable" onClick={() => this.sort("documentId")} scope="col">OrganizationId {this.renderSortIcon("documentName")}</th>
+                            <th className="clickable" onClick={() => this.sort("organizationId")} scope="col">OrganizationId {this.renderSortIcon("organizationName")}</th>
                             <th scope="col">Access</th>
                             <th scope="col"></th>
                         </tr>
                         </thead>
                         <br></br>
                         <tbody>    
-                        { sortedDocuments.map((document) => 
-                            <tr key={document.organizationId}>
-                                <td> {document.organizationId}</td>
-                                <td>{ !hasPermission(document.organizationId) && 
-                                    <button  type="button" onClick={this.grantPermission(document.organizationId)} class="btn btn-success">Grant</button>}
-                                    { hasPermission(document.organizationId) && 
+                        { sortedOrganizations.map((organization) => 
+                            <tr key={organization.organizationId}>
+                                <td> {organization.organizationId}</td>
+                                <td>{ !this.hasPermission(organization.organizationId) && 
+                                    <button  type="button" onClick={this.grantPermission(organization.organizationId)} class="btn btn-success">Grant</button>}
+                                    { this.hasPermission(organization.organizationId) && 
                                     <button  type="button" class="btn btn-success" disabled>Grant</button>}
                                 </td>
-                                <td>{ hasPermission(document.organizationId) && 
-                                    <button type="button" onClick={this.revokePermission(document.organizationId)} class="btn btn-danger">Revoke</button>}
-                                    { !hasPermission(document.organizationId) && 
+                                <td>{ this.hasPermission(organization.organizationId) && 
+                                    <button type="button" onClick={this.revokePermission(organization.organizationId)} class="btn btn-danger">Revoke</button>}
+                                    { !this.hasPermission(organization.organizationId) && 
                                     <button type="button" class="btn btn-danger" disabled>Revoke</button>}
                                     
                                 </td>
