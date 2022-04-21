@@ -25,7 +25,8 @@ export default class Login extends Component {
         let token = await login(this.state.loginCredentials);
         localStorage.setItem('eduCertJwtToken', token);
         console.log(localStorage.getItem('eduCertJwtToken'));
-    } 
+
+      } 
     else 
       return;
   }

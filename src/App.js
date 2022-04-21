@@ -35,7 +35,7 @@ class App extends Component{
     try{
     
     //localStorage.removeItem('eduCertJwtToken')
-    localStorage.setItem('eduCertJwtToken','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJiaXN0cmlsIiwib3JnYW5pemF0aW9uIjoiT3JnMU1TUCIsInJvbGUiOiJ2aWNlQWRtaW4iLCJpYXQiOjE1MTYyMzkwMjJ9.gePonmyhGlFBj3lE4Bw3EuG87W2Z5f2flLEDqfYQIoU')
+    // localStorage.setItem('eduCertJwtToken','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJiaXN0cmlsIiwib3JnYW5pemF0aW9uIjoiT3JnMU1TUCIsInJvbGUiOiJ2aWNlQWRtaW4iLCJpYXQiOjE1MTYyMzkwMjJ9.gePonmyhGlFBj3lE4Bw3EuG87W2Z5f2flLEDqfYQIoU')
     const token = localStorage.getItem('eduCertJwtToken');
     const user = jwtDecode(token);
     console.log(user);

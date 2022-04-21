@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
+import {logout} from '../services/authService';
+
 import './navbar.css';
 
 class Navbar extends Component {
@@ -93,7 +95,7 @@ class Navbar extends Component {
           <NavLink to="/login"><button className="navBtn">Log In</button></NavLink>
           }
           { user &&
-          <NavLink to="/logout"><button className="navBtn">Log Out</button></NavLink>
+          <NavLink to="/logout"><button className="navBtn" onClick={logout}>Log Out</button></NavLink>
           }
         </div>
       </header>
