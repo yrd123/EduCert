@@ -16,44 +16,54 @@ import Typography from '@mui/material/Typography';
 class ViewOrganizations extends Component {
     state = { 
         documents : [{"organizationId":"org1"},{"organizationId":"org2"}],
-        documentsStatus : "All",
-        currentPage : 1,
-        pageSize : 2,
         sorting : { property : "documentName", order : "asc" },
         searchText  : "",
         openApplicantModal: false,
-        applicant:{},
         organizationId:''
     };
 
-    grantPermission = name =>{
+    grantPermission = organization =>{
 
         fetch("http://localhost:4000/grantAccessToOrganization", {
         method:"POST",
         body:JSON.stringify({
             "data":{
-                "organizationId":name
+                "organizationId":organization
             }
         }),
         headers:{"Content-Type" : "application/json","x-auth-token":localStorage.getItem("eduCertJwtToken")}
         })
         .then(response => response.json())
-        alert(`Granted ${name}`);
+        alert(`Granted ${organization}`);
     };
 
-    revokePermission = name => {
+    revokePermission = organization => {
         fetch("http://localhost:4000/revokeAccessFromOrganization", {
             method:"POST",
             body:JSON.stringify({
                 "data":{
-                    "organizationId":name
+                    "organizationId":organization
                 }
             }),
             headers:{"Content-Type" : "application/json","x-auth-token":localStorage.getItem("eduCertJwtToken")}
         })
         .then(response => response.json())
-        alert(`Revoked ${name}`);
+        alert(`Revoked ${organization}`);
     };
+
+    hasPermission = organization => {
+        let promise = await fetch("http://localhost:4000/hasMyPermission", {
+            method:"POST",
+            body:JSON.stringify({
+                "data":{
+                    "organizationId":organization
+                }
+            }),
+            headers:{"Content-Type" : "application/json","x-auth-token":localStorage.getItem("eduCertJwtToken")}
+        })
+        return await promise.json();
+
+    }
 
     sort(property){
         if(this.state.sorting.property === property){
@@ -76,32 +86,14 @@ class ViewOrganizations extends Component {
     }
 
     render() { 
-        const {currentPage, documentsStatus, pageSize, documents, sorting, searchText} = this.state;
-        let filteredDocuments = documents;
-        if(documentsStatus !== "All")
-            filteredDocuments = documents.filter(document => document.status === documentsStatus);
-        filteredDocuments = filteredDocuments.filter(document => {
+        const { documents, sorting, searchText} = this.state;
+        filteredDocuments = documents.filter(document => {
             for(let property in document){
                 if(document[property].includes(searchText)) return true;
             }
             return false;
         });
         const sortedDocuments = _.orderBy(filteredDocuments,[sorting.property],[sorting.order]);
-        const paginatedDocuments = paginate(sortedDocuments, currentPage, pageSize);
-        
-        const modalStyle = {
-            position: 'absolute',
-            top: '55%',
-            left: '50%',
-            transform: 'translate(-50%, -50%)',
-            width: 600,
-            bgcolor: 'background.paper',
-            border: '2px solid #000',
-            boxShadow: 24,
-            p: 4,
-            overflow:'scroll',
-            height:'70%'
-        };
           
         return (
             <>
@@ -118,11 +110,20 @@ class ViewOrganizations extends Component {
                         </thead>
                         <br></br>
                         <tbody>    
-                        { paginatedDocuments.map((document) => 
+                        { sortedDocuments.map((document) => 
                             <tr key={document.organizationId}>
                                 <td> {document.organizationId}</td>
-                                <td><button  type="button" onClick={this.grantPermission(document.organizationId)} class="btn btn-success">Grant</button></td>
-                                <td><button type="button" onClick={this.revokePermission(document.organizationId)} class="btn btn-danger">Revoke</button></td>
+                                <td>{ !hasPermission(document.organizationId) && 
+                                    <button  type="button" onClick={this.grantPermission(document.organizationId)} class="btn btn-success">Grant</button>}
+                                    { hasPermission(document.organizationId) && 
+                                    <button  type="button" class="btn btn-success" disabled>Grant</button>}
+                                </td>
+                                <td>{ hasPermission(document.organizationId) && 
+                                    <button type="button" onClick={this.revokePermission(document.organizationId)} class="btn btn-danger">Revoke</button>}
+                                    { !hasPermission(document.organizationId) && 
+                                    <button type="button" class="btn btn-danger" disabled>Revoke</button>}
+                                    
+                                </td>
                             </tr>
                         )}
                         </tbody>
