@@ -11,9 +11,8 @@ export default function Navbar(props)  {
 const navigate = useNavigate();
 
   function logoutAndNavigate(){
-    console.log("hiiii");
     logout();
-    navigate('/');
+    navigate('/login');
     window.location.reload(false);
   }
   
