@@ -74,12 +74,6 @@ export default class Login extends Component {
       formIsValid = false;
       errors["organization"] = "Organization Id Cannot be empty";
     }
-    else if (typeof loginCredentials["organization"] !== "undefined") {
-      if (!loginCredentials["organization"].match(/^[a-zA-Z0-9]*$/)) {
-        formIsValid = false;
-        errors["organization"] = "Organization Id should contain only Letters and numbers";
-      }
-    }
 
     this.setState({ errors: errors });
     return formIsValid;
@@ -114,7 +108,7 @@ export default class Login extends Component {
                 </div>
               }
 
-              <label htmlFor="organization">Organization Id</label>
+              <label htmlFor="organization">Organization Id (- if applicant)</label>
               <input type="text" name="organization" id = "organization" onChange={this.handleChange} value = {this.state.loginCredentials.id} placeholder="sanyamgandhi00" />
               { this.state.errors['organization'] && 
                 <div class="alert alert-danger" role="alert">

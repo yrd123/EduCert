@@ -75,19 +75,17 @@ const navigate = useNavigate();
       </button> */}
           { user && user.role === 'admin' && 
             <>
-              <NavLink to="/organization/dashboard"><button className="navBtn">Dashboard</button></NavLink>
-              <NavLink to="/organization/dashboard"><button className="navBtn">View Applicants</button></NavLink>
-              <NavLink to="/organization/uploadDocument"><button className="navBtn">Create Document</button></NavLink>
-              <NavLink to="/organization/login"><button className="navBtn">Requests</button></NavLink>
+              <NavLink to="/admin/registerViceAdmin"><button className="navBtn">Register Vice Admin</button></NavLink>
+              <NavLink to="/admin/viewViceAdmins"><button className="navBtn">View Vice Admins</button></NavLink>
             </>
           }
 
           { user && user.role === 'viceAdmin' && 
             <>
               <NavLink to="/organization/dashboard"><button className="navBtn">Dashboard</button></NavLink>
+              <NavLink to="/organization/viewApplicants"><button className="navBtn">View Applicants</button></NavLink>
+              <NavLink to="/organization/registerApplicant"><button className="navBtn">Register Applicant</button></NavLink>
               <NavLink to="/organization/createDocument"><button className="navBtn">Create Document</button></NavLink>
-              <NavLink to="/organization/dashboard"><button className="navBtn">View Applicants</button></NavLink>
-              <NavLink to="/organization/applicantSignUp"><button className="navBtn">Create Applicant</button></NavLink>
             </>
           }
 

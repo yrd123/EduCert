@@ -3,8 +3,6 @@ import { getDocumentsByOrganizationId } from '../../services/documentService';
 import Pagination from '../common/pagination';
 import { paginate } from '../../utils/paginate';
 import _ from 'lodash';
-import CustomModal from '../common/modal';
-import CenteredTabs from '../common/tabs';
 import SearchBar from '../common/searchBar';
 import PreviewCertificate from '../common/previewCertificate';
 import { getApplicantById } from '../../services/applicantService';
@@ -28,7 +26,7 @@ class ViewOrganizations extends Component {
         organizationId:''
     };
 
-    grantPermission = name => e =>{
+    grantPermission = name =>{
 
         fetch("http://localhost:4000/grantAccessToOrganization", {
         method:"POST",
@@ -37,14 +35,13 @@ class ViewOrganizations extends Component {
                 "organizationId":name
             }
         }),
-        headers:{"Content-Type" : "application/json","x-auth-token":localStorage.getItem("eduCertJwtToken")}})
+        headers:{"Content-Type" : "application/json","x-auth-token":localStorage.getItem("eduCertJwtToken")}
+        })
         .then(response => response.json())
-
         alert(`Granted ${name}`);
     };
 
-    
-    revokePermission = name => e =>{
+    revokePermission = name => {
         fetch("http://localhost:4000/revokeAccessFromOrganization", {
             method:"POST",
             body:JSON.stringify({
@@ -52,19 +49,11 @@ class ViewOrganizations extends Component {
                     "organizationId":name
                 }
             }),
-            headers:{"Content-Type" : "application/json","x-auth-token":localStorage.getItem("eduCertJwtToken")}})
-            .then(response => response.json())
-    
+            headers:{"Content-Type" : "application/json","x-auth-token":localStorage.getItem("eduCertJwtToken")}
+        })
+        .then(response => response.json())
         alert(`Revoked ${name}`);
     };
-
-    handleTabChange = tab =>{
-        this.setState({documentsStatus : tab, searchText : ""});
-    }
-
-    handlePageChange = page => {
-        this.setState({currentPage : page});
-    }
 
     sort(property){
         if(this.state.sorting.property === property){
@@ -81,22 +70,10 @@ class ViewOrganizations extends Component {
         return <i className="fa fa-sort-desc"></i>;
     }
 
-    getStatusClass(status){
-        return status === "Verified" ? "badge badge-success" : "badge badge-warning";
-    }
-    
     search = searchText => {
         console.log(searchText);
         this.setState({searchText});
     }
-
-    redirectToVerify = document =>{
-        const navigate = useNavigate();
-        navigate({pathname:'/organization/verify',state:{document}});
-    }
-
-    handleOpenApplicantModal = applicantId => this.setState({openApplicantModal:true, applicant: getApplicantById(applicantId)});
-    handleCloseApplicantModal = () => this.setState({openApplicantModal:false});
 
     render() { 
         const {currentPage, documentsStatus, pageSize, documents, sorting, searchText} = this.state;
@@ -135,54 +112,21 @@ class ViewOrganizations extends Component {
                         <thead>
                         <tr>
                             <th className="clickable" onClick={() => this.sort("documentId")} scope="col">OrganizationId {this.renderSortIcon("documentName")}</th>
-                                <th className="clickable" onClick={() => this.sort("status")} scope="col">Access {this.renderSortIcon("dateOfIssue")}</th>
-                            
+                            <th scope="col">Access</th>
+                            <th scope="col"></th>
                         </tr>
                         </thead>
                         <br></br>
                         <tbody>    
-                        { paginatedDocuments.map((document,index) => 
+                        { paginatedDocuments.map((document) => 
                             <tr key={document.organizationId}>
-
                                 <td> {document.organizationId}</td>
                                 <td><button  type="button" onClick={this.grantPermission(document.organizationId)} class="btn btn-success">Grant</button></td>
-                
-                                <td> <button type="button" onClick={this.revokePermission(document.organizationId)} class="btn btn-danger">Revoke</button></td>
-                               
+                                <td><button type="button" onClick={this.revokePermission(document.organizationId)} class="btn btn-danger">Revoke</button></td>
                             </tr>
                         )}
                         </tbody>
                     </table>
-                    
-                    <Pagination 
-                        itemsCount={filteredDocuments.length} 
-                        pageSize={this.state.pageSize} 
-                        currentPage={currentPage}
-                        onPageChange={this.handlePageChange}/>
-
-                    <Modal
-                        open={this.state.openApplicantModal}
-                        onClose={this.handleCloseApplicantModal}
-                        aria-labelledby="modal-modal-title"
-                        aria-describedby="modal-modal-description"
-                    >
-                        <Box sx={modalStyle}>
-                        <Typography id="modal-modal-title" variant="h6" component="h2">
-                            <center><h4>Applicant Details</h4></center>
-                        </Typography>
-                        <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                        <div className="forms" style={{margin : 0, width:'100%'}}>
-                            <form> 
-                            <label>Applicant Id</label>{/*autofilled*/}    
-                            <input className="form-control" value={this.state.applicant._id} name="applicantId" placeholder="112345" type="number" id="applicantId" required disabled/>
-                            <label>Applicant Email</label> 
-                            <input className="form-control" value={this.state.applicant.email} name="applicantEmail" placeholder="a@gmail.com" type="email" id="applicantEmail" required />
-                            <br />
-                            </form>
-                        </div>
-                        </Typography>
-                        </Box>
-                    </Modal>
                 </div>
             </>
         );

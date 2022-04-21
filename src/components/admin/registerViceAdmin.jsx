@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import './login.css';
+import '../login.css';
 
 
 
-export default class ViceAdminSignUp extends Component {
+export default class RegisterViceAdmin extends Component {
   state = {
     applicantinfo: {
       organization: "",
@@ -114,16 +114,8 @@ export default class ViceAdminSignUp extends Component {
                 </div>
               }
 
-              <label htmlFor="id">Organization</label>
-              <input type="text" name="organization" id="organization" onChange={this.handleChange} value={this.state.applicantinfo.id} placeholder="Org1" />
-              {this.state.errors['organization'] &&
-                <div class="alert alert-danger" role="alert">
-                  {this.state.errors["organization"]}
-                </div>
-              }
-
               {/* <a href="applicant/dashboard"> */}
-              <input type="submit" defaultValue="Login" className="button" />
+              <input type="submit" defaultValue="Register" className="button" />
               {/* </a> */}
 
             </div>

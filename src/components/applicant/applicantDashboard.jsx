@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
-import { getDocumentsByApplicantId } from '../services/documentService';
-import Pagination from './common/pagination';
-import { paginate } from '../utils/paginate';
+import { getDocumentsByApplicantId } from '../../services/documentService';
+import Pagination from '../common/pagination';
+import { paginate } from '../../utils/paginate';
 import _ from 'lodash';
-import CustomModal from './common/modal';
-import CenteredTabs from './common/tabs';
-import SearchBar from './common/searchBar';
-import PreviewCertificate from './common/previewCertificate';
-import { getOrganizationById } from '../services/organizationService';
+import CustomModal from '../common/modal';
+import CenteredTabs from '../common/tabs';
+import SearchBar from '../common/searchBar';
+import PreviewCertificate from '../common/previewCertificate';
+//import { getOrganizationById } from '../services/organizationService';
 
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
@@ -21,7 +21,7 @@ class ApplicantDashboard extends Component {
         pageSize : 2,
         sorting : { property : "documentName", order : "asc" },
         searchText  : "",
-        openOrganizationModal: false,
+        //openOrganizationModal: false,
         organization:{}
     };
 
@@ -69,8 +69,8 @@ class ApplicantDashboard extends Component {
         this.setState({searchText});
     }
 
-    handleOpenOrganizationModal = organizationId => this.setState({openOrganizationModal:true, organization: getOrganizationById(organizationId)});
-    handleCloseOrganizationModal = () => this.setState({openOrganizationModal:false});
+    // handleOpenOrganizationModal = organizationId => this.setState({openOrganizationModal:true, organization: getOrganizationById(organizationId)});
+    // handleCloseOrganizationModal = () => this.setState({openOrganizationModal:false});
     
     render() { 
         const {currentPage, documentsStatus, pageSize, documents, sorting, searchText} = this.state;
@@ -114,7 +114,6 @@ class ApplicantDashboard extends Component {
                     <th className="clickable" onClick={() => this.sort("applicantOrganizationNumber")} scope="col">Roll No {this.renderSortIcon("documentName")}</th>
                     <th className="clickable" onClick={() => this.sort("description")} scope="col">Description {this.renderSortIcon("documentName")}</th>
                     <th className="clickable" onClick={() => this.sort("dateOfAccomplishment")} scope="col">Completion Date {this.renderSortIcon("documentName")}</th>
-
                     <th className="clickable" onClick={() => this.sort("tenure")} scope="col">Tenure {this.renderSortIcon("applicantId")}</th>
                     <th className="clickable" onClick={() => this.sort("percentage")} scope="col">Percentage {this.renderSortIcon("applicantName")}</th>
                     <th className="clickable" onClick={() => this.sort("percentage")} scope="col">Out Of  {this.renderSortIcon("applicantName")}</th>
@@ -123,7 +122,8 @@ class ApplicantDashboard extends Component {
                     <th scope="col"></th>
                 </tr>
                 </thead>
-                <tbody>    { paginatedDocuments.map((document,index) => 
+                <tbody>    
+                    { paginatedDocuments.map((document,index) => 
                     <tr key={document.documentId}>
                     <th scope="row">{(currentPage-1)*pageSize+index+1}</th>
                     <td>{document.documentId}</td>
@@ -131,10 +131,8 @@ class ApplicantDashboard extends Component {
                     <td>{document.applicantOrganizationNumber}</td>
                     <td>{document.description}</td>
                     <td>{document.dateOfAccomplishment}</td>
-                    
                     <td>{document.tenure}</td>
                     <td>{document.percentage}</td>
-                    
                     <td>{document.outOfPercentage}</td>
                     <td>{document.updatedBy}</td>
                     <td><span className={this.getStatusClass(document.status)}>{document.status}</span></td>

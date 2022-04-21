@@ -4,7 +4,7 @@ import CenteredTabs from '../common/tabs';
 
 
 
-export default class ApplicantSignUp extends Component {
+export default class RegisterApplicant extends Component {
     state = {
       currentTab : "Sign Up" ,
       applicantinfoSignup :{ applicantId:'', email :'' , fullName : '' , address :'' , pincode : '', stateOfApplicant : '', country : '', contactNumber: '' , dob :''  } ,

@@ -4,29 +4,24 @@ import jwtDecode from 'jwt-decode';
 
 import Navbar from './components/navbar';
 
-import ViewDocuments from './components/admin/viewDocuments';
-import ViewApplicants from './components/admin/viewApplicants';
-import AddOrganization from './components/admin/addOrganization';
 import ViewViceAdmins from './components/admin/viewViceAdmins';
-import OrganizationLogin from './components/organizationLogin';
-import ViewApplicantProfile from './components/organization/getPermissionedApplicant';
 import CreateVerifiedDocument from './components/organization/createDocument';
 import OrganizationDashboard from './components/organization/organizationDashboard';
-import OrganizationProfile from './components/organization/organizationProfile';
-import OrganizationUploadDocument from './components/organizationUploadDocument';
 import ApplicantProfile from './components/applicant/applicantProfile';
-import ViewOrganizations from './components/applicant/viewOrganizations';
 
 import Login from './components/login';
-import ApplicantSignUp from './components/organization/applicantSignUp'
-import ApplicantDashboard from './components/applicantDashboard';
+import RegisterApplicant from './components/organization/registerApplicant'
+import ApplicantDashboard from './components/applicant/applicantDashboard';
 import Home from './components/home';
 import VerifyDocument from './components/organization/verifyDocument';
 import { getDocumentById } from './services/documentService';
-import ViceAdminSignUp from './components/viceAdminSignUp';
-import ViewApplicantDocuments from './components/viewApplicantDocuments';
+import RegisterViceAdmin from './components/admin/registerViceAdmin';
+import ViewApplicantDocuments from './components/organization/viewApplicantDocuments';
 import { Component } from 'react';
 import CreateSelfUploadedDocument from './components/applicant/createDocument';
+import UpdatePassword from './components/applicant/updatePassword';
+import ViewApplicants from './components/organization/viewApplicants';
+import ViewOrganizations from './components/applicant/viewOrganizations';
 
 class App extends Component{
   state = {};
@@ -51,29 +46,34 @@ class App extends Component{
         <div className='content'>
             <Routes>
                 <Route exact path="/" element={<Home />} />
+                <Route exact path="login" element={<Login />} />
 
-                <Route exact path="admin/viewDocuments" element={<ViewDocuments />} />
+                {/* <Route exact path="admin/viewDocuments" element={<ViewDocuments />} />
                 <Route exact path="admin/viewOrganizations" element={<ViewOrganizations />} />
                 <Route exact path="admin/viewApplicants" element={<ViewApplicants />} />
-                <Route exact path="applicant/viewOrganizations" element={<ViewOrganizations />} />
-                <Route exact path="admin/viewViceAdmins" element={<ViewViceAdmins />} />
-              
-                <Route exact path="organization/login" element={<OrganizationLogin />} />  
-                <Route exact path="organization/dashboard" element={<OrganizationDashboard />} />
+                <Route exact path="organization/login" element={<OrganizationLogin />} /> 
                 <Route exact path="organization/profile" element={<OrganizationProfile />} />
+                <Route exact path="organization/createDocument" element={<CreateVerifiedDocument />} />
                 <Route exact path="organization/viewApplicantProfile" element={<ViewApplicantProfile />} />
-                <Route exact path="organization/addDocument" element={<CreateVerifiedDocument />} />
+
+                */}
+
+                <Route exact path="admin/viewViceAdmins" element={<ViewViceAdmins />} />
+                <Route exact path="admin/registerViceAdmin" element={<RegisterViceAdmin />} />
+
+                <Route exact path="organization/dashboard" element={<OrganizationDashboard />} />
                 <Route exact path="organization/createDocument" element={<CreateVerifiedDocument />} />
                 <Route exact path="organization/verify" element={<VerifyDocument />} />
-                <Route exact path="login" element={<Login />} />
-                <Route exact path="viceAdminSignUp" element={<ViceAdminSignUp />} />
-                
+                <Route exact path="organization/viewApplicants" element={<ViewApplicants />} />
                 <Route exact path="organization/viewApplicantDocuments" element={<ViewApplicantDocuments />} />
-                <Route exact path="organization/applicantSignUp" element={<ApplicantSignUp />} />
+                <Route exact path="organization/registerApplicant" element={<RegisterApplicant />} />
+
                 <Route exact path="applicant/dashboard" element={<ApplicantDashboard />} />
                 <Route exact path="applicant/profile" element={<ApplicantProfile />} />
+                <Route exact path="applicant/updatePassword" element={<UpdatePassword />} />
                 <Route exact path="applicant/createDocument" element={<CreateSelfUploadedDocument />} />
-                <Route exact path="admin/addOrganization" element={<AddOrganization />} />
+                <Route exact path="applicant/viewOrganizations" element={<ViewOrganizations />} /> 
+
             </Routes>
         </div>
         {/* <div id="inner-div">
