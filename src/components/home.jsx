@@ -4,9 +4,9 @@ class Home extends Component {
       applicant:{}
      } 
     componentDidMount(){
-      fetch("http://localhost:4000/getApplicant/1814073/search?org=Org1MSP&userId=bistril")
+      /*fetch("http://localhost:4000/getApplicant/1814073/search?org=Org1MSP&userId=bistril")
       .then(response => response.json()).then((data)=>console.log(data.email));
-
+*/
      // .then((applicant) => this.setState({applicant}));
     }
 

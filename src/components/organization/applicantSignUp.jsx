@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import './login.css';
-import CenteredTabs from './common/tabs';
+import '../login.css';
+import CenteredTabs from '../common/tabs';
 
 
 

@@ -4,6 +4,7 @@ import './navbar.css';
 
 class Navbar extends Component {
   render() {
+    let user = this.props.user;
     return (
       /*<nav className="navbar">
         <div className="container">
@@ -40,9 +41,9 @@ class Navbar extends Component {
         <h1><img src="https://www.formationsco.com/wp-content/uploads/2017/12/certificate_icon.png" className="logoImg" /> EduCert</h1>
         <div className="nav-div">
           <NavLink to="/"> <button className="navBtn ">Home</button></NavLink>
-          <NavLink to="/applicant/login"><button className="navBtn">Applicant</button></NavLink>
-          <NavLink to="/organization/login"><button className="navBtn">Organization</button></NavLink>
-          <button className="navBtn dropdown">Organization <i className="fa fa-angle-down"></i>
+          
+          {/* user && user.role === 'viceAdmin' &&
+            <button className="navBtn dropdown">Organization <i className="fa fa-angle-down"></i>
             <ul className="dropdown-menu">
               <NavLink className="nav-link" to="/organization/dashboard">Dashboard</NavLink>
               <NavLink className="nav-link" to="/organization/uploadDocument">Send for Verification</NavLink>
@@ -50,21 +51,50 @@ class Navbar extends Component {
               <NavLink className="nav-link" to="/organization/login">Requests</NavLink>
               <NavLink className="nav-link" to="/organization/login">Log Out</NavLink>
             </ul>
-          </button>
-          <button className="navBtn dropdown">Applicant <i className="fa fa-angle-down"></i>
-          {/* <ul class="dropdown">
-            <li><a href="#">Sub-1</a></li>
-            <li><a href="#">Sub-2</a></li>
-            <li><a href="#">Sub-3</a></li>
-          </ul> */}
-
+        </button>*/}
+          {/* user && user.role === 'applicant' &&
+            <button className="navBtn dropdown">Applicant <i className="fa fa-angle-down"></i>
             <ul className="dropdown-menu">
               <NavLink className="nav-link" to="/applicant/dashboard">Dashboard</NavLink>
               <NavLink className="nav-link" to="/applicant/uploadDocument">Send for Verification</NavLink>
               <NavLink className="nav-link" to="/applicant/profile">Profile</NavLink>
               <NavLink className="nav-link" to="/applicant/login">Log Out</NavLink>
             </ul>
-          </button>
+      </button> */}
+          { user && user.role === 'admin' && 
+            <>
+              <NavLink to="/organization/dashboard"><button className="navBtn">Dashboard</button></NavLink>
+              <NavLink to="/organization/dashboard"><button className="navBtn">View Applicants</button></NavLink>
+              <NavLink to="/organization/uploadDocument"><button className="navBtn">Create Document</button></NavLink>
+              <NavLink to="/organization/login"><button className="navBtn">Requests</button></NavLink>
+            </>
+          }
+
+          { user && user.role === 'viceAdmin' && 
+            <>
+              <NavLink to="/organization/dashboard"><button className="navBtn">Dashboard</button></NavLink>
+              <NavLink to="/organization/createDocument"><button className="navBtn">Create Document</button></NavLink>
+              <NavLink to="/organization/dashboard"><button className="navBtn">View Applicants</button></NavLink>
+              <NavLink to="/organization/applicantSignUp"><button className="navBtn">Create Applicant</button></NavLink>
+            </>
+          }
+
+          { user && user.role === 'applicant' && 
+            <>
+              <NavLink to="/applicant/dashboard"><button className="navBtn">Dashboard</button></NavLink>
+              <NavLink to="/applicant/profile"><button className="navBtn">Profile</button></NavLink>
+              <NavLink to="/applicant/createDocument"><button className="navBtn">Create Document</button></NavLink>
+              <NavLink to="/applicant/viewOrganizations"><button className="navBtn">View Organizations</button></NavLink>
+            </>
+          }
+
+
+          { !user &&
+          <NavLink to="/login"><button className="navBtn">Log In</button></NavLink>
+          }
+          { user &&
+          <NavLink to="/logout"><button className="navBtn">Log Out</button></NavLink>
+          }
         </div>
       </header>
 
