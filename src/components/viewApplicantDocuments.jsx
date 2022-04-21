@@ -11,6 +11,7 @@ import { getOrganizationById } from '../services/organizationService';
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
+import './cardscss.css';
 
 class ViewApplicantDocuments extends Component {
     state = { 
@@ -24,7 +25,24 @@ class ViewApplicantDocuments extends Component {
         sorting : { property : "documentName", order : "asc" },
         searchText  : "",
         openOrganizationModal: false,
-        organization:{} 
+        organization:{} ,
+        data :{
+            "applicantId" :"1814073", 
+            "email":"yash@deorah.com",
+            "password":"Secure@2022",
+            "name":"Yash Deorah",
+            "address":"kalyan",
+            "pin":"421103",
+            "state":"Maharashtra",
+            "country":"India",
+            "contact":"1234567077",
+            "dateOfBirth":"12-11-2000",
+            "documentIds":["docid1"],
+            "currentOrganization":"org1",
+            "organizationsEnrolledIn":["org1"],
+            "permissionGranted":["org1"],
+            "updatedBy":"initLedger"
+        } 
     };
     
     handleTabChange = tab =>{
@@ -124,14 +142,39 @@ class ViewApplicantDocuments extends Component {
             <br />
 
 
+            
+<h3>Applicant's Personal Details</h3>
 
-        <form onSubmit={this.handleSubmit}>
-        <div className="form-group">
-          <label htmlFor="applicantId">Applicant ID</label>
-          <input type="text" name="applicantId" id = "applicantId" onChange={this.handleChange} value = {this.state.applicantId} className="form-control" placeholder="Enter ApplicantId" />
-          </div>
-        <button type="submit" className="btn btn-primary">Submit</button>
-        </form>
+<br></br>
+
+<div className="card">
+  <div className="container">
+    <h6><b>Applicant Id:</b> {this.state.data.applicantId} </h6>
+    <h6><b>Name :</b> {this.state.data.name}</h6>
+    <h6><b>Current Organization: </b> {this.state.data.currentOrganization}</h6>
+    
+    <h6><b>Email: </b>{this.state.data.email}</h6>
+
+    <h6><b>Address: </b> {this.state.data.address}</h6>
+    <h6><b>Pin: </b> {this.state.data.pin}</h6>
+    <h6><b>State: </b> {this.state.data.state}</h6>
+    <h6><b>Country: </b> {this.state.data.country}</h6>
+    
+    <h6><b>Date Of Birth: </b> {this.state.data.dateOfBirth}</h6>
+    
+    
+  </div>
+  <div className="container2"><button type="button" class="btn btn-primary">Change Current Organization</button></div>
+</div>
+
+<br></br>
+
+<br></br>
+<h3>Document's Details</h3>
+
+
+
+
 
 
 
