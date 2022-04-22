@@ -86,8 +86,6 @@ class ViewApplicants extends Component {
         const sortedDocuments = _.orderBy(filteredDocuments,[sorting.property],[sorting.order]);
         const paginatedDocuments = paginate(sortedDocuments, currentPage, pageSize);
         
-      
-          
         return (
             <>
                 <div style={{margin: 10, backgroundColor: 'white', padding: 30, paddingLeft: 120, paddingRight:120}}>

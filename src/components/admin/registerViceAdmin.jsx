@@ -30,13 +30,10 @@ export default class RegisterViceAdmin extends Component {
         })
         .then(response => response.json())
         .then((data) => this.setState({viceAdmins:data}))
-
-
-    } else {
-      return;
+        window.location('/admin/viewViceAdmins')
     }
-
-    console.log(this.state.errors);
+    else 
+      return;
   }
 
   handleValidation() {
