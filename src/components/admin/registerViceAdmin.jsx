@@ -6,7 +6,7 @@ import '../login.css';
 export default class RegisterViceAdmin extends Component {
   state = {
     viceAdminInfo: {
-      id: "",
+      userId: "",
       password: ""
     },
     errors: {},
@@ -45,14 +45,14 @@ export default class RegisterViceAdmin extends Component {
     let formIsValid = true;
 
     //Id
-    if (!viceAdminInfo["id"]) {
+    if (!viceAdminInfo["userId"]) {
       formIsValid = false;
-      errors["id"] = "Id Cannot be empty";
+      errors["userId"] = "Id Cannot be empty";
     }
-    else if (typeof viceAdminInfo["id"] !== "undefined") {
-      if (!viceAdminInfo["id"].match(/^[a-zA-Z0-9]*$/)) {
+    else if (typeof viceAdminInfo["userId"] !== "undefined") {
+      if (!viceAdminInfo["userId"].match(/^[a-zA-Z0-9]*$/)) {
         formIsValid = false;
-        errors["id"] = "Id should contain only Letters and numbers";
+        errors["userId"] = "Id should contain only Letters and numbers";
       }
     }
 
@@ -101,11 +101,11 @@ export default class RegisterViceAdmin extends Component {
               {/* INSERT LOGIN WARNINGS HERE */}
             </div>
             <div className="input-field">
-              <label htmlFor="id">UserId</label>
-              <input type="text" name="id" id="id" onChange={this.handleChange} value={this.state.viceAdminInfo.id} placeholder="sanyamgandhi00" />
-              {this.state.errors['id'] &&
+              <label htmlFor="userId">UserId</label>
+              <input type="text" name="userId" id="userId" onChange={this.handleChange} value={this.state.viceAdminInfo.userId} placeholder="sanyamgandhi00" />
+              {this.state.errors['userId'] &&
                 <div class="alert alert-danger" role="alert">
-                  {this.state.errors["id"]}
+                  {this.state.errors["userId"]}
                 </div>
               }
 

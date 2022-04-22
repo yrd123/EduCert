@@ -3,17 +3,17 @@ import '../login.css';
 
 export default class ViewViceAdmins extends Component {
   state = {
-      viceAdmins : ['Yash', 'Ronak','Sanyam','Manish']
+      viceAdmins : []
   };
 
-//   componentDidMount(){
-//         fetch("http://localhost:4000/getViceAdmins", {
-//         method:"POST",
-//         headers:{"Content-Type" : "application/json","x-auth-token":localStorage.getItem("eduCertJwtToken")}
-//         })
-//         .then(response => response.json())
-//         .then((data) => this.setState({viceAdmins:data}))
-//   }
+  componentDidMount(){
+        fetch("http://localhost:4000/getViceAdmins", {
+        method:"POST",
+        headers:{"Content-Type" : "application/json","x-auth-token":localStorage.getItem("eduCertJwtToken")}
+        })
+        .then(response => response.json())
+        .then((data) => this.setState({viceAdmins:data}))
+  }
 
   render() {
     return (
@@ -23,7 +23,7 @@ export default class ViewViceAdmins extends Component {
         <ul class="list-group"  style={{marginLeft:150, width:500}}>
             {
                 this.state.viceAdmins.map(viceAdmin => 
-                  <li class="list-group-item">{viceAdmin}</li>
+                  <li class="list-group-item">{viceAdmin.userId}</li>
 
                 )
             }
