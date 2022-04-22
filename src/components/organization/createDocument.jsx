@@ -21,7 +21,7 @@ class CreateVerifiedDocument extends Component {
             body: JSON.stringify({ "data": this.state.data }),
             headers: { "Content-Type": "application/json", "x-auth-token": localStorage.getItem("eduCertJwtToken") }
         })
-            .then(response => response.json())
+        .then(response => response.json())
         this.setState({ data: { documentId: '', applicantId: '', applicantName: '', applicantOrganizationNumber: '', organizationId: '', documentName: '', description: '', dateOfAccomplishment: '', tenure: '', percentage: '', outOfPercentage: '', documentUrl: '' } })
 
     };
@@ -41,34 +41,34 @@ class CreateVerifiedDocument extends Component {
                         <input className="form-control" name="applicantId" id="applicantId" onChange={this.handleChange} value={this.state.data.applicantId} type="text" placeholder="1814078" required />
 
                         <label>Applicant Name</label>
-                        <input className="form-control" name="applicantName" id="applicantName" onChange={this.handleChange} value={this.state.data.applicantName} type="text" placeholder="Sanyam" required />
+                        <input className="form-control" name="applicantName" id="applicantName" onChange={this.handleChange} value={this.state.data.applicantName} type="text" placeholder="Sanyam Gandhi" required />
 
                         <label>Applicant Organization Number</label>
-                        <input className="form-control" name="applicantOrganizationNumber" id="applicantOrganizationNumber" onChange={this.handleChange} value={this.state.data.applicantOrganizationNumber} type="text" placeholder="6qaz" required />
+                        <input className="form-control" name="applicantOrganizationNumber" id="applicantOrganizationNumber" onChange={this.handleChange} value={this.state.data.applicantOrganizationNumber} type="text" placeholder="6QAZ" required />
 
                         <label>OrganizationId</label>
                         <input className="form-control" name="organizationId" id="organizationId" onChange={this.handleChange} value={this.state.data.organizationId} type="text" placeholder="org1" required />
 
                         <label>Document Name</label>
-                        <input className="form-control" name="documentName" id="documentName" onChange={this.handleChange} value={this.state.data.documentName} type="text" placeholder="org1" required />
+                        <input className="form-control" name="documentName" id="documentName" onChange={this.handleChange} value={this.state.data.documentName} type="text" placeholder="Marksheet" required />
 
                         <label>Document Description</label>
                         <input className="form-control" name="description" id="description" onChange={this.handleChange} value={this.state.data.description} type="text" placeholder="Marksheet of 10th std" required />
 
                         <label>Date Of Accomplishment(End Date)</label>
-                        <input className="form-control" name="dateOfAccomplishment" id="dateOfAccomplishment" onChange={this.handleChange} value={this.state.data.dateOfAccomplishment} type="text" placeholder="Marksheet of 10th std" required />
+                        <input className="form-control" name="dateOfAccomplishment" id="dateOfAccomplishment" onChange={this.handleChange} value={this.state.data.dateOfAccomplishment} type="text" placeholder="24-11-2016" required />
 
                         <label>Tenure(In years)</label>
                         <input className="form-control" name="tenure" id="tenure" onChange={this.handleChange} value={this.state.data.tenure} type="text" placeholder="2 Year" />
 
                         <label>Percentage/GPA</label>
-                        <input className="form-control" name="percentage" id="percentage" onChange={this.handleChange} value={this.state.data.percentage} type="text" placeholder="69" />
+                        <input className="form-control" name="percentage" id="percentage" onChange={this.handleChange} value={this.state.data.percentage} type="text" placeholder="79" />
 
                         <label>Out of Percentage/GPA</label>
                         <input className="form-control" name="outOfPercentage" id="outOfPercentage" onChange={this.handleChange} value={this.state.data.outOfPercentage} type="text" placeholder="100" />
 
                         <label>Document URL</label>
-                        <input className="form-control" name="documentUrl" id="documentUrl" onChange={this.handleChange} value={this.state.data.documentUrl} type="text" placeholder="100" />
+                        <input className="form-control" name="documentUrl" id="documentUrl" onChange={this.handleChange} value={this.state.data.documentUrl} type="text" placeholder="drive.google.com/56465435466435464131" />
 
                         <center>
                             <input type="submit" className="button" value="Submit" />
