@@ -10,7 +10,8 @@ import PreviewCertificate from '../common/previewCertificate';
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';*/
-import '../cardscss.css';
+
+import '../static/css/cardscss.css';
 
 class ViewApplicantDocuments extends Component {
     state = {
