@@ -9,14 +9,13 @@ import { Link, useNavigate } from 'react-router-dom';
 
 class ViewApplicants extends Component {
     state = { 
-        documents : [],
-        documentsStatus : "All",
+        applicants : [],
+        applicantsStatus : "All",
         currentPage : 1,
         pageSize : 2,
         sorting : { property : "documentName", order : "asc" },
         searchText  : "",
-        openApplicantModal: false,
-        applicant:{}
+        openApplicantModal: false
     };
 
 
@@ -27,7 +26,7 @@ class ViewApplicants extends Component {
         headers:{"Content-Type" : "application/json","x-auth-token":localStorage.getItem("eduCertJwtToken")}
     })
     .then(response => response.json())
-    .then((data) => this.setState({documents:data}))
+    .then((data) => this.setState({applicants:data}))
   
     
     }
@@ -35,7 +34,7 @@ class ViewApplicants extends Component {
 
     
     handleTabChange = tab =>{
-        this.setState({documentsStatus : tab, searchText : ""});
+        this.setState({applicantsStatus : tab, searchText : ""});
     }
 
     handlePageChange = page => {
@@ -73,10 +72,10 @@ class ViewApplicants extends Component {
 
 
     render() { 
-        const {currentPage, documentsStatus, pageSize, documents, sorting, searchText} = this.state;
-        let filteredDocuments = documents;
-        if(documentsStatus !== "All")
-            filteredDocuments = documents.filter(document => document.status === documentsStatus);
+        const {currentPage, applicantsStatus, pageSize, applicants, sorting, searchText} = this.state;
+        let filteredDocuments = applicants;
+        if(applicantsStatus !== "All")
+            filteredDocuments = applicants.filter(document => document.status === applicantsStatus);
         filteredDocuments = filteredDocuments.filter(document => {
             for(let property in document){
                 if(document[property].includes(searchText)) return true;
