@@ -72,6 +72,11 @@ class ApplicantProfile extends Component {
                             <input type="text" name="dob" value={this.state.data.dateOfBirth} placeholder="24-11-2000" disabled />
 
                             <input type="submit" value="UPDATE" className="button" />
+                            <center>Update Your Password</center> 
+
+                            <button type="button" class="button" style={{width:"100%"}}>Update Password</button>
+
+            
 
                         </div>
                     </form>
