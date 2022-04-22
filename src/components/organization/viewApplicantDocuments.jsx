@@ -130,7 +130,7 @@ class ViewApplicantDocuments extends Component {
                         <h6><b>Country: </b> {this.state.data.country}</h6>
                         <h6><b>Date Of Birth: </b> {this.state.data.dateOfBirth}</h6>
                         
-                        <h6><b>Organnizations Enrolled In: </b> {this.state.data.organizationsEnrolledIn}</h6>
+                        <h6><b>Organnizations Enrolled In: </b> {this.state.data.organizationsEnrolledIn.map(organization => <span class="badge badge-info">{organization}</span>)}</h6>
                     </div>
                     <div className="container2"><button type="button" class="btn btn-primary">Change Current Organization</button></div>
                 </div>
