@@ -1,8 +1,12 @@
 import React, { Component } from 'react';
+import { Progress } from "reactstrap";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 class CreateVerifiedDocument extends Component {
     state = {
-        data: { documentId: '', applicantId: '', applicantName: '', applicantOrganizationNumber: '', organizationId: '', documentName: '', description: '', dateOfAccomplishment: '', tenure: '', percentage: '', outOfPercentage: '', documentUrl: '' }
+        data: { documentId: '', applicantId: '', applicantName: '', applicantOrganizationNumber: '', organizationId: '', documentName: '', description: '', dateOfAccomplishment: '', tenure: '', percentage: '', outOfPercentage: '', documentUrl: 'abcd' },
+        loaderData: { selectedFile: null }
     };
 
     handleChange = (e) => {
@@ -12,16 +16,113 @@ class CreateVerifiedDocument extends Component {
 
     };
 
+    checkMimeType = (event) => {
+        //getting file object
+        let files = event.target.files;
+        //define message container
+        let err = [];
+        // list allow mime type
+        const types = ["image/png", "image/jpeg"];
+        // loop access array
+        for (var x = 0; x < files.length; x++) {
+          // compare file type find doesn't matach
+          if (types.every((type) => files[x].type !== type)) {
+            // create error message and assign to container
+            err[x] = files[x].type + " is not a supported format\n";
+          }
+        }
+        for (var z = 0; z < err.length; z++) {
+          // if message not same old that mean has error
+          // discard selected file
+          toast.error(err[z]);
+          event.target.value = null;
+        }
+        return true;
+      };
+      maxSelectFile = (event) => {
+        let files = event.target.files;
+        if (files.length > 1) {
+          const msg = "Only 3 images can be uploaded at a time";
+          event.target.value = null;
+          toast.warn(msg);
+          return false;
+        }
+        return true;
+      };
+      checkFileSize = (event) => {
+        let files = event.target.files;
+        let size = 1000000000;
+        let err = [];
+        for (var x = 0; x < files.length; x++) {
+          if (files[x].size > size) {
+            err[x] = files[x].type + " is too large, please pick a smaller file\n";
+          }
+        }
+        for (var z = 0; z < err.length; z++) {
+          // if message not same old that mean has error
+          // discard selected file
+          toast.error(err[z]);
+          event.target.value = null;
+        }
+        return true;
+      };
+      onFileChangeHandler = (event) => {
+        var files = event.target.files;
+        if (
+          this.maxSelectFile(event) &&
+          this.checkMimeType(event) &&
+          this.checkFileSize(event)
+        ) {
+          // if return true allow to setState
+          this.setState({ loaderData: {
+            selectedFile: files,
+            // loaded: 0,
+          }});
+        }
+      };
+
     handleSubmit = (e) => {
         e.preventDefault();
         console.log(this.state.data);
 
+        const data = new FormData();
+        for (var x = 0; x < this.state.loaderData.selectedFile.length; x++) {
+          data.append("file", this.state.loaderData.selectedFile[x]);
+        }
+        data.append('data', this.state.data);
+
+        // axios
+        //   .post("http://localhost:8000/upload", file, {
+        //     onUploadProgress: (ProgressEvent) => {
+        //       this.setState({
+        //         loaded: (ProgressEvent.loaded / ProgressEvent.total) * 100,
+        //       });
+        //     },
+        //   })
+        //   .then((res) => {
+        //     // then print response status
+        //     toast.success("upload success");
+        //   })
+        //   .catch((err) => {
+        //     // then print response status
+        //     toast.error("upload fail");
+        //   });
+
         fetch("http://localhost:4000/createVerifiedDocument", {
             method: "POST",
-            body: JSON.stringify({ "data": this.state.data }),
+            // body: JSON.stringify({ "data": this.state.data , "file": file}),
+            body: data,
             headers: { "Content-Type": "application/json", "x-auth-token": localStorage.getItem("eduCertJwtToken") }
         })
         .then(response => response.json())
+        .then((res) => {
+            // then print response status
+            toast.success("upload success");
+          })
+          .catch((err) => {
+            // then print response status
+            toast.error("upload fail");
+          });
         this.setState({ data: { documentId: '', applicantId: '', applicantName: '', applicantOrganizationNumber: '', organizationId: '', documentName: '', description: '', dateOfAccomplishment: '', tenure: '', percentage: '', outOfPercentage: '', documentUrl: '' } })
 
     };
@@ -69,6 +170,25 @@ class CreateVerifiedDocument extends Component {
 
                         <label>Document URL</label>
                         <input className="form-control" name="documentUrl" id="documentUrl" onChange={this.handleChange} value={this.state.data.documentUrl} type="text" placeholder="drive.google.com/56465435466435464131" />
+
+                        <div class="container">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group files">
+                                <label>Upload Your File </label>
+                                <input
+                                    type="file"
+                                    class="form-control"
+                                    multiple
+                                    onChange={this.onFileChangeHandler}
+                                />
+                                </div>
+                                <div class="form-group">
+                                <ToastContainer />
+                                </div>
+                            </div>
+                            </div>
+                        </div>
 
                         <center>
                             <input type="submit" className="button" value="Submit" />

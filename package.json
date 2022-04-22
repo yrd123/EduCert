@@ -18,7 +18,11 @@
     "react-router-dom": "^6.2.1",
     "react-scripts": "5.0.0",
     "stable": "^0.1.8",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "nodemon": "^2.0.15",
+    "react-strap": "0.0.1",
+    "react-toastify": "^8.2.0",
+    "reactstrap": "^9.0.2"
   },
   "scripts": {
     "start": "react-scripts start",
