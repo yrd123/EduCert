@@ -17,7 +17,6 @@
 // export default VerifyDocument;
 
 import {useLocation} from 'react-router-dom'
-import Modal from '@mui/material/Modal';
 import React from 'react';
 
 
@@ -49,11 +48,9 @@ export default function VerifyDocument() {
                         <label>Organization Id</label> 
                         <div className='row'> 
                           <div className="col-12">
-                            <input className="form-control" value={document.organizationId} name="organizationId" id="organizationId" disabled />
+                            <input className="form-control" value={document.organizationId} name="organizationId" id="organizationId"  placeholder="Org1MSP"disabled />
                           </div>
-                          {/* <div className="col-4">
-                            <button type="button" onClick={this.handleOpenOrganizationPreviewModal} className="btn btn-success">&nbsp;&nbsp;Organization Details&nbsp;&nbsp;</button>
-                          </div> */}
+                          
                         </div>
 
                         <br/><center><h4> Applicant Details </h4></center><br/>
@@ -61,12 +58,10 @@ export default function VerifyDocument() {
                         <label>Applicant Id</label> 
                         <div className='row'> 
                           <div className="col-12">
-                            <input className="form-control" value={document.applicantId} name="applicantId" id="applicantId"  disabled />
+                            <input className="form-control" value={document.applicantId} name="applicantId" id="applicantId" placeholder="1814078" disabled />
                           </div>
 
-                          {/* <div className="col-4">
-                            <button type="button" onClick={this.handleOpenApplicantPreviewModal} className="btn btn-success">&nbsp;&nbsp;&nbsp;&nbsp;Applicant Details&nbsp;&nbsp;&nbsp;&nbsp;</button>
-                          </div> */}
+                          
                         </div>
 
                         <label>Applicant Name</label>

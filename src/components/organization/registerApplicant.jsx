@@ -137,12 +137,7 @@ export default class RegisterApplicant extends Component {
       return  (
         <div>
           <div className="forms">
-            {/* <ul className="tab-group">
-              <li className="tab active" id="loginbutton">
-                <a href="#login">Log In</a>
-              </li>
-              <li className="tab" id="signupbutton"><a href="#signup">Sign Up</a></li>
-            </ul> */}
+            
 
 
             {/* SIGNUP FORM */}
@@ -152,7 +147,7 @@ export default class RegisterApplicant extends Component {
               </div>
               <div className="input-field">
               <label htmlFor="applicantId">Applicant Id</label>
-                <input type="text" id="applicantId" name="applicantId" onChange={this.handleChangeSignup} value = {this.state.applicantinfoSignup.applicantId} placeholder="1234" />
+                <input type="text" id="applicantId" name="applicantId" onChange={this.handleChangeSignup} value = {this.state.applicantinfoSignup.applicantId} placeholder="1814078" />
                 {
                   this.state.signupErrors["applicantId"] &&
                   <div class="alert alert-danger" role="alert">
@@ -160,7 +155,7 @@ export default class RegisterApplicant extends Component {
                   </div>
                 }
                 <label htmlFor="email">Email</label>
-                <input type="email" id="email"name="email" onChange={this.handleChangeSignup} value = {this.state.applicantinfoSignup.email} placeholder="sanyamgandhi@gmail.com" />
+                <input type="email" id="email"name="email" onChange={this.handleChangeSignup} value = {this.state.applicantinfoSignup.email} placeholder="sanyamgandhi00@gmail.com" />
                 {
                   this.state.signupErrors["email"] &&
                   <div class="alert alert-danger" role="alert">
@@ -170,7 +165,7 @@ export default class RegisterApplicant extends Component {
 
                 
                 <label htmlFor="fullName">Name</label>
-                <input type="text" id = "fullName" name="fullName" onChange={this.handleChangeSignup} value = {this.state.applicantinfoSignup.fullName} placeholder="John Doe" />
+                <input type="text" id = "fullName" name="fullName" onChange={this.handleChangeSignup} value = {this.state.applicantinfoSignup.fullName} placeholder="Sanyam Gandhi" />
                 {
                   this.state.signupErrors["fullName"] &&
                   <div class="alert alert-danger" role="alert">
@@ -179,7 +174,7 @@ export default class RegisterApplicant extends Component {
                 }
                 
                 <label htmlFor="address">Address</label>
-                <input type="text" id="address" name="address" onChange={this.handleChangeSignup} value = {this.state.applicantinfoSignup.address} placeholder="c8 sambhav appt" />
+                <input type="text" id="address" name="address" onChange={this.handleChangeSignup} value = {this.state.applicantinfoSignup.address} placeholder="Sambhav appt" />
                 {
                   this.state.signupErrors["address"] &&
                   <div class="alert alert-danger" role="alert">
@@ -188,7 +183,7 @@ export default class RegisterApplicant extends Component {
                 }
                 
                 <label htmlFor="pincode">Pin/Zip Code</label>
-                <input type="text" id="pincode" name="pincode" onChange={this.handleChangeSignup} value = {this.state.applicantinfoSignup.pincode} placeholder="John Doe" />
+                <input type="text" id="pincode" name="pincode" onChange={this.handleChangeSignup} value = {this.state.applicantinfoSignup.pincode} placeholder="444001" />
                 {
                   this.state.signupErrors["pincode"] &&
                   <div class="alert alert-danger" role="alert">
@@ -196,7 +191,7 @@ export default class RegisterApplicant extends Component {
                   </div>
                 }
                 <label htmlFor="stateOfApplicant">State</label>
-                <input type="text" id="stateOfApplicant" name="stateOfApplicant" onChange={this.handleChangeSignup} value = {this.state.applicantinfoSignup.stateOfApplicant} placeholder="John Doe" />
+                <input type="text" id="stateOfApplicant" name="stateOfApplicant" onChange={this.handleChangeSignup} value = {this.state.applicantinfoSignup.stateOfApplicant} placeholder="Maharashtra" />
                 {
                   this.state.signupErrors["stateOfApplicant"] &&
                   <div class="alert alert-danger" role="alert">
@@ -204,7 +199,7 @@ export default class RegisterApplicant extends Component {
                   </div>
                 }
                 <label htmlFor="country">Country</label>
-                <input type="text" id = "country" name="country" onChange={this.handleChangeSignup} value = {this.state.applicantinfoSignup.country} placeholder="John Doe" />
+                <input type="text" id = "country" name="country" onChange={this.handleChangeSignup} value = {this.state.applicantinfoSignup.country} placeholder="India" />
                 {
                   this.state.signupErrors["country"] &&
                   <div class="alert alert-danger" role="alert">
@@ -212,7 +207,7 @@ export default class RegisterApplicant extends Component {
                   </div>
                 }
                 <label htmlFor="contactNumber">Contact Number</label>
-                <input type="number" id="contactNumber" name="contactNumber" onChange={this.handleChangeSignup} value = {this.state.applicantinfoSignup.contactNumber} placeholder={9876543210} />
+                <input type="number" id="contactNumber" name="contactNumber" onChange={this.handleChangeSignup} value = {this.state.applicantinfoSignup.contactNumber} placeholder="9876543210" />
                 {
                   this.state.signupErrors["contactNumber"] &&
                   <div class="alert alert-danger" role="alert">
