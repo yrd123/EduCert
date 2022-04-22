@@ -1,19 +1,11 @@
 import React, { Component } from 'react';
-import { getDocumentsByOrganizationId } from '../../services/documentService';
 import Pagination from '../common/pagination';
 import { paginate } from '../../utils/paginate';
 import _ from 'lodash';
-import CustomModal from '../common/modal';
 import CenteredTabs from '../common/tabs';
 import SearchBar from '../common/searchBar';
-import PreviewCertificate from '../common/previewCertificate';
-import { getApplicantById } from '../../services/applicantService';
 import { Link, useNavigate } from 'react-router-dom';
 
-import VerifyDocument from './verifyDocument';
-import Modal from '@mui/material/Modal';
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
 
 class ViewApplicants extends Component {
     state = { 
@@ -79,8 +71,6 @@ class ViewApplicants extends Component {
         navigate({pathname:'/organization/verify',state:{document}});
     }
 
-    handleOpenApplicantModal = applicantId => this.setState({openApplicantModal:true, applicant: getApplicantById(applicantId)});
-    handleCloseApplicantModal = () => this.setState({openApplicantModal:false});
 
     render() { 
         const {currentPage, documentsStatus, pageSize, documents, sorting, searchText} = this.state;
@@ -96,23 +86,11 @@ class ViewApplicants extends Component {
         const sortedDocuments = _.orderBy(filteredDocuments,[sorting.property],[sorting.order]);
         const paginatedDocuments = paginate(sortedDocuments, currentPage, pageSize);
         
-        const modalStyle = {
-            position: 'absolute',
-            top: '55%',
-            left: '50%',
-            transform: 'translate(-50%, -50%)',
-            width: 600,
-            bgcolor: 'background.paper',
-            border: '2px solid #000',
-            boxShadow: 24,
-            p: 4,
-            overflow:'scroll',
-            height:'70%'
-        };
+      
           
         return (
             <>
-                <div style={{margin: 10, backgroundColor: 'white', padding: 30, paddingLeft: 5, paddingRight:5}}>
+                <div style={{margin: 10, backgroundColor: 'white', padding: 30, paddingLeft: 120, paddingRight:120}}>
                 <SearchBar search={this.search} searchInput={searchText} />
                     <br />
                     <CenteredTabs tabs={["CurrentlyEnrolled","All"]} handleTabChange={this.handleTabChange} /><br />
@@ -120,9 +98,9 @@ class ViewApplicants extends Component {
                         <thead>
                         <tr>
                             <th scope="col">No.</th>
-                            <th className="clickable" onClick={() => this.sort("applicantId")} scope="col">ApplicantId{this.renderSortIcon("documentName")}</th>
-                            <th className="clickable" onClick={() => this.sort("applicantName")} scope="col">Applicant Name {this.renderSortIcon("documentName")}</th>
-                            <th className="clickable" onClick={() => this.sort("status")} scope="col">View Document {this.renderSortIcon("dateOfIssue")}</th>
+                            <th className="clickable" onClick={() => this.sort("applicantId")} scope="col">ApplicantId{this.renderSortIcon("applicantId")}</th>
+                            <th className="clickable" onClick={() => this.sort("applicantName")} scope="col">Applicant Name {this.renderSortIcon("applicantName")}</th>
+                            <th scope="col">View</th>
                             <th scope="col"></th>
                         </tr>
                         </thead>
@@ -144,29 +122,7 @@ class ViewApplicants extends Component {
                         currentPage={currentPage}
                         onPageChange={this.handlePageChange}/>
 
-                    <Modal
-                        open={this.state.openApplicantModal}
-                        onClose={this.handleCloseApplicantModal}
-                        aria-labelledby="modal-modal-title"
-                        aria-describedby="modal-modal-description"
-                    >
-                        <Box sx={modalStyle}>
-                        <Typography id="modal-modal-title" variant="h6" component="h2">
-                            <center><h4>Applicant Details</h4></center>
-                        </Typography>
-                        <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                        <div className="forms" style={{margin : 0, width:'100%'}}>
-                            <form> 
-                            <label>Applicant Id</label>{/*autofilled*/}    
-                            <input className="form-control" value={this.state.applicant._id} name="applicantId" placeholder="112345" type="number" id="applicantId" required disabled/>
-                            <label>Applicant Email</label> 
-                            <input className="form-control" value={this.state.applicant.email} name="applicantEmail" placeholder="a@gmail.com" type="email" id="applicantEmail" required />
-                            <br />
-                            </form>
-                        </div>
-                        </Typography>
-                        </Box>
-                    </Modal>
+                    
                 </div>
             </>
         );

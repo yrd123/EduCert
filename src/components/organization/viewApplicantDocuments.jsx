@@ -36,8 +36,8 @@ class ViewApplicantDocuments extends Component {
             "dateOfBirth": "12-11-2000",
             "documentIds": ["docid1"],
             "currentOrganization": "org1",
-            "organizationsEnrolledIn": ["org1"],
-            "permissionGranted": ["org1"],
+            "organizationsEnrolledIn": ["org1" , "org2"],
+            "permissionGranted": ["org1" ],
             "updatedBy": "initLedger"
         }
     };
@@ -50,9 +50,7 @@ class ViewApplicantDocuments extends Component {
         this.setState({ currentPage: page });
     }
 
-    // handleClose = () => this.setState({show:true});
-    // handleShow = () => this.setState({show:false});
-
+   
     sort(property) {
         if (this.state.sorting.property === property) {
             const order = (this.state.sorting.order === "asc") ? "desc" : "asc";
@@ -131,6 +129,8 @@ class ViewApplicantDocuments extends Component {
                         <h6><b>State: </b> {this.state.data.state}</h6>
                         <h6><b>Country: </b> {this.state.data.country}</h6>
                         <h6><b>Date Of Birth: </b> {this.state.data.dateOfBirth}</h6>
+                        
+                        <h6><b>Organnizations Enrolled In: </b> {this.state.data.organizationsEnrolledIn}</h6>
                     </div>
                     <div className="container2"><button type="button" class="btn btn-primary">Change Current Organization</button></div>
                 </div>
@@ -145,16 +145,15 @@ class ViewApplicantDocuments extends Component {
                             <th scope="col">No.</th>
                             <th className="clickable" onClick={() => this.sort("documentId")} scope="col">Document Id {this.renderSortIcon("documentId")}</th>
                             <th className="clickable" onClick={() => this.sort("documentName")} scope="col">Document Name {this.renderSortIcon("documentName")}</th>
-                            <th className="clickable" onClick={() => this.sort("applicantId")} scope="col">Applicant Id{this.renderSortIcon("applicantId")}</th>
                             <th className="clickable" onClick={() => this.sort("applicantName")} scope="col">Applicant Name{this.renderSortIcon("applicantName")}</th>
-                            <th className="clickable" onClick={() => this.sort("applicantOrganizationNumber")} scope="col">Roll No {this.renderSortIcon("documentName")}</th>
-                            <th className="clickable" onClick={() => this.sort("description")} scope="col">Description {this.renderSortIcon("documentName")}</th>
-                            <th className="clickable" onClick={() => this.sort("dateOfAccomplishment")} scope="col">Completion Date {this.renderSortIcon("documentName")}</th>
-                            <th className="clickable" onClick={() => this.sort("tenure")} scope="col">Tenure {this.renderSortIcon("applicantId")}</th>
-                            <th className="clickable" onClick={() => this.sort("percentage")} scope="col">Percentage {this.renderSortIcon("applicantName")}</th>
-                            <th className="clickable" onClick={() => this.sort("outOfpercentage")} scope="col">Out Of  {this.renderSortIcon("applicantName")}</th>
-                            <th className="clickable" onClick={() => this.sort("updatedBy")} scope="col">Updated By {this.renderSortIcon("typeOfDocument")}</th>
-                            <th className="clickable" onClick={() => this.sort("status")} scope="col">Status {this.renderSortIcon("dateOfIssue")}</th>
+                            <th className="clickable" onClick={() => this.sort("applicantOrganizationNumber")} scope="col">Roll No {this.renderSortIcon("applicantOrganizationNumber")}</th>
+                            <th className="clickable" onClick={() => this.sort("description")} scope="col">Description {this.renderSortIcon("description")}</th>
+                            <th className="clickable" onClick={() => this.sort("dateOfAccomplishment")} scope="col">Completion Date {this.renderSortIcon("dateOfAccomplishment")}</th>
+                            <th className="clickable" onClick={() => this.sort("tenure")} scope="col">Tenure {this.renderSortIcon("tenure")}</th>
+                            <th className="clickable" onClick={() => this.sort("percentage")} scope="col">Percentage {this.renderSortIcon("percentage")}</th>
+                            <th className="clickable" onClick={() => this.sort("outOfpercentage")} scope="col">Out Of  {this.renderSortIcon("outOfpercentage")}</th>
+                            <th className="clickable" onClick={() => this.sort("updatedBy")} scope="col">Updated By {this.renderSortIcon("updatedBy")}</th>
+                            <th className="clickable" onClick={() => this.sort("status")} scope="col">Status {this.renderSortIcon("status")}</th>
                             <th scope="col"></th>
                         </tr>
                     </thead>
@@ -164,7 +163,6 @@ class ViewApplicantDocuments extends Component {
                                 <th scope="row">{(currentPage - 1) * pageSize + index + 1}</th>
                                 <td>{document.documentId}</td>
                                 <td>{document.documentName}</td>
-                                <td>{document.applicantId}</td>
                                 <td>{document.applicantName}</td>
                                 <td>{document.applicantOrganizationNumber}</td>
                                 <td>{document.description}</td>
