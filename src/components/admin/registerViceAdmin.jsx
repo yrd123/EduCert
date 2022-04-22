@@ -5,28 +5,31 @@ import '../login.css';
 
 export default class RegisterViceAdmin extends Component {
   state = {
-    applicantinfo: {
-      organization: "",
+    viceAdminInfo: {
       id: "",
-      password: "",
-      role: "viceAdmin"
+      password: ""
     },
     errors: {},
   }
 
   handleChange = (e) => {
-    const applicantinfo = { ...this.state.applicantinfo };
-    applicantinfo[e.currentTarget.name] = e.currentTarget.value;
-    this.setState({ applicantinfo });
-    console.log(applicantinfo);
+    const viceAdminInfo = { ...this.state.viceAdminInfo };
+    viceAdminInfo[e.currentTarget.name] = e.currentTarget.value;
+    this.setState({ viceAdminInfo });
+    console.log(viceAdminInfo);
   }
 
   handleSubmit = (e) => {
     e.preventDefault();
 
     if (this.handleValidation()) {
-      const base_url = "http://127.0.0.1:4000/createApplicant"
-      const data = { applicantinfoSignup: this.state.applicantinfoSignup }
+      fetch("http://localhost:4000/registerViceAdmin", {
+        method:"POST",
+        body:JSON.stringify(this.state.viceAdminInfo),
+        headers:{"Content-Type" : "application/json","x-auth-token":localStorage.getItem("eduCertJwtToken")}
+        })
+        .then(response => response.json())
+        .then((data) => this.setState({viceAdmins:data}))
 
 
     } else {
@@ -37,38 +40,38 @@ export default class RegisterViceAdmin extends Component {
   }
 
   handleValidation() {
-    let applicantinfo = this.state.applicantinfo;
+    let viceAdminInfo = this.state.viceAdminInfo;
     let errors = {};
     let formIsValid = true;
 
     //Id
-    if (!applicantinfo["id"]) {
+    if (!viceAdminInfo["id"]) {
       formIsValid = false;
       errors["id"] = "Id Cannot be empty";
     }
-    else if (typeof applicantinfo["id"] !== "undefined") {
-      if (!applicantinfo["id"].match(/^[a-zA-Z0-9]*$/)) {
+    else if (typeof viceAdminInfo["id"] !== "undefined") {
+      if (!viceAdminInfo["id"].match(/^[a-zA-Z0-9]*$/)) {
         formIsValid = false;
         errors["id"] = "Id should contain only Letters and numbers";
       }
     }
 
     //Password
-    if (!applicantinfo["password"]) {
+    if (!viceAdminInfo["password"]) {
       formIsValid = false;
       errors["password"] = "Cannot be empty";
-    } else if (typeof applicantinfo["password"] !== "undefined") {
-      var minNumberofChars = 6;
-      var maxNumberofChars = 16;
-      var newPassword = applicantinfo["password"];
+    } else if (typeof viceAdminInfo["password"] !== "undefined") {
+      var minNumberofChars = 5;
+      var maxNumberofChars = 20;
+      var newPassword = viceAdminInfo["password"];
       if (
         newPassword.length < minNumberofChars ||
         newPassword.length > maxNumberofChars
       ) {
         formIsValid = false;
-        errors["password"] = "Password should be between 6 to 16 char";
+        errors["password"] = "Password should be between 5 to 20 char";
       }
-      if (!applicantinfo["password"].match(/^[a-zA-Z0-9!@#$%^&*]{6,16}$/)) {
+      if (!viceAdminInfo["password"].match(/^[a-zA-Z0-9!@#$%^&*]{5,20}$/)) {
         formIsValid = false;
         errors["password"] =
           "password should contain atleast one number and one special character";
@@ -99,7 +102,7 @@ export default class RegisterViceAdmin extends Component {
             </div>
             <div className="input-field">
               <label htmlFor="id">UserId</label>
-              <input type="text" name="id" id="id" onChange={this.handleChange} value={this.state.applicantinfo.id} placeholder="sanyamgandhi00" />
+              <input type="text" name="id" id="id" onChange={this.handleChange} value={this.state.viceAdminInfo.id} placeholder="sanyamgandhi00" />
               {this.state.errors['id'] &&
                 <div class="alert alert-danger" role="alert">
                   {this.state.errors["id"]}
@@ -107,7 +110,7 @@ export default class RegisterViceAdmin extends Component {
               }
 
               <label htmlFor="password">Password</label>
-              <input type="password" name="password" id="password" onChange={this.handleChange} value={this.state.applicantinfo.password} placeholder="******" />
+              <input type="password" name="password" id="password" onChange={this.handleChange} value={this.state.viceAdminInfo.password} placeholder="******" />
               {this.state.errors['password'] &&
                 <div class="alert alert-danger" role="alert">
                   {this.state.errors["password"]}
