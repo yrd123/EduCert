@@ -23,9 +23,16 @@ export default class Login extends Component {
     e.preventDefault();
     if (this.handleValidation()) {
         let token = await login(this.state.loginCredentials);
-        localStorage.setItem('eduCertJwtToken', token);
-        console.log(localStorage.getItem('eduCertJwtToken'));
-        window.location = '/organization/dashboard';
+        if(token){
+          localStorage.setItem('eduCertJwtToken', token);
+          let role = this.state.loginCredentials.role;
+          if(role === 'admin')
+            window.location = '/admin/viewViceAdmins';
+          else if(role === 'viceAdmin')
+            window.location = '/organization/dashboard';
+          else if(role === 'applicant')
+            window.location = '/applicant/dashboard';
+        }
       } 
     else 
       return;
@@ -93,7 +100,7 @@ export default class Login extends Component {
             </div>
             <div className="input-field">
               <label htmlFor="userId">UserId</label>
-              <input type="text" name="userId" id = "userId" onChange={this.handleChange} value = {this.state.loginCredentials.id} placeholder="sanyamgandhi00" />
+              <input type="text" name="userId" id = "userId" onChange={this.handleChange} value = {this.state.loginCredentials.id} placeholder="1814078" />
               { this.state.errors['userId'] && 
                 <div class="alert alert-danger" role="alert">
                 {  this.state.errors["userId"]}
@@ -108,8 +115,8 @@ export default class Login extends Component {
                 </div>
               }
 
-              <label htmlFor="organization">Organization Id (- if applicant)</label>
-              <input type="text" name="organization" id = "organization" onChange={this.handleChange} value = {this.state.loginCredentials.id} placeholder="sanyamgandhi00" />
+              <label htmlFor="organization">Organization Id <span style={{color:'gray', fontWeight:400}}>(- if applicant)</span></label>
+              <input type="text" name="organization" id = "organization" onChange={this.handleChange} value = {this.state.loginCredentials.id} placeholder="Org1MSP" />
               { this.state.errors['organization'] && 
                 <div class="alert alert-danger" role="alert">
                 {  this.state.errors["organization"]}

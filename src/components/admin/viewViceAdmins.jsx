@@ -3,7 +3,7 @@ import '../login.css';
 
 export default class ViewViceAdmins extends Component {
   state = {
-      viceAdmins : ['v1', 'v2','v4']
+      viceAdmins : ['Yash', 'Ronak','Sanyam','Manish']
   };
 
 //   componentDidMount(){
@@ -18,16 +18,16 @@ export default class ViewViceAdmins extends Component {
   render() {
     return (
         <>
-        <h1 className='vice'> Vice Admins</h1>
-        <div className="container">
+        <br/><br/><br/>
+        <h3 className='vice'> Vice Admins</h3><br/>
+        <ul class="list-group"  style={{marginLeft:150, width:500}}>
             {
                 this.state.viceAdmins.map(viceAdmin => 
-                    <div className="row" id="rowId">
-                        <h3>{viceAdmin}</h3>
-                    </div>
+                  <li class="list-group-item">{viceAdmin}</li>
+
                 )
             }
-        </div>
+        </ul>
         </>
       
     );
