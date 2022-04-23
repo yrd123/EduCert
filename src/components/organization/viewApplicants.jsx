@@ -4,7 +4,7 @@ import { paginate } from '../../utils/paginate';
 import _ from 'lodash';
 import CenteredTabs from '../common/tabs';
 import SearchBar from '../common/searchBar';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 
 
 class ViewApplicants extends Component {
@@ -24,24 +24,27 @@ class ViewApplicants extends Component {
         applicantsStatus : "All",
         currentPage : 1,
         pageSize : 2,
-        sorting : { property : "documentName", order : "asc" },
+        sorting : { property : "applicantName", order : "asc" },
         searchText  : "",
         openApplicantModal: false
     };
 
 
-    componentDidMount() {
+    /*componentDidMount() {
 
-        fetch("http://localhost:4000/getDocumentsSignedByOrganization", {
+        fetch("http://localhost:4000/getAllApplicants", {
         method:"POST",
         headers:{"Content-Type" : "application/json","x-auth-token":localStorage.getItem("eduCertJwtToken")}
-    })
-    .then(response => response.json())
-    .then((data) => this.setState({applicants:data}))
-  
-    
-    }
+        })
+        .then(response => response.json())
+        .then((data) => this.setState({applicants:data}))    
+    }*/
 
+    redirectToViewApplicantDocuments = applicantId =>{
+        console.log(applicantId)
+        const navigate = useNavigate();
+        navigate({pathname:'/organization/viewApplicantDocuments/1814073',state:{applicantId}});
+    }
 
     
     handleTabChange = tab =>{
@@ -76,25 +79,19 @@ class ViewApplicants extends Component {
         this.setState({searchText});
     }
 
-    redirectToVerify = document =>{
-        const navigate = useNavigate();
-        navigate({pathname:'/organization/verify',state:{document}});
-    }
-
-
     render() { 
         const {currentPage, applicantsStatus, pageSize, applicants, sorting, searchText} = this.state;
-        let filteredDocuments = applicants;
+        let filteredApplicants = applicants;
         if(applicantsStatus !== "All")
-            filteredDocuments = applicants.filter(document => document.status === applicantsStatus);
-        filteredDocuments = filteredDocuments.filter(document => {
-            for(let property in document){
-                if(document[property].includes(searchText)) return true;
+            filteredApplicants = applicants.filter(applicant => applicant.status === applicantsStatus);
+        filteredApplicants = filteredApplicants.filter(applicant => {
+            for(let property in applicant){
+                if(applicant[property].includes(searchText)) return true;
             }
             return false;
         });
-        const sortedDocuments = _.orderBy(filteredDocuments,[sorting.property],[sorting.order]);
-        const paginatedDocuments = paginate(sortedDocuments, currentPage, pageSize);
+        const sortedApplicants = _.orderBy(filteredApplicants,[sorting.property],[sorting.order]);
+        const paginatedApplicants = paginate(sortedApplicants, currentPage, pageSize);
         
         return (
             <>
@@ -113,24 +110,24 @@ class ViewApplicants extends Component {
                         </tr>
                         </thead>
                         <tbody>    
-                        { paginatedDocuments.map((document,index) => 
-                            <tr key={document.documentId}>
+                        { paginatedApplicants.map((applicant,index) => 
+                            <tr key={applicant.applicantId}>
                                 <th scope="row">{(currentPage-1)*pageSize+index+1}</th>
-                                <td>{document.applicantId}</td>
-                                <td>{document.name}</td>
-                                <td><button type="button" class="btn btn-success">View</button></td>   
+                                <td>{applicant.applicantId}</td>
+                                <td>{applicant.name}</td>
+                                <td><Link to="/organization/viewApplicantDocuments" state={{applicantId:applicant.applicantId}}>
+                                    <button type="button" class="btn btn-success">View</button> 
+                                </Link></td>
                             </tr>
                         )}
                         </tbody>
                     </table>
                     
                     <Pagination 
-                        itemsCount={filteredDocuments.length} 
+                        itemsCount={filteredApplicants.length} 
                         pageSize={this.state.pageSize} 
                         currentPage={currentPage}
-                        onPageChange={this.handlePageChange}/>
-
-                    
+                        onPageChange={this.handlePageChange}/>                    
                 </div>
             </>
         );

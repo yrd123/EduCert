@@ -94,8 +94,8 @@ export default class RegisterViceAdmin extends Component {
           {/* LOGIN FORM */}
           <form id="login" onSubmit={this.handleSubmit} name="loginform" method="POST">
             <br />
-            <div id="loginwarning" className="warning">
-              {/* INSERT LOGIN WARNINGS HERE */}
+            <div class="alert alert-danger" role="alert">
+                  <center>Invalid username or password</center>
             </div>
             <div className="input-field">
               <label htmlFor="userId">UserId</label>
