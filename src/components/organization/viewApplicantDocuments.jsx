@@ -17,14 +17,14 @@ class ViewApplicantDocuments extends Component {
     state = {
 
         applicantId: '',
-        documents: [],
+        documents: [ ],
         documentsStatus: "All",
         currentPage: 1,
         pageSize: 2,
         sorting: { property: "documentName", order: "asc" },
         searchText: "",
         organization: {},
-        data: {
+        applicant: {
             "applicantId": "1814073",
             "email": "yash@deorah.com",
             "password": "Secure@2022",
@@ -80,20 +80,32 @@ class ViewApplicantDocuments extends Component {
         console.log(applicantId);
     };
 
+    
+    componentDidMount() {
+
+        fetch("http://localhost:4000/getMyDetails", {
+            method: "POST",
+            // body:JSON.stringify({"data":{"applicantId":this.state.applicantId}}),
+            headers: { "Content-Type": "application/json", "x-auth-token": localStorage.getItem("eduCertJwtToken") }
+        })
+            .then(response => response.json())
+            .then((data) => this.setState({ data: data }))
+
+            fetch("http://localhost:4000/getDocumentsByApplicantId", {
+                method: "POST",
+                body: JSON.stringify({ "data": { "applicantId": this.state.applicantId } }),
+                headers: { "Content-Type": "application/json", "x-auth-token": localStorage.getItem('eduCertJwtToken') }
+            })
+                .then(response => response.json())
+                .then((data) => this.setState({ documents: data }))
+    }
+
 
     handleSubmit = (e) => {
         e.preventDefault();
 
         console.log(this.state.applicantId);
-
-        fetch("http://localhost:4000/getDocumentsByApplicantId", {
-            method: "POST",
-            body: JSON.stringify({ "data": { "applicantId": this.state.applicantId } }),
-            headers: { "Content-Type": "application/json", "x-auth-token": localStorage.getItem('eduCertJwtToken') }
-        })
-            .then(response => response.json())
-            .then((data) => this.setState({ documents: data }))
-
+  
     };
 
     render() {
@@ -121,17 +133,17 @@ class ViewApplicantDocuments extends Component {
 
                 <div className="card">
                     <div className="container">
-                        <h6><b>Applicant Id:</b> {this.state.data.applicantId} </h6>
-                        <h6><b>Name :</b> {this.state.data.name}</h6>
-                        <h6><b>Current Organization: </b> {this.state.data.currentOrganization}</h6>
-                        <h6><b>Email: </b>{this.state.data.email}</h6>
-                        <h6><b>Address: </b> {this.state.data.address}</h6>
-                        <h6><b>Pin: </b> {this.state.data.pin}</h6>
-                        <h6><b>State: </b> {this.state.data.state}</h6>
-                        <h6><b>Country: </b> {this.state.data.country}</h6>
-                        <h6><b>Date Of Birth: </b> {this.state.data.dateOfBirth}</h6>
+                        <h6><b>Applicant Id:</b> {this.state.applicant.applicantId} </h6>
+                        <h6><b>Name :</b> {this.state.applicant.name}</h6>
+                        <h6><b>Current Organization: </b> {this.state.applicant.currentOrganization}</h6>
+                        <h6><b>Email: </b>{this.state.applicant.email}</h6>
+                        <h6><b>Address: </b> {this.state.applicant.address}</h6>
+                        <h6><b>Pin: </b> {this.state.applicant.pin}</h6>
+                        <h6><b>State: </b> {this.state.applicant.state}</h6>
+                        <h6><b>Country: </b> {this.state.applicant.country}</h6>
+                        <h6><b>Date Of Birth: </b> {this.state.applicant.dateOfBirth}</h6>
                         
-                        <h6><b>Organnizations Enrolled In: </b> {this.state.data.organizationsEnrolledIn.map(organization => <span class="badge badge-info" style={{marginRight:5}}>{organization}  </span> )} </h6>
+                        <h6><b>Organnizations Enrolled In: </b> {this.state.applicant.organizationsEnrolledIn.map(organization => <span class="badge badge-info" style={{marginRight:5}}>{organization}  </span> )} </h6>
                     </div>
                     <div className="container2"><button type="button" class="btn btn-primary">Change Current Organization</button></div>
                 </div>

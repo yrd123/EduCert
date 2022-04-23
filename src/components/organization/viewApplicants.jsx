@@ -9,7 +9,18 @@ import { Link, useNavigate } from 'react-router-dom';
 
 class ViewApplicants extends Component {
     state = { 
-        applicants : [],
+        applicants : [
+            {
+                applicantId :'1814078' ,
+                name : 'Sanyam' ,
+
+            } ,
+
+            {
+                applicantId : '1814073' ,
+                name : 'Yash'
+            }
+        ],
         applicantsStatus : "All",
         currentPage : 1,
         pageSize : 2,
