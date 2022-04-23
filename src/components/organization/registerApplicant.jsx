@@ -124,6 +124,10 @@ export default class RegisterApplicant extends Component {
     render() {
       return  (
         <div>
+
+<div class="alert alert-danger" role="alert">
+                <center>Hello </center>
+                </div>
           <div className="forms">
             
 

@@ -131,6 +131,9 @@ class CreateVerifiedDocument extends Component {
 
         return (
             <React.Fragment>
+              <div class="alert alert-danger" role="alert">
+                <center>Hello </center>
+                </div>
                 <div className="forms">
                     <br /><center><h4>  Details </h4></center><br />
 

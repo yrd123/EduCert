@@ -45,6 +45,9 @@ class ApplicantProfile extends Component {
     render() {
         return (
             <React.Fragment>
+                <div class="alert alert-danger" role="alert">
+                <center>Hello </center>
+                </div>
                 <div className="forms">
                     <form onSubmit={this.handleSubmit} >
                         <center><h4> Profile </h4></center><br />

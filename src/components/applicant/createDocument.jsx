@@ -42,6 +42,10 @@ class CreateSelfUploadedDocument extends Component {
     render() {
         return (
             <React.Fragment>
+
+                <div class="alert alert-danger" role="alert">
+                <center>Hello </center>
+                </div>
                 <div className="forms">
                     <br />
                     <center>

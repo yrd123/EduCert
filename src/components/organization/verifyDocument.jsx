@@ -42,6 +42,9 @@ export default function VerifyDocument() {
    
     return (
         <React.Fragment>
+          <div class="alert alert-danger" role="alert">
+                <center>Hello </center>
+                </div>
             <div className="forms">
                     <br />
                     <form onSubmit={handleSubmit}>  
