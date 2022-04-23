@@ -1,4 +1,4 @@
-import './App.css';
+import './static/css/App.css';
 import {BrowserRouter, Route , Routes } from 'react-router-dom';
 import jwtDecode from 'jwt-decode';
 

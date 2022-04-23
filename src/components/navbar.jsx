@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import {logout} from '../services/authService';
 
-import './static/css/navbar.css';
+import '../static/css/navbar.css';
 
 
 

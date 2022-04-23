@@ -11,7 +11,7 @@ import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';*/
 
-import '../static/css/cardscss.css';
+import '../../static/css/cardscss.css';
 
 class ViewApplicantDocuments extends Component {
     state = {

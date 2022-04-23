@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
-import '../static/css/login.css';
-import CenteredTabs from '../common/tabs';
-
-
+import '../../static/css/login.css';
 
 export default class RegisterApplicant extends Component {
     state = {
@@ -11,10 +8,6 @@ export default class RegisterApplicant extends Component {
       errors: {},
       signupErrors :{} 
     }
-
-    
-
-    
   
   handleChangeSignup = (e) => {
     const applicantinfoSignup = { ...this.state.applicantinfoSignup };
@@ -27,14 +20,11 @@ export default class RegisterApplicant extends Component {
     e.preventDefault();
 
     if (this.handleSignUpValidation()) {
-
      console.log(this.state.applicantinfoSignup);
-    } else {
+    } 
+    else 
       return;
-    }
-
   };
-
   
   handleSignUpValidation() {
     let applicantinfoSignup = this.state.applicantinfoSignup;
@@ -45,8 +35,6 @@ export default class RegisterApplicant extends Component {
       formIsValid = false;
       signupErrors["applicantId"] = "Cannot be empty";
     }
-
-
 
     //Email
     if (!applicantinfoSignup["email"]) {

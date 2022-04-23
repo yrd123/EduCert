@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { login } from '../services/authService';
-import './static/css/login.css';
+import '../static/css/login.css';
 
 export default class Login extends Component {
     state = {

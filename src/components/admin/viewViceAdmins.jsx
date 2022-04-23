@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import '../static/css/login.css';
+import '../../static/css/login.css';
 
 export default class ViewViceAdmins extends Component {
   state = {

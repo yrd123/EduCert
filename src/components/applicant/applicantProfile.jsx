@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { getApplicantById } from '../../services/applicantService';
-import '../static/css/login.css';
+import '../../static/css/login.css';
 import { NavLink } from 'react-router-dom';
 
 class ApplicantProfile extends Component {
