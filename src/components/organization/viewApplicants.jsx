@@ -30,7 +30,7 @@ class ViewApplicants extends Component {
     };
 
 
-    /*componentDidMount() {
+    componentDidMount() {
 
         fetch("http://localhost:4000/getAllApplicants", {
         method:"POST",
@@ -38,12 +38,12 @@ class ViewApplicants extends Component {
         })
         .then(response => response.json())
         .then((data) => this.setState({applicants:data}))    
-    }*/
+    }
 
     redirectToViewApplicantDocuments = applicantId =>{
         console.log(applicantId)
         const navigate = useNavigate();
-        navigate({pathname:'/organization/viewApplicantDocuments/1814073',state:{applicantId}});
+        navigate({pathname:'/organization/viewApplicantDocuments/',state:{applicantId}});
     }
 
     

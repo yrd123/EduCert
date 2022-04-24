@@ -20,7 +20,13 @@ export default class RegisterApplicant extends Component {
     e.preventDefault();
 
     if (this.handleSignUpValidation()) {
-     console.log(this.state.applicantinfoSignup);
+      fetch("http://localhost:4000/registerApplicant", {
+        method:"POST",
+        body:JSON.stringify(this.state.applicantinfoSignup),
+        headers:{"Content-Type" : "application/json","x-auth-token":localStorage.getItem("eduCertJwtToken")}
+        })
+        .then(response => response.json())
+        .then((data) => console.log(data))
     } 
     else 
       return;
