@@ -57,8 +57,6 @@ export default class UpdatePassword extends Component {
     return formIsValid;
   }
 
-
-
   render() {
     return (
       <div>
