@@ -32,16 +32,14 @@ class App extends Component{
   state = {};
 
   componentDidMount(){
-    try{
-    
-    //localStorage.removeItem('eduCertJwtToken')    
-    //localStorage.setItem('eduCertJwtToken','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJiaXN0cmlsIiwib3JnYW5pemF0aW9uIjoiT3JnMU1TUCIsInJvbGUiOiJ2aWNlQWRtaW4iLCJpYXQiOjE1MTYyMzkwMjJ9.gePonmyhGlFBj3lE4Bw3EuG87W2Z5f2flLEDqfYQIoU')
-    //localStorage.setItem('eduCertJwtToken','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJhZG1pbiIsIm9yZ2FuaXphdGlvbiI6Ik9yZzFNU1AiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE1MTYyMzkwMjJ9.80mmHyTPvEISXmZ_MWW_YvRvhEsHFkT3Be9YXY35w8M')
-
-    const token = localStorage.getItem('eduCertJwtToken');
-    const user = jwtDecode(token);
-    console.log(user);
-    this.setState({user});
+    try{ 
+      //localStorage.removeItem('eduCertJwtToken')    
+      //localStorage.setItem('eduCertJwtToken','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJiaXN0cmlsIiwib3JnYW5pemF0aW9uIjoiT3JnMU1TUCIsInJvbGUiOiJ2aWNlQWRtaW4iLCJpYXQiOjE1MTYyMzkwMjJ9.gePonmyhGlFBj3lE4Bw3EuG87W2Z5f2flLEDqfYQIoU')
+      //localStorage.setItem('eduCertJwtToken','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJhZG1pbiIsIm9yZ2FuaXphdGlvbiI6Ik9yZzFNU1AiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE1MTYyMzkwMjJ9.80mmHyTPvEISXmZ_MWW_YvRvhEsHFkT3Be9YXY35w8M')
+      const token = localStorage.getItem('eduCertJwtToken');
+      const user = jwtDecode(token);
+      console.log(user);
+      this.setState({user});
     }
     catch(ex){}
   }
@@ -65,25 +63,25 @@ class App extends Component{
                 <Route exact path="organization/viewApplicantProfile" element={<ViewApplicantProfile />} />
 
                 */}
-                {/* <Route element={<AdminProtectedRoutes />}> */}
+                <Route element={<AdminProtectedRoutes />}>
                   <Route exact path="admin/viewViceAdmins" element={(user && user.role === 'admin')?<ViewViceAdmins />:<Navigate to="/login" />} />
                   <Route exact path="admin/registerViceAdmin" element={<RegisterViceAdmin />} />
-                {/* </Route> */}
-                {/* <Route element={<ViceAdminProtectedRoutes />}> */}
+                </Route>
+                <Route element={<ViceAdminProtectedRoutes />}>
                   <Route exact path="organization/dashboard" element={<OrganizationDashboard />}/>
                   <Route exact path="organization/createDocument" element={<CreateVerifiedDocument />} />
                   <Route exact path="organization/verify" element={<VerifyDocument />} />
                   <Route exact path="organization/viewApplicants" element={<ViewApplicants />} />
                   <Route exact path="organization/viewApplicantDocuments" element={<ViewApplicantDocuments />} />
                   <Route exact path="organization/registerApplicant" element={<RegisterApplicant />} />
-                {/* </Route> */}
-                {/* <Route element={<ApplicantProtectedRoutes/>}> */}
+                </Route>
+                <Route element={<ApplicantProtectedRoutes/>}>
                   <Route exact path="applicant/dashboard" element={<ApplicantDashboard />} />
                   <Route exact path="applicant/profile" element={<ApplicantProfile />} />
                   <Route exact path="applicant/updatePassword" element={<UpdatePassword />} />
                   <Route exact path="applicant/createDocument" element={<CreateSelfUploadedDocument />} />
                   <Route exact path="applicant/viewOrganizations" element={<ViewOrganizations />} /> 
-                {/* </Route> */}
+                </Route>
             </Routes>
         </div>
         {/* <div id="inner-div">

@@ -172,27 +172,23 @@ export default function ViewApplicantDocuments(){
     const [sorting, setSort] = useState({ property: "documentName", order: "asc" });
 
     let initializeApplicant = () => {
-        setApplicant({
-            "applicantId": "1814073",
-            "email": "yash@deorah.com",
-            "password": "Secure@2022",
-            "name": "Yash Deorah",
-            "address": "kalyan",
-            "pin": "421103",
-            "state": "Maharashtra",
-            "country": "India",
-            "contact": "1234567077",
-            "dateOfBirth": "12-11-2000",
-            "documentIds": ["docid1"],
-            "currentOrganization": "org1",
-            "organizationsEnrolledIn": ["org1" , "org2"],
-            "permissionGranted": ["org1" ],
-            "updatedBy": "initLedger"
-        })
+        fetch("http://localhost:4000/getPermissionedApplicant", {
+            method:"POST",
+            body:JSON.stringify({data: applicantId}),
+            headers:{"Content-Type" : "application/json","x-auth-token":localStorage.getItem("eduCertJwtToken")}
+            })
+            .then(response => response.json())
+            .then((data) => setApplicant(data))
     }
 
     let initializeDocuments = () => {
-        setDocuments([]);
+        fetch("http://localhost:4000/getDocumentsByApplicantId", {
+        method:"POST",
+        body:JSON.stringify({data: applicantId}),
+        headers:{"Content-Type" : "application/json","x-auth-token":localStorage.getItem("eduCertJwtToken")}
+        })
+        .then(response => response.json())
+        .then((data) => setDocuments(data));
     }
 
     useEffect(() => {
