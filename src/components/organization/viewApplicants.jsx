@@ -10,16 +10,16 @@ import { Link, Navigate, useNavigate } from 'react-router-dom';
 class ViewApplicants extends Component {
     state = { 
         applicants : [
-            {
-                applicantId :'1814078' ,
-                name : 'Sanyam' ,
+            // {
+            //     applicantId :'1814078' ,
+            //     name : 'Sanyam' ,
 
-            } ,
+            // } ,
 
-            {
-                applicantId : '1814073' ,
-                name : 'Yash'
-            }
+            // {
+            //     applicantId : '1814073' ,
+            //     name : 'Yash'
+            // }
         ],
         applicantsStatus : "All",
         currentPage : 1,
@@ -32,7 +32,7 @@ class ViewApplicants extends Component {
 
     componentDidMount() {
 
-        fetch("http://localhost:4000/getAllApplicants", {
+        fetch("http://localhost:4000/getCurrentApplicantsEnrolled", {
         method:"POST",
         headers:{"Content-Type" : "application/json","x-auth-token":localStorage.getItem("eduCertJwtToken")}
         })
