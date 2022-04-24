@@ -29,8 +29,12 @@ export default class RegisterViceAdmin extends Component {
         headers:{"Content-Type" : "application/json","x-auth-token":localStorage.getItem("eduCertJwtToken")}
         })
         .then(response => response.json())
-        .then((data) => this.setState({viceAdmins:data}))
-        window.location('/admin/viewViceAdmins')
+        .then(data => {
+          this.setState({viceAdmins:data});
+          alert("Vice admin registered successfully");
+          window.location('/admin/viewViceAdmins')
+        })
+        .catch(err => console.log(err.message))
     }
     else 
       return;
