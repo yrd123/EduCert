@@ -4,14 +4,14 @@ import SearchBar from '../common/searchBar';
 
 class ViewOrganizations extends Component {
     state = { 
-        organizations : [{"organizationId":"org1", "hasPermission":false},{"organizationId":"org2", "hasPermission":false}],
+        organizations : [{"organizationId":"org1", "hasPermission":true},{"organizationId":"org2", "hasPermission":true}],
         sorting : { property : "organizationId", order : "asc" },
         searchText  : "",
         organizationId:''
     };
 
-    componentDidMount(){
-        this.setPermissions();
+    async componentDidMount(){
+        await this.setPermissions();
     }
 
     grantPermission = organization =>{
@@ -27,6 +27,7 @@ class ViewOrganizations extends Component {
         })
         .then(response => response.json())
         alert(`Granted ${organization}`);
+        window.location.reload(false);
     };
 
     revokePermission = organization => {
@@ -41,13 +42,14 @@ class ViewOrganizations extends Component {
         })
         .then(response => response.json())
         alert(`Revoked ${organization}`);
+        window.location.reload(false);
     };
 
-    setPermissions = () => {
+    setPermissions = async() => {
         console.log("yo")
         let organizations = this.state.organizations;
         for(let org of organizations){
-        fetch("http://localhost:4000/hasMyPermission", {
+        await fetch("http://localhost:4000/hasMyPermission", {
             method:"POST",
             body:JSON.stringify({
                 "data":{
@@ -58,11 +60,15 @@ class ViewOrganizations extends Component {
         }).then(response => response.json())
         .then(data => {
             org["hasPermission"] = data;
+            console.log(org["organizationId"])
+            console.log(org["hasPermission"]);
+            console.log(data);
         })
+    }
             
         this.setState(organizations)
+        console.log(this.state.organizations);
         //return await promise.json();
-        }
 
     }
 
@@ -113,7 +119,7 @@ class ViewOrganizations extends Component {
                         <tbody>    
                         { sortedOrganizations.map((organization) => 
                             <tr key={organization.organizationId}>
-                                <td> {organization.organizationId}</td>
+                                <td> {organization.organizationId} {organization.hasPermission}</td>
                                 <td>{ !organization.hasPermission && 
                                     <button  type="button" onClick={()=>this.grantPermission(organization.organizationId)} class="btn btn-success">Grant</button>}
                                     { organization.hasPermission && 
