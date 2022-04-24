@@ -102,12 +102,12 @@ class ViewOrganizations extends Component {
                             <tr key={organization.organizationId}>
                                 <td> {organization.organizationId}</td>
                                 <td>{ !this.hasPermission(organization.organizationId) && 
-                                    <button  type="button" onClick={this.grantPermission(organization.organizationId)} class="btn btn-success">Grant</button>}
+                                    <button  type="button" onClick={()=>this.grantPermission(organization.organizationId)} class="btn btn-success">Grant</button>}
                                     { this.hasPermission(organization.organizationId) && 
                                     <button  type="button" class="btn btn-success" disabled>Grant</button>}
                                 </td>
                                 <td>{ this.hasPermission(organization.organizationId) && 
-                                    <button type="button" onClick={this.revokePermission(organization.organizationId)} class="btn btn-danger">Revoke</button>}
+                                    <button type="button" onClick={()=>this.revokePermission(organization.organizationId)} class="btn btn-danger">Revoke</button>}
                                     { !this.hasPermission(organization.organizationId) && 
                                     <button type="button" class="btn btn-danger" disabled>Revoke</button>}
                                     

@@ -54,11 +54,8 @@ export default class RegisterApplicant extends Component {
 
       if (
         !(
-          lastAtPos < lastDotPos &&
           lastAtPos > 0 &&
-          applicantinfoSignup["email"].indexOf("@") === -1 &&
-          lastDotPos > 2 &&
-          applicantinfoSignup["email"].length - lastDotPos > 2
+          lastDotPos > 0
         )
       ) {
         formIsValid = false;
@@ -91,7 +88,7 @@ export default class RegisterApplicant extends Component {
       signupErrors["contactNumber"] = "Contact Cannot be empty";
     }
     else if (typeof applicantinfoSignup["contactNumber"] !== "undefined") {
-      if (!applicantinfoSignup["contactNumber"].match(/^[0-9]$/)) {
+      if (!applicantinfoSignup["contactNumber"].match(/^[0-9]*$/)) {
         formIsValid = false;
         signupErrors["contactNumber"] = "Contact should be a 10 Digit No";
       }
@@ -139,7 +136,7 @@ export default class RegisterApplicant extends Component {
 
 
             {/* SIGNUP FORM */}
-            <form onSubmit={this.handleSubmitSignup} id="signup" style={{display: this.state.currentTab==='Sign Up' ? 'block' : 'none' }} onsubmit="return validatesignup()" name="signupform" method="POST">
+            <form onSubmit={this.handleSubmitSignup} id="signup" style={{display: this.state.currentTab==='Sign Up' ? 'block' : 'none' }} name="signupform" method="POST">
               <div id="signupwarning" className="warning">
                 {/* INSERT SIGNUP WARNINGS HERE */}
               </div>

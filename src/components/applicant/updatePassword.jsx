@@ -15,12 +15,12 @@ export default class UpdatePassword extends Component {
     data[e.currentTarget.name] = e.currentTarget.value;
     this.setState({ data });
   }
-
+// PASSWORD DEORAH
   handleSubmit = (e) => {
     e.preventDefault();
     if (this.handleValidation()) {
         console.log(this.state.data);
-        fetch("http://localhost:4000/updatePassword", {
+        fetch("http://localhost:4000/updateMyPassword", {
         method:"POST",
         body:JSON.stringify({data: this.state.data}),
         headers:{"Content-Type" : "application/json","x-auth-token":localStorage.getItem("eduCertJwtToken")}

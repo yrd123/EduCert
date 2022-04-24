@@ -71,7 +71,7 @@ export default function VerifyDocument() {
                         <input className="form-control" value={document.applicantName} name="applicantName" type="text" id="applicantName"  disabled />
 
                         <label>Applicant Organization Identification Number</label>
-                        <input className="form-control" value={document.applicantOrganizationId} name="applicantOrganizationId" placeholder={"Roll No, Seat No, etc"} type="text" id="applicantOrganizationId"  disabled />
+                        <input className="form-control" value={document.applicantOrganizationNumber} name="applicantOrganizationNumber" placeholder={"Roll No, Seat No, etc"} type="text" id="applicantOrganizationNumber"  disabled />
 
                         <br/><center><h4> Document Details </h4></center><br/>
 
@@ -79,7 +79,7 @@ export default function VerifyDocument() {
                         <input className="form-control" value={document.documentName} name="documentName" type="text" placeholder="Marksheet"  id="documentName" disabled />
 
                         <label>Document Description</label>
-                        <input className="form-control" value={document.documentDescription} name="documentDescription" type="Text Area"  placeholder="Has secured rank1 in 10th std" id="desc" disabled/>
+                        <input className="form-control" value={document.description} name="description" type="Text Area"  placeholder="Has secured rank1 in 10th std" id="desc" disabled/>
                         
                         <label>Date Of Accomplishment(End Date)</label>
                         <input className="form-control" value={document.dateOfAccomplishment} name="dateOfAccomplishment"  id="dateOfAccomplishment" disabled />

@@ -27,11 +27,11 @@ export default class Login extends Component {
           localStorage.setItem('eduCertJwtToken', token);
           let role = this.state.loginCredentials.role;
           if(role === 'admin')
-            window.location = '/admin/viewViceAdmins';
+            window.location = '/';
           else if(role === 'viceAdmin')
-            window.location = '/organization/dashboard';
+            window.location = '/';
           else if(role === 'applicant')
-            window.location = '/applicant/dashboard';
+            window.location = '/';
         }
       } 
     else 

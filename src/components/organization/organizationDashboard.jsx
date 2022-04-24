@@ -100,6 +100,7 @@ class OrganizationDashboard extends Component {
                         <tr>
                             <th scope="col">No.</th>
                             <th className="clickable" onClick={() => this.sort("documentId")} scope="col">DocumentId {this.renderSortIcon("documentId")}</th>
+                            <th className="clickable" onClick={() => this.sort("documentName")} scope="col">DocumentName {this.renderSortIcon("documentName")}</th>
                             <th className="clickable" onClick={() => this.sort("applicantId")} scope="col">ApplicantId{this.renderSortIcon("applicantId")}</th>
                             <th className="clickable" onClick={() => this.sort("applicantName")} scope="col">Applicant Name {this.renderSortIcon("applicantName")}</th>
                             <th className="clickable" onClick={() => this.sort("applicantOrganizationNumber")} scope="col">Roll No {this.renderSortIcon("applicantOrganizationNumber")}</th>
@@ -119,6 +120,7 @@ class OrganizationDashboard extends Component {
                             <tr key={document.documentId}>
                                 <th scope="row">{(currentPage-1)*pageSize+index+1}</th>
                                 <td>{document.documentId}</td>
+                                <td>{document.documentName}</td>
                                 <td>{document.applicantId}</td>
                                 <td>{document.applicantName}</td>
                                 <td>{document.applicantOrganizationNumber}</td>
