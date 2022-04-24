@@ -4,11 +4,15 @@ import SearchBar from '../common/searchBar';
 
 class ViewOrganizations extends Component {
     state = { 
-        organizations : [{"organizationId":"org1"},{"organizationId":"org2"}],
+        organizations : [{"organizationId":"org1", "hasPermission":false},{"organizationId":"org2", "hasPermission":false}],
         sorting : { property : "organizationId", order : "asc" },
         searchText  : "",
         organizationId:''
     };
+
+    componentDidMount(){
+        this.setPermissions();
+    }
 
     grantPermission = organization =>{
 
@@ -39,17 +43,26 @@ class ViewOrganizations extends Component {
         alert(`Revoked ${organization}`);
     };
 
-    hasPermission = async organization => {
-        let promise = await fetch("http://localhost:4000/hasMyPermission", {
+    setPermissions = () => {
+        console.log("yo")
+        let organizations = this.state.organizations;
+        for(let org of organizations){
+        fetch("http://localhost:4000/hasMyPermission", {
             method:"POST",
             body:JSON.stringify({
                 "data":{
-                    "organizationId":organization
+                    "organizationId":org["organizationId"]
                 }
             }),
             headers:{"Content-Type" : "application/json","x-auth-token":localStorage.getItem("eduCertJwtToken")}
+        }).then(response => response.json())
+        .then(data => {
+            org["hasPermission"] = data;
         })
-        return await promise.json();
+            
+        this.setState(organizations)
+        //return await promise.json();
+        }
 
     }
 
@@ -101,14 +114,14 @@ class ViewOrganizations extends Component {
                         { sortedOrganizations.map((organization) => 
                             <tr key={organization.organizationId}>
                                 <td> {organization.organizationId}</td>
-                                <td>{ !this.hasPermission(organization.organizationId) && 
+                                <td>{ !organization.hasPermission && 
                                     <button  type="button" onClick={()=>this.grantPermission(organization.organizationId)} class="btn btn-success">Grant</button>}
-                                    { this.hasPermission(organization.organizationId) && 
+                                    { organization.hasPermission && 
                                     <button  type="button" class="btn btn-success" disabled>Grant</button>}
                                 </td>
-                                <td>{ this.hasPermission(organization.organizationId) && 
+                                <td>{ organization.hasPermission &&
                                     <button type="button" onClick={()=>this.revokePermission(organization.organizationId)} class="btn btn-danger">Revoke</button>}
-                                    { !this.hasPermission(organization.organizationId) && 
+                                    { !organization.hasPermission && 
                                     <button type="button" class="btn btn-danger" disabled>Revoke</button>}
                                     
                                 </td>
