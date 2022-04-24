@@ -127,18 +127,12 @@ export default class RegisterApplicant extends Component {
     render() {
       return  (
         <div>
-
-<div class="alert alert-danger" role="alert">
-                <center>Hello </center>
-                </div>
           <div className="forms">
-            
-
 
             {/* SIGNUP FORM */}
             <form onSubmit={this.handleSubmitSignup} id="signup" style={{display: this.state.currentTab==='Sign Up' ? 'block' : 'none' }} name="signupform" method="POST">
-              <div id="signupwarning" className="warning">
-                {/* INSERT SIGNUP WARNINGS HERE */}
+              <div class="alert alert-danger" role="alert">
+                <center>Hello </center>
               </div>
               <div className="input-field">
               <label htmlFor="applicantId">Applicant Id</label>

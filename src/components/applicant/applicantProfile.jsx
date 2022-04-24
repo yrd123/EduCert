@@ -45,12 +45,12 @@ class ApplicantProfile extends Component {
     render() {
         return (
             <React.Fragment>
-                <div class="alert alert-danger" role="alert">
-                <center>Hello </center>
-                </div>
                 <div className="forms">
                     <form onSubmit={this.handleSubmit} >
                         <center><h4> Profile </h4></center><br />
+                        <div class="alert alert-danger" role="alert">
+                        <center>Hello </center>
+                        </div>
                         <div className="input-field">
                             <label htmlFor="id">Id</label>
                             <input type="id" name="id" value={this.state.data.applicantId} placeholder="1814078" disabled />

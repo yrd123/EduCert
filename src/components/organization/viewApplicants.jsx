@@ -21,12 +21,14 @@ class ViewApplicants extends Component {
             //     name : 'Yash'
             // }
         ],
-        applicantsStatus : "All",
+        applicantsStatus : "Current",
         currentPage : 1,
         pageSize : 2,
         sorting : { property : "applicantName", order : "asc" },
         searchText  : "",
-        openApplicantModal: false
+        openApplicantModal: false,
+        currentApplicants:[],
+        allApplicants:[]
     };
 
 
@@ -37,7 +39,14 @@ class ViewApplicants extends Component {
         headers:{"Content-Type" : "application/json","x-auth-token":localStorage.getItem("eduCertJwtToken")}
         })
         .then(response => response.json())
-        .then((data) => this.setState({applicants:data}))    
+        .then((data) => this.setState({currentApplicants :data}))    
+
+        fetch("http://localhost:4000/getAllApplicantsOfOrganization", {
+        method:"POST",
+        headers:{"Content-Type" : "application/json","x-auth-token":localStorage.getItem("eduCertJwtToken")}
+        })
+        .then(response => response.json())
+        .then((data) => this.setState({allApplicants :data}))    
     }
 
     redirectToViewApplicantDocuments = applicantId =>{
@@ -48,6 +57,10 @@ class ViewApplicants extends Component {
 
     
     handleTabChange = tab =>{
+        if(tab === 'Current')
+            this.setState({applicants:this.state.currentApplicants})
+        else if(tab === 'All')
+            this.setState({applicants:this.state.allApplicants})
         this.setState({applicantsStatus : tab, searchText : ""});
     }
 
@@ -98,7 +111,7 @@ class ViewApplicants extends Component {
                 <div style={{margin: 10, backgroundColor: 'white', padding: 30, paddingLeft: 120, paddingRight:120}}>
                 <SearchBar search={this.search} searchInput={searchText} />
                     <br />
-                    <CenteredTabs tabs={["CurrentlyEnrolled","All"]} handleTabChange={this.handleTabChange} /><br />
+                    <CenteredTabs tabs={["Current","All"]} handleTabChange={this.handleTabChange} /><br />
                     <table className="table table-striped">
                         <thead>
                         <tr>

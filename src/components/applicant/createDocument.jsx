@@ -4,7 +4,6 @@ class CreateSelfUploadedDocument extends Component {
     state = {
         data: {
             documentId: "",
-            applicantId: "",
             applicantName: "",
             applicantOrganizationNumber: "",
             organizationId: "",
@@ -13,8 +12,7 @@ class CreateSelfUploadedDocument extends Component {
             dateOfAccomplishment: "",
             tenure: "",
             percentage: "",
-            outOfPercentage: "",
-            documentUrl: "",
+            outOfPercentage: ""
         },
     };
 
@@ -62,18 +60,6 @@ class CreateSelfUploadedDocument extends Component {
                             value={this.state.data.documentId}
                             type="text"
                             placeholder="123"
-                            required
-                        />
-
-                        <label>Applicant Id</label>
-                        <input
-                            className="form-control"
-                            name="applicantId"
-                            id="applicantId"
-                            onChange={this.handleChange}
-                            value={this.state.data.applicantId}
-                            type="text"
-                            placeholder="1814078"
                             required
                         />
 
@@ -180,17 +166,6 @@ class CreateSelfUploadedDocument extends Component {
                             value={this.state.data.outOfPercentage}
                             type="text"
                             placeholder="100"
-                        />
-
-                        <label>Document URL</label>
-                        <input
-                            className="form-control"
-                            name="documentUrl"
-                            id="documentUrl"
-                            onChange={this.handleChange}
-                            value={this.state.data.documentUrl}
-                            type="text"
-                            placeholder="www.google.drive/132464654641654646546"
                         />
 
                         <center>

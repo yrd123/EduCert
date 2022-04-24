@@ -5,7 +5,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 class CreateVerifiedDocument extends Component {
     state = {
-        data: { documentId: '', applicantId: '', applicantName: '', applicantOrganizationNumber: '', organizationId: '', documentName: '', description: '', dateOfAccomplishment: '', tenure: '', percentage: '', outOfPercentage: '', documentUrl: 'abcd' },
+        data: { documentId: '', applicantId: '', applicantName: '', applicantOrganizationNumber: '',  documentName: '', description: '', dateOfAccomplishment: '', tenure: '', percentage: '', outOfPercentage: '' },
         loaderData: { selectedFile: null }
     };
 
@@ -123,7 +123,7 @@ class CreateVerifiedDocument extends Component {
             // then print response status
             toast.error("upload fail");
           });
-        this.setState({ data: { documentId: '', applicantId: '', applicantName: '', applicantOrganizationNumber: '', organizationId: '', documentName: '', description: '', dateOfAccomplishment: '', tenure: '', percentage: '', outOfPercentage: '', documentUrl: '' } })
+        this.setState({ data: { documentId: '', applicantId: '', applicantName: '', applicantOrganizationNumber: '', documentName: '', description: '', dateOfAccomplishment: '', tenure: '', percentage: '', outOfPercentage: '' } })
 
     };
 
@@ -131,12 +131,13 @@ class CreateVerifiedDocument extends Component {
 
         return (
             <React.Fragment>
-              <div class="alert alert-danger" role="alert">
-                <center>Hello </center>
-                </div>
+              
                 <div className="forms">
+                  
                     <br /><center><h4>  Details </h4></center><br />
-
+                    <div class="alert alert-danger" role="alert">
+                      <center>Hello </center>
+                    </div>
                     <form onSubmit={this.handleSubmit}>
                         <label>Document Id</label>
                         <input className="form-control" name="documentId" id="documentId" onChange={this.handleChange} value={this.state.data.documentId} type="text" placeholder="123" required />
@@ -149,9 +150,6 @@ class CreateVerifiedDocument extends Component {
 
                         <label>Applicant Organization Number</label>
                         <input className="form-control" name="applicantOrganizationNumber" id="applicantOrganizationNumber" onChange={this.handleChange} value={this.state.data.applicantOrganizationNumber} type="text" placeholder="6QAZ" required />
-
-                        <label>OrganizationId</label>
-                        <input className="form-control" name="organizationId" id="organizationId" onChange={this.handleChange} value={this.state.data.organizationId} type="text" placeholder="org1" required />
 
                         <label>Document Name</label>
                         <input className="form-control" name="documentName" id="documentName" onChange={this.handleChange} value={this.state.data.documentName} type="text" placeholder="Marksheet" required />
@@ -170,9 +168,6 @@ class CreateVerifiedDocument extends Component {
 
                         <label>Out of Percentage/GPA</label>
                         <input className="form-control" name="outOfPercentage" id="outOfPercentage" onChange={this.handleChange} value={this.state.data.outOfPercentage} type="text" placeholder="100" />
-
-                        <label>Document URL</label>
-                        <input className="form-control" name="documentUrl" id="documentUrl" onChange={this.handleChange} value={this.state.data.documentUrl} type="text" placeholder="drive.google.com/56465435466435464131" />
 
                         <div class="container">
                         <div class="row">

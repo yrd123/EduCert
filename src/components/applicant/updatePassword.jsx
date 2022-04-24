@@ -2,38 +2,38 @@ import React, { Component } from 'react';
 import '../../static/css/login.css';
 
 export default class UpdatePassword extends Component {
-    state = {
-      data: {
-        oldPassword: "",
-        newPassword: "",
-      },
-      errors: {},
-    }
-    
+  state = {
+    data: {
+      oldPassword: "",
+      newPassword: "",
+    },
+    errors: {},
+  }
+
   handleChange = (e) => {
     const data = { ...this.state.data };
     data[e.currentTarget.name] = e.currentTarget.value;
     this.setState({ data });
   }
-// PASSWORD DEORAH
+  // PASSWORD DEORAH
   handleSubmit = (e) => {
     e.preventDefault();
     if (this.handleValidation()) {
-        console.log(this.state.data);
-        fetch("http://localhost:4000/updateMyPassword", {
-        method:"POST",
-        body:JSON.stringify({data: this.state.data}),
-        headers:{"Content-Type" : "application/json","x-auth-token":localStorage.getItem("eduCertJwtToken")}
-        })
+      console.log(this.state.data);
+      fetch("http://localhost:4000/updateMyPassword", {
+        method: "POST",
+        body: JSON.stringify({ data: this.state.data }),
+        headers: { "Content-Type": "application/json", "x-auth-token": localStorage.getItem("eduCertJwtToken") }
+      })
         .then(response => response.json())
         .then((data) => {
           console.log(data);
           alert('password updated successfully');
         })
-        
-        window.location('/applicant/profile')
-    } 
-    else 
+
+      window.location('/applicant/profile')
+    }
+    else
       return;
   }
 
@@ -49,46 +49,47 @@ export default class UpdatePassword extends Component {
     }
     //Password
     if (!data["newPassword"]) {
-        formIsValid = false;
-        errors["newPassword"] = "Cannot be empty";
+      formIsValid = false;
+      errors["newPassword"] = "Cannot be empty";
     }
 
     this.setState({ errors: errors });
     return formIsValid;
-  } 
+  }
 
 
-  
+
   render() {
-    return  (
+    return (
       <div>
-        <div class="alert alert-danger" role="alert">
-                <center>Hello </center>
-                </div>
+
         <div className="forms">
           {/* LOGIN FORM */}
-          <form  id="login" onSubmit={this.handleSubmit} name="loginform" method="POST">
-            <br/>
+          <form id="login" onSubmit={this.handleSubmit} name="loginform" method="POST">
+            <div class="alert alert-danger" role="alert">
+              <center>Hello </center>
+            </div>
+            <br />
 
             <div className="input-field">
-            <label htmlFor="oldPassword">Old Password</label>
-              <input type="oldPassword" name="oldPassword" id = "oldPassword" onChange={this.handleChange} value = {this.state.data.oldPassword}  placeholder="******" />
-              { this.state.errors['oldPassword'] && 
+              <label htmlFor="oldPassword">Old Password</label>
+              <input type="oldPassword" name="oldPassword" id="oldPassword" onChange={this.handleChange} value={this.state.data.oldPassword} placeholder="******" />
+              {this.state.errors['oldPassword'] &&
                 <div class="alert alert-danger" role="alert">
-                {  this.state.errors["oldPassword"]}
+                  {this.state.errors["oldPassword"]}
                 </div>
               }
-               
+
               <label htmlFor="newPassword">New Password</label>
-              <input type="newPassword" name="newPassword" id = "newPassword" onChange={this.handleChange} value = {this.state.data.newPassword}  placeholder="******" />
-              { this.state.errors['newPassword'] && 
+              <input type="newPassword" name="newPassword" id="newPassword" onChange={this.handleChange} value={this.state.data.newPassword} placeholder="******" />
+              {this.state.errors['newPassword'] &&
                 <div class="alert alert-danger" role="alert">
-                {  this.state.errors["newPassword"]}
+                  {this.state.errors["newPassword"]}
                 </div>
               }
               <br></br>
               <br></br>
-                <input type="submit" defaultValue="login" className="button" />
+              <input type="submit" defaultValue="login" className="button" />
             </div>
           </form>
         </div>

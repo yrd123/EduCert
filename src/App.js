@@ -34,7 +34,7 @@ class App extends Component{
   componentDidMount(){
     try{ 
       //localStorage.removeItem('eduCertJwtToken')    
-      //localStorage.setItem('eduCertJwtToken','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJiaXN0cmlsIiwib3JnYW5pemF0aW9uIjoiT3JnMU1TUCIsInJvbGUiOiJ2aWNlQWRtaW4iLCJpYXQiOjE1MTYyMzkwMjJ9.gePonmyhGlFBj3lE4Bw3EuG87W2Z5f2flLEDqfYQIoU')
+      localStorage.setItem('eduCertJwtToken','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJiaXN0cmlsIiwib3JnYW5pemF0aW9uIjoiT3JnMU1TUCIsInJvbGUiOiJ2aWNlQWRtaW4iLCJpYXQiOjE1MTYyMzkwMjJ9.gePonmyhGlFBj3lE4Bw3EuG87W2Z5f2flLEDqfYQIoU')
       //localStorage.setItem('eduCertJwtToken','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJhZG1pbiIsIm9yZ2FuaXphdGlvbiI6Ik9yZzFNU1AiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE1MTYyMzkwMjJ9.80mmHyTPvEISXmZ_MWW_YvRvhEsHFkT3Be9YXY35w8M')
       //localStorage.setItem('eduCertJwtToken','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJkcmV2ZW50ZW0iLCJvcmdhbml6YXRpb24iOiJPcmcxTVNQIiwicm9sZSI6ImFwcGxpY2FudCIsImlhdCI6MTUxNjIzOTAyMn0.BAGSjcc0lBuDrX-DRrf2_NaEFK2LX8Y-H3QG00fJc5M')
       const token = localStorage.getItem('eduCertJwtToken');

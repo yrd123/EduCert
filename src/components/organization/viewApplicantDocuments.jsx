@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import {useLocation} from 'react-router-dom';
-
-//import { getDocumentsByApplicantId } from '../services/documentService';
 import _ from 'lodash';
 import CustomModal from '../common/modal';
 import PreviewCertificate from '../common/previewCertificate';
@@ -238,7 +236,7 @@ export default function ViewApplicantDocuments(){
                         
                         <h6><b>Organnizations Enrolled In: </b> {applicant.organizationsEnrolledIn && applicant.organizationsEnrolledIn.map(organization => <span class="badge badge-info" style={{marginRight:5}}>{organization}  </span> )} </h6>
                     </div>
-                    <div className="container2"><button type="button" class="btn btn-primary">Change Current Organization</button></div>
+                    <div className="container2"><button type="button" class="btn btn-primary">Update Current Organization</button></div>
                 </div>
 
                 <br></br>
