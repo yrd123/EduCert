@@ -83,13 +83,14 @@ class CreateVerifiedDocument extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        console.log(this.state.data);
 
         const data = new FormData();
         for (var x = 0; x < this.state.loaderData.selectedFile.length; x++) {
           data.append("file", this.state.loaderData.selectedFile[x]);
         }
-        data.append('data', this.state.data);
+        data.append('data', JSON.stringify(this.state.data));
+
+        console.log([...data]);
 
         // axios
         //   .post("http://localhost:8000/upload", file, {
@@ -112,7 +113,7 @@ class CreateVerifiedDocument extends Component {
             method: "POST",
             // body: JSON.stringify({ "data": this.state.data , "file": file}),
             body: data,
-            headers: { "Content-Type": "application/json", "x-auth-token": localStorage.getItem("eduCertJwtToken") }
+            headers: {  "x-auth-token": localStorage.getItem("eduCertJwtToken") }
         })
         .then(response => response.json())
         .then((res) => {
@@ -123,7 +124,7 @@ class CreateVerifiedDocument extends Component {
             // then print response status
             toast.error("upload fail");
           });
-        this.setState({ data: { documentId: '', applicantId: '', applicantName: '', applicantOrganizationNumber: '', documentName: '', description: '', dateOfAccomplishment: '', tenure: '', percentage: '', outOfPercentage: '' } })
+        //this.setState({ data: { documentId: '', applicantId: '', applicantName: '', applicantOrganizationNumber: '', documentName: '', description: '', dateOfAccomplishment: '', tenure: '', percentage: '', outOfPercentage: '' } })
 
     };
 

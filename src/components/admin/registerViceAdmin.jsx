@@ -30,9 +30,9 @@ export default class RegisterViceAdmin extends Component {
         })
         .then(response => response.json())
         .then(data => {
-          this.setState({viceAdmins:data});
+          // this.setState({viceAdmins:data});
           alert("Vice admin registered successfully");
-          window.location('/admin/viewViceAdmins')
+          window.location = '/admin/viewViceAdmins';
         })
         .catch(err => console.log(err.message))
     }

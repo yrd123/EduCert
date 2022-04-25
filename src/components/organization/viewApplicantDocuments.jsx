@@ -177,9 +177,11 @@ export default function ViewApplicantDocuments(){
             })
             .then(response => response.json())
             .then((data) => setApplicant(data))
+            console.log(applicant)
     }
 
     let initializeDocuments = () => {
+        console.log(applicantId)
         fetch("http://localhost:4000/getDocumentsByApplicantId", {
         method:"POST",
         body:JSON.stringify({data: applicantId}),

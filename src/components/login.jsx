@@ -91,12 +91,12 @@ export default class Login extends Component {
   render() {
     return  (
       <div>
-        <div class="alert alert-danger" role="alert">
-                <center>Hello </center>
-                </div>
         <div className="forms">
           {/* LOGIN FORM */}
           <form  id="login" onSubmit={this.handleSubmit} name="loginform" method="POST">
+          <div class="alert alert-danger" role="alert">
+                <center>Hello </center>
+                </div>
             <br/>
             <div id="loginwarning" className="warning">
               {/* INSERT LOGIN WARNINGS HERE */}

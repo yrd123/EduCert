@@ -29,9 +29,10 @@ export default class UpdatePassword extends Component {
         .then((data) => {
           console.log(data);
           alert('password updated successfully');
+          window.location= '/applicant/profile';
+
         })
 
-      window.location('/applicant/profile')
     }
     else
       return;

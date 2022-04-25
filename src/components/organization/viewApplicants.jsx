@@ -10,16 +10,6 @@ import { Link, Navigate, useNavigate } from 'react-router-dom';
 class ViewApplicants extends Component {
     state = { 
         applicants : [
-            // {
-            //     applicantId :'1814078' ,
-            //     name : 'Sanyam' ,
-
-            // } ,
-
-            // {
-            //     applicantId : '1814073' ,
-            //     name : 'Yash'
-            // }
         ],
         applicantsStatus : "Current",
         currentPage : 1,
@@ -33,20 +23,19 @@ class ViewApplicants extends Component {
 
 
     componentDidMount() {
-
         fetch("http://localhost:4000/getCurrentApplicantsEnrolled", {
         method:"POST",
         headers:{"Content-Type" : "application/json","x-auth-token":localStorage.getItem("eduCertJwtToken")}
         })
         .then(response => response.json())
-        .then((data) => this.setState({currentApplicants :data}))    
+        .then((data) => this.setState({currentApplicants :data, applicants:data}))    
 
         fetch("http://localhost:4000/getAllApplicantsOfOrganization", {
         method:"POST",
         headers:{"Content-Type" : "application/json","x-auth-token":localStorage.getItem("eduCertJwtToken")}
         })
         .then(response => response.json())
-        .then((data) => this.setState({allApplicants :data}))    
+        .then((data) => this.setState({allApplicants :data}))  
     }
 
     redirectToViewApplicantDocuments = applicantId =>{
@@ -94,9 +83,9 @@ class ViewApplicants extends Component {
 
     render() { 
         const {currentPage, applicantsStatus, pageSize, applicants, sorting, searchText} = this.state;
+        console.log(this.state.allApplicants)  
+
         let filteredApplicants = applicants;
-        if(applicantsStatus !== "All")
-            filteredApplicants = applicants.filter(applicant => applicant.status === applicantsStatus);
         filteredApplicants = filteredApplicants.filter(applicant => {
             for(let property in applicant){
                 if(applicant[property].includes(searchText)) return true;
