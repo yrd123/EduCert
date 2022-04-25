@@ -22,7 +22,9 @@ class CreateVerifiedDocument extends Component {
         //define message container
         let err = [];
         // list allow mime type
-        const types = ["image/png", "image/jpeg"];
+        const types = ["image/png",
+        //  "image/jpeg"
+        ];
         // loop access array
         for (var x = 0; x < files.length; x++) {
           // compare file type find doesn't matach
@@ -91,24 +93,6 @@ class CreateVerifiedDocument extends Component {
         data.append('data', JSON.stringify(this.state.data));
 
         console.log([...data]);
-
-        // axios
-        //   .post("http://localhost:8000/upload", file, {
-        //     onUploadProgress: (ProgressEvent) => {
-        //       this.setState({
-        //         loaded: (ProgressEvent.loaded / ProgressEvent.total) * 100,
-        //       });
-        //     },
-        //   })
-        //   .then((res) => {
-        //     // then print response status
-        //     toast.success("upload success");
-        //   })
-        //   .catch((err) => {
-        //     // then print response status
-        //     toast.error("upload fail");
-        //   });
-
         fetch("http://localhost:4000/createVerifiedDocument", {
             method: "POST",
             // body: JSON.stringify({ "data": this.state.data , "file": file}),
@@ -124,7 +108,7 @@ class CreateVerifiedDocument extends Component {
             // then print response status
             toast.error("upload fail");
           });
-        //this.setState({ data: { documentId: '', applicantId: '', applicantName: '', applicantOrganizationNumber: '', documentName: '', description: '', dateOfAccomplishment: '', tenure: '', percentage: '', outOfPercentage: '' } })
+        this.setState({ data: { documentId: '', applicantId: '', applicantName: '', applicantOrganizationNumber: '', documentName: '', description: '', dateOfAccomplishment: '', tenure: '', percentage: '', outOfPercentage: '' } })
 
     };
 

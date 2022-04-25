@@ -18,6 +18,8 @@
 
 import { useLocation } from 'react-router-dom'
 import React from 'react';
+import CustomModal from '../common/modal';
+import PreviewCertificate from '../common/previewCertificate';
 
 
 
@@ -91,8 +93,8 @@ export default function VerifyDocument() {
 
           <label>Out of Percentage/GPA</label>
           <input className="form-control" value={document.outOfPercentage} name="outOfPercentage" type="number" placeholder="100/4" id="outOfPercentage" />
-
-
+          
+          <CustomModal modalBody={<PreviewCertificate document={document} />} modalButtonLabel="View" />
           <center>
             <input type="submit" className="button" value="Verify" />
           </center>
