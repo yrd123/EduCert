@@ -15,7 +15,7 @@ class OrganizationDashboard extends Component {
         documents : [],
         documentsStatus : "All",
         currentPage : 1,
-        pageSize : 2,
+        pageSize : 50,
         sorting : { property : "documentName", order : "asc" },
         searchText  : "",
         openApplicantModal: false,
@@ -31,7 +31,6 @@ class OrganizationDashboard extends Component {
     })
     .then(response => response.json())
     .then((data) => this.setState({documents:data}))
-  
     
     }
 
@@ -52,6 +51,8 @@ class OrganizationDashboard extends Component {
         }
         else
             this.setState({sorting : { property , order : "asc"}});
+    console.log(this.state.documents)
+
     }
 
     renderSortIcon = property => {
