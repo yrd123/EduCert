@@ -44,7 +44,7 @@ class CreateVerifiedDocument extends Component {
       maxSelectFile = (event) => {
         let files = event.target.files;
         if (files.length > 1) {
-          const msg = "Only 3 images can be uploaded at a time";
+          const msg = "Only 1 images can be uploaded at a time";
           event.target.value = null;
           toast.warn(msg);
           return false;
