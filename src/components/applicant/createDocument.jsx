@@ -116,8 +116,8 @@ class CreateSelfUploadedDocument extends Component {
         .then((res) => {
             // then print response status
             toast.success("upload success");
-          })
-          .catch((err) => {
+        })
+        .catch((err) => {
             // then print response status
             toast.error("upload fail");
           });

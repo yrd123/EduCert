@@ -8,6 +8,7 @@ export default class UpdatePassword extends Component {
       newPassword: "",
     },
     errors: {},
+    updateError:""
   }
 
   handleChange = (e) => {
@@ -25,13 +26,21 @@ export default class UpdatePassword extends Component {
         body: JSON.stringify({ data: this.state.data }),
         headers: { "Content-Type": "application/json", "x-auth-token": localStorage.getItem("eduCertJwtToken") }
       })
-        .then(response => response.json())
-        .then((data) => {
-          console.log(data);
-          alert('password updated successfully');
-          window.location= '/applicant/profile';
-
-        })
+      .then(response => {
+        // console.log(response)
+        if(response.ok)
+          return response.json();
+        else{
+          return response.text().then(text => { throw new Error(text) })
+        }
+      })
+      .then((data) => {
+        alert('password updated successfully');
+        window.location= '/applicant/profile';
+      })
+      .catch(err => {
+        this.setState({updateError:err.message});
+      })
 
     }
     else
@@ -65,9 +74,10 @@ export default class UpdatePassword extends Component {
         <div className="forms">
           {/* LOGIN FORM */}
           <form id="login" onSubmit={this.handleSubmit} name="loginform" method="POST">
-            <div class="alert alert-danger" role="alert">
-              <center>Hello </center>
-            </div>
+            { this.state.updateError &&
+              <div class="alert alert-danger" role="alert">
+              <center>{this.state.updateError}</center>
+            </div>}
             <br />
 
             <div className="input-field">

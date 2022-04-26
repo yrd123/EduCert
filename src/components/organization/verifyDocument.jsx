@@ -26,6 +26,8 @@ import PreviewCertificate from '../common/previewCertificate';
 export default function VerifyDocument() {
   let location = useLocation();
   const { document } = location.state;
+  const [verifyError, setError] = useState("");
+
   console.log(document);
 
   let handleSubmit = (e) => {
@@ -37,8 +39,21 @@ export default function VerifyDocument() {
       body: JSON.stringify({ "data": { "documentId": document.documentId } }),
       headers: { "Content-Type": "application/json", "x-auth-token": localStorage.getItem("eduCertJwtToken") }
     })
-      .then(response => response.json())
-      .then((data) => this.setState({ document: data }))
+    .then(response => {
+      // console.log(response)
+      if(response.ok)
+          return response.json();
+      else{
+          return response.text().then(text => { throw new Error(text) })
+      }
+      })
+      .then((data) => {
+          alert('Document Verified successfully');
+          window.location = '/viceAdmin/dashboard'
+      })
+      .catch(err => {
+          setError(err.message);
+      })
 
   }
 
@@ -50,6 +65,10 @@ export default function VerifyDocument() {
         </div>
         <br />
         <form onSubmit={handleSubmit}>
+                  { verifyError &&
+                            <div class="alert alert-danger" role="alert">
+                            <center>{verifyError}</center>
+                        </div>}
           <label>Organization Id</label>
           <div className='row'>
             <div className="col-12">

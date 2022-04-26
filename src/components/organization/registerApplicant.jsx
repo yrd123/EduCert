@@ -5,8 +5,9 @@ export default class RegisterApplicant extends Component {
     state = {
       currentTab : "Sign Up" ,
       applicantinfoSignup :{ applicantId:'', email :'' , fullName : '' , address :'' , pincode : '', stateOfApplicant : '', country : '', contactNumber: '' , dob :''  } ,
-      errors: {},
-      signupErrors :{} 
+      registrationError: {},
+      signupErrors :{} ,
+
     }
   
   handleChangeSignup = (e) => {
@@ -25,8 +26,22 @@ export default class RegisterApplicant extends Component {
         body:JSON.stringify(this.state.applicantinfoSignup),
         headers:{"Content-Type" : "application/json","x-auth-token":localStorage.getItem("eduCertJwtToken")}
         })
-        .then(response => response.json())
-        .then((data) => console.log(data))
+        .then(response => {
+          // console.log(response)
+          if(response.ok)
+            return response.json();
+          else{
+            return response.text().then(text => { throw new Error(text) })
+          }
+        })
+        .then(data => {
+          // this.setState({viceAdmins:data});
+          alert("Applicant registered successfully");
+          window.location = '/viceAdmin/viewApplicants';
+        })
+        .catch(err => {
+          this.setState({registrationError:err.message});
+        })
 
     } 
     else 
@@ -132,9 +147,10 @@ export default class RegisterApplicant extends Component {
 
             {/* SIGNUP FORM */}
             <form onSubmit={this.handleSubmitSignup} id="signup" style={{display: this.state.currentTab==='Sign Up' ? 'block' : 'none' }} name="signupform" method="POST">
-              <div class="alert alert-danger" role="alert">
-                <center>Hello </center>
-              </div>
+              { this.state.registrationError && 
+                <div class="alert alert-danger" role="alert">
+                <center>{this.state.registrationError}</center>
+              </div>}
               <div className="input-field">
               <label htmlFor="applicantId">Applicant Id</label>
                 <input type="text" id="applicantId" name="applicantId" onChange={this.handleChangeSignup} value = {this.state.applicantinfoSignup.applicantId} placeholder="1814078" />

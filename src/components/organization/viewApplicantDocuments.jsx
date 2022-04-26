@@ -166,6 +166,7 @@ export default function ViewApplicantDocuments(){
     const { applicantId } = location.state;
     const [applicant, setApplicant] = useState({});
     const [documents, setDocuments] = useState([]);
+    const [updateError, setError] = useState("");
 
     const [sorting, setSort] = useState({ property: "documentName", order: "asc" });
 
@@ -197,6 +198,30 @@ export default function ViewApplicantDocuments(){
     }, [])
 
 
+    let changeCurrentOrganization = () => {
+        fetch("http://localhost:4000/changeCurrentOrganization+", {
+        method:"POST",
+        body:JSON.stringify({data: applicantId}),
+        headers:{"Content-Type" : "application/json","x-auth-token":localStorage.getItem("eduCertJwtToken")}
+        })
+        .then(response => {
+        // console.log(response)
+        if(response.ok)
+            return response.json();
+        else{
+            return response.text().then(text => { throw new Error(text) })
+        }
+        })
+        .then((data) => {
+            alert('Current Organization Updated successfully');
+        })
+        .catch(err => {
+            setError(err.message);
+        })
+    
+        
+    }
+
     let sort = (property)  => {
         if (sorting.property === property) {
             const order = (sorting.order === "asc") ? "desc" : "asc";
@@ -226,6 +251,10 @@ export default function ViewApplicantDocuments(){
                 <br></br>
                 <div className="card">
                     <div className="container">
+                        { updateError &&
+                            <div class="alert alert-danger" role="alert">
+                            <center>{updateError}</center>
+                        </div>}
                         <h6><b>Applicant Id:</b> {applicant.applicantId} </h6>
                         <h6><b>Name :</b> {applicant.name}</h6>
                         <h6><b>Current Organization: </b> {applicant.currentOrganization}</h6>
@@ -238,7 +267,7 @@ export default function ViewApplicantDocuments(){
                         
                         <h6><b>Organnizations Enrolled In: </b> {applicant.organizationsEnrolledIn && applicant.organizationsEnrolledIn.map(organization => <span class="badge badge-info" style={{marginRight:5}}>{organization}  </span> )} </h6>
                     </div>
-                    <div className="container2"><button type="button" class="btn btn-primary">Update Current Organization</button></div>
+                    <div className="container2"><button type="button" class="btn btn-primary" onClick={changeCurrentOrganization}>Update Current Organization</button></div>
                 </div>
 
                 <br></br>

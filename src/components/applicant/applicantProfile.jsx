@@ -5,8 +5,8 @@ import { NavLink } from 'react-router-dom';
 class ApplicantProfile extends Component {
     state = {
         applicant: {},
-        data: { applicantId: '', email: '', name: '', pin: '', state: '', country: '', contact: '', dtaeOfBirth: '' }
-
+        data: { applicantId: '', email: '', name: '', pin: '', state: '', country: '', contact: '', dtaeOfBirth: '' },
+        updateError:""
     };
 
 
@@ -38,8 +38,21 @@ class ApplicantProfile extends Component {
             body: JSON.stringify({ "data": this.state.data }),
             headers: { "Content-Type": "application/json", "x-auth-token": localStorage.getItem("eduCertJwtToken") }
         })
-            .then(response => response.json())
-
+        .then(response => {
+            // console.log(response)
+            if(response.ok)
+              return response.json();
+            else{
+              return response.text().then(text => { throw new Error(text) })
+            }
+          })
+          .then(data => {
+            // this.setState({viceAdmins:data});
+            alert("Update successfull");
+          })
+          .catch(err => {
+            this.setState({updateError:err.message});
+          })
     };
 
     render() {
@@ -48,9 +61,10 @@ class ApplicantProfile extends Component {
                 <div className="forms">
                     <form onSubmit={this.handleSubmit} >
                         <center><h4> Profile </h4></center><br />
-                        <div class="alert alert-danger" role="alert">
-                        <center>Hello </center>
-                        </div>
+                        {   this.state.updateError && 
+                            <div class="alert alert-danger" role="alert">
+                            <center>{this.state.updateError}</center>
+                        </div>}
                         <div className="input-field">
                             <label htmlFor="id">Id</label>
                             <input type="id" name="id" value={this.state.data.applicantId} placeholder="1814078" disabled />

@@ -34,7 +34,7 @@ export default class RegisterViceAdmin extends Component {
           if(response.ok)
             return response.json();
           else{
-            throw Error(response.text());
+            return response.text().then(text => { throw new Error(text) })
           }
         })
         .then(data => {
@@ -43,7 +43,6 @@ export default class RegisterViceAdmin extends Component {
           window.location = '/admin/viewViceAdmins';
         })
         .catch(err => {
-          console.log(err.message)
           this.setState({registrationError:err.message})
         })
     }
