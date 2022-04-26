@@ -19,7 +19,8 @@ class OrganizationDashboard extends Component {
         sorting : { property : "documentName", order : "asc" },
         searchText  : "",
         openApplicantModal: false,
-        applicant:{}
+        applicant:{},
+        fetchError: ''
     };
 
 
@@ -29,9 +30,21 @@ class OrganizationDashboard extends Component {
         method:"POST",
         headers:{"Content-Type" : "application/json","x-auth-token":localStorage.getItem("eduCertJwtToken")}
     })
-    .then(response => response.json())
-    .then((data) => this.setState({documents:data}))
-    
+    .then(async response => {
+        // console.log(response)
+        if(response.ok)
+          return response.json();
+        else{
+          return response.text().then(text => { throw new Error(text) })
+        }
+      })
+      .then(data => {
+          console.log(data)
+          this.setState({documents:data});
+      })
+      .catch(err => {
+        this.setState({fetchError:err.message});
+      })
     }
 
 
@@ -93,6 +106,10 @@ class OrganizationDashboard extends Component {
         return (
             <>
                 <div style={{margin: 10, backgroundColor: 'white', padding: 30, paddingLeft: 5, paddingRight:5}}>
+                {   this.state.fetchError && 
+                            <div class="alert alert-danger" role="alert">
+                            <center>{this.state.fetchError}</center>
+                        </div>}
                 <SearchBar search={this.search} searchInput={searchText} />
                     <br />
                     <CenteredTabs tabs={["All","Verified","Self-Uploaded"]} handleTabChange={this.handleTabChange} /><br />

@@ -64,6 +64,7 @@ export default function VerifyDocument() {
           <center>Hello </center>
         </div>
         <br />
+        <CustomModal modalBody={<PreviewCertificate document={document} />} modalButtonLabel="View" />
         <form onSubmit={handleSubmit}>
                   { verifyError &&
                             <div class="alert alert-danger" role="alert">
@@ -113,7 +114,6 @@ export default function VerifyDocument() {
           <label>Out of Percentage/GPA</label>
           <input className="form-control" value={document.outOfPercentage} name="outOfPercentage" type="number" placeholder="100/4" id="outOfPercentage" />
           
-          <CustomModal modalBody={<PreviewCertificate document={document} />} modalButtonLabel="View" />
           <center>
             <input type="submit" className="button" value="Verify" />
           </center>
