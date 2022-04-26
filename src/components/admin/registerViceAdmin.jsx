@@ -10,6 +10,7 @@ export default class RegisterViceAdmin extends Component {
       password: ""
     },
     errors: {},
+    registrationError:""
   }
 
   handleChange = (e) => {
@@ -28,13 +29,19 @@ export default class RegisterViceAdmin extends Component {
         body:JSON.stringify(this.state.viceAdminInfo),
         headers:{"Content-Type" : "application/json","x-auth-token":localStorage.getItem("eduCertJwtToken")}
         })
-        .then(response => console.log(response))
+        .then(response => {
+          if(response.ok)
+            return response.json();
+          else{
+            this.setState({registrationError:response.json()})
+          }
+        })
         .then(data => {
           // this.setState({viceAdmins:data});
           alert("Vice admin registered successfully");
           window.location = '/admin/viewViceAdmins';
         })
-        .catch(err => console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'))
+        .catch(err => console.log(err.message))
     }
     else 
       return;
@@ -98,9 +105,10 @@ export default class RegisterViceAdmin extends Component {
           {/* LOGIN FORM */}
           <form id="login" onSubmit={this.handleSubmit} name="loginform" method="POST">
             <br />
-            <div class="alert alert-danger" role="alert">
-                  <center>Invalid username or password</center>
-            </div>
+
+           { this.state.registrationError && <div class="alert alert-danger" role="alert">
+                  <center>this.state.registrationError</center>
+            </div>}
             <div className="input-field">
               <label htmlFor="userId">UserId</label>
               <input type="text" name="userId" id="userId" onChange={this.handleChange} value={this.state.viceAdminInfo.userId} placeholder="sanyamgandhi00" />
