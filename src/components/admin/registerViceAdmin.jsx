@@ -43,7 +43,8 @@ export default class RegisterViceAdmin extends Component {
           window.location = '/admin/viewViceAdmins';
         })
         .catch(err => {
-          this.setState({registrationError:err})
+          console.log(err.message)
+          this.setState({registrationError:err.message})
         })
     }
     else 
