@@ -17,7 +17,7 @@
 // export default VerifyDocument;
 
 import { useLocation } from 'react-router-dom'
-import React from 'react';
+import React, { useState } from 'react';
 import CustomModal from '../common/modal';
 import PreviewCertificate from '../common/previewCertificate';
 

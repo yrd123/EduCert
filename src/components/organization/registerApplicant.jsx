@@ -5,7 +5,7 @@ export default class RegisterApplicant extends Component {
     state = {
       currentTab : "Sign Up" ,
       applicantinfoSignup :{ applicantId:'', email :'' , fullName : '' , address :'' , pincode : '', stateOfApplicant : '', country : '', contactNumber: '' , dob :''  } ,
-      registrationError: {},
+      registrationError: '',
       signupErrors :{} ,
 
     }

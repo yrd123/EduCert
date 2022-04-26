@@ -23,7 +23,7 @@ class ViewApplicants extends Component {
 
 
     componentDidMount() {
-        fetch("http://localhost:4000/getCurrentApplicantsEnrolled", {
+        fetch("http://localhost:4000/getEnrolledApplicants", {
         method:"POST",
         headers:{"Content-Type" : "application/json","x-auth-token":localStorage.getItem("eduCertJwtToken")}
         })

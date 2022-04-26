@@ -33,7 +33,7 @@ class ApplicantProfile extends Component {
         e.preventDefault();
         console.log(this.state.data);
 
-        fetch("http://localhost:4000/updateApplicantPersonalDetails", {
+        fetch("http://localhost:4000/updateMyPersonalDetails", {
             method: "POST",
             body: JSON.stringify({ "data": this.state.data }),
             headers: { "Content-Type": "application/json", "x-auth-token": localStorage.getItem("eduCertJwtToken") }
