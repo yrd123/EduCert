@@ -30,18 +30,21 @@ export default class RegisterViceAdmin extends Component {
         headers:{"Content-Type" : "application/json","x-auth-token":localStorage.getItem("eduCertJwtToken")}
         })
         .then(response => {
+          // console.log(response)
           if(response.ok)
             return response.json();
           else{
-            this.setState({registrationError:response.json()})
+            return response.text()
           }
         })
         .then(data => {
           // this.setState({viceAdmins:data});
-          alert("Vice admin registered successfully");
-          window.location = '/admin/viewViceAdmins';
+          // alert("Vice admin registered successfully");
+          this.setState({registrationError:data})
+          console.log(this.state.registrationError)
+          // window.location = '/admin/viewViceAdmins';
         })
-        .catch(err => console.log(err.message))
+        // .catch(err => console.log(err.message))
     }
     else 
       return;
@@ -107,7 +110,7 @@ export default class RegisterViceAdmin extends Component {
             <br />
 
            { this.state.registrationError && <div class="alert alert-danger" role="alert">
-                  <center>this.state.registrationError</center>
+                  <center>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</center>
             </div>}
             <div className="input-field">
               <label htmlFor="userId">UserId</label>
