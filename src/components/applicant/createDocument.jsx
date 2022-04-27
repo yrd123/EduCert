@@ -122,26 +122,27 @@ class CreateSelfUploadedDocument extends Component {
         })
         .then((res) => {
             // then print response status
+            this.setState({ uploadError:'' })
             toast.success("upload success");
         })
         .catch((err) => {
             // then print response status
             toast.error("upload fail");
             this.setState({uploadError:err.message})
+            window.scrollTo({ top: 0, behavior: 'smooth' });
           });
-        this.setState({ data: { documentId: '', applicantId: '', applicantName: '', applicantOrganizationNumber: '', documentName: '', description: '', dateOfAccomplishment: '', tenure: '', percentage: '', outOfPercentage: '' } })
+        // this.setState({ data: { documentId: '', applicantId: '', applicantName: '', applicantOrganizationNumber: '', documentName: '', description: '', dateOfAccomplishment: '', tenure: '', percentage: '', outOfPercentage: '' } })
 
     };
 
     render() {
         return (
             <React.Fragment>
-
+                <div className="forms">
                 {this.state.uploadError &&
                 <div class="alert alert-danger" role="alert">
                   <center>{this.state.uploadError}</center>
                 </div>}
-                <div className="forms">
                     <br />
                     <center>
                         <h4> Details </h4>

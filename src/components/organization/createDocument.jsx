@@ -111,12 +111,14 @@ class CreateVerifiedDocument extends Component {
       })
       .then((res) => {
         // then print response status
+        this.setState({ uploadError:'' })
         toast.success("upload success");
       })
       .catch((err) => {
         // then print response status
         toast.error("upload fail");
         this.setState({uploadError: err.message})
+        window.scrollTo({ top: 0, behavior: 'smooth' });
       });
     // this.setState({ data: { documentId: '', applicantId: '', applicantName: '', applicantOrganizationNumber: '', documentName: '', description: '', dateOfAccomplishment: '', tenure: '', percentage: '', outOfPercentage: '' } })
 

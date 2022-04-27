@@ -39,10 +39,11 @@ class OrganizationDashboard extends Component {
         }
       })
       .then(data => {
-          this.setState({documents:data});
+          this.setState({documents:data, fetchError:''});
       })
       .catch(err => {
         this.setState({fetchError:err.message});
+        window.scrollTo({ top: 0, behavior: 'smooth' });
       })
     }
 

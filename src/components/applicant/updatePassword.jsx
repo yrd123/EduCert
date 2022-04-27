@@ -21,7 +21,7 @@ export default class UpdatePassword extends Component {
     e.preventDefault();
     if (this.handleValidation()) {
       console.log(this.state.data);
-      fetch("http://localhost:4000/word", {
+      fetch("http://localhost:4000/updateMyPassword", {
         method: "POST",
         body: JSON.stringify({ data: this.state.data }),
         headers: { "Content-Type": "application/json", "x-auth-token": localStorage.getItem("eduCertJwtToken") }
@@ -40,6 +40,7 @@ export default class UpdatePassword extends Component {
       })
       .catch(err => {
         this.setState({updateError:err.message});
+        window.scrollTo({ top: 0, behavior: 'smooth' });
       })
 
     }

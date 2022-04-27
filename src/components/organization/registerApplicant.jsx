@@ -21,7 +21,7 @@ export default class RegisterApplicant extends Component {
     e.preventDefault();
 
     if (this.handleSignUpValidation()) {
-      ("http://localhost:4000/registerApplicant", {
+      fetch("http://localhost:4000/registerApplicant", {
         method:"POST",
         body:JSON.stringify(this.state.applicantinfoSignup),
         headers:{"Content-Type" : "application/json","x-auth-token":localStorage.getItem("eduCertJwtToken")}
@@ -41,6 +41,7 @@ export default class RegisterApplicant extends Component {
         })
         .catch(err => {
           this.setState({registrationError:err.message});
+          window.scrollTo({ top: 0, behavior: 'smooth' });
         })
 
     } 

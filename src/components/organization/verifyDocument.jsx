@@ -53,6 +53,7 @@ export default function VerifyDocument() {
       })
       .catch(err => {
           setError(err.message);
+          window.scrollTo({ top: 0, behavior: 'smooth' });
       })
 
   }
@@ -60,11 +61,8 @@ export default function VerifyDocument() {
   return (
     <React.Fragment>
       <div className="forms">
-        <div class="alert alert-danger" role="alert">
-          <center>Hello </center>
-        </div>
         <br />
-        <CustomModal modalBody={<PreviewCertificate document={document} />} modalButtonLabel="View" />
+        <center><CustomModal modalBody={<PreviewCertificate document={document} />} modalButtonLabel="View Document" /></center>
         <form onSubmit={handleSubmit}>
                   { verifyError &&
                             <div class="alert alert-danger" role="alert">

@@ -38,6 +38,7 @@ class ViewOrganizations extends Component {
         })
         .catch(err => {
             this.setState({error:err.message});
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         })
     };
 

@@ -171,7 +171,7 @@ export default function ViewApplicantDocuments(){
     const [sorting, setSort] = useState({ property: "documentName", order: "asc" });
 
     let initializeApplicant = () => {
-        fetch("http://localhost:4000/missionedApplicant", {
+        fetch("http://localhost:4000/getPermissionedApplicant", {
             method:"POST",
             body:JSON.stringify({data: applicantId}),
             headers:{"Content-Type" : "application/json","x-auth-token":localStorage.getItem("eduCertJwtToken")}
@@ -218,11 +218,12 @@ export default function ViewApplicantDocuments(){
 
 
     let changeCurrentOrganization = () => {
-        fetch("http://localhost:4000/changeCurrentOrganization+", {
+        fetch("http://localhost:4000/changeCurrentOrganization", {
         method:"POST",
-        body:JSON.stringify({data: applicantId}),
+        body:JSON.stringify({data: {applicantId}}),
         headers:{"Content-Type" : "application/json","x-auth-token":localStorage.getItem("eduCertJwtToken")}
         })
+        // console.log(this.state.data)
         .then(response => {
         // console.log(response)
         if(response.ok)
@@ -232,11 +233,13 @@ export default function ViewApplicantDocuments(){
         }
         })
         .then((data) => {
+            setError('');
             alert('Current Organization Updated successfully');
             setApplicant(data)
         })
         .catch(err => {
             setError(err.message);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         })
     
         
@@ -275,10 +278,6 @@ export default function ViewApplicantDocuments(){
                 <br></br>
                 <div className="card">
                     <div className="container">
-                        { updateError &&
-                            <div class="alert alert-danger" role="alert">
-                            <center>{updateError}</center>
-                        </div>}
                         <h6><b>Applicant Id:</b> {applicant.applicantId} </h6>
                         <h6><b>Name :</b> {applicant.name}</h6>
                         <h6><b>Current Organization: </b> {applicant.currentOrganization}</h6>

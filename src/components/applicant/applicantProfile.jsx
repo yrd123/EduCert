@@ -32,9 +32,10 @@ class ApplicantProfile extends Component {
                 return response.text().then(text => { throw new Error(text) })
             }
         })
-        .then((data) => this.setState({ data: data }))
+        .then((data) => this.setState({ data: data, updateError:'' }))
         .catch(err => {
             this.setState({updateError:"Fetch Error: "+err.message});
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         })
     }
 
@@ -42,7 +43,7 @@ class ApplicantProfile extends Component {
         e.preventDefault();
         console.log(this.state.data);
 
-        fetch("http://localhost:4000/PersonalDetails", {
+        fetch("http://localhost:4000/updateMyPersonalDetails", {
             method: "POST",
             body: JSON.stringify({ "data": this.state.data }),
             headers: { "Content-Type": "application/json", "x-auth-token": localStorage.getItem("eduCertJwtToken") }
@@ -57,6 +58,7 @@ class ApplicantProfile extends Component {
           })
           .then(data => {
             // this.setState({viceAdmins:data});
+            this.setState({ updateError:'' })
             alert(data);
           })
           .catch(err => {

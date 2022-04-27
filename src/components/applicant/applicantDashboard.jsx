@@ -27,7 +27,7 @@ class ApplicantDashboard extends Component {
     };
 
     componentDidMount() {
-        fetch("http://localhost:4000/cuments", {
+        fetch("http://localhost:4000/getMydocuments", {
         method:"POST",
         headers:{"Content-Type" : "application/json","x-auth-token":localStorage.getItem("eduCertJwtToken")}
         })
@@ -38,9 +38,10 @@ class ApplicantDashboard extends Component {
                 return response.text().then(text => { throw new Error(text) })
             }
         })
-        .then((data) => this.setState({documents:data}))
+        .then((data) => this.setState({documents:data, fetchError:''}))
         .catch(err => {
             this.setState({fetchError:err.message})
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         })
     }
     

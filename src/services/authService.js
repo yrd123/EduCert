@@ -9,12 +9,14 @@ export async function login(loginCredentials){
         headers:{"Content-Type" : "application/json"},
         body:JSON.stringify(loginCredentials)
         });
+        console.log(promise)
         if(promise.ok){
             let token = await promise.text();
+        console.log(promise.ok)
             return {ok:true,token};
         }
         else
-            promise.text().then(text => { throw new Error(text) })
+            await promise.text().then(text => { throw new Error(text) })
     }
     catch(ex){
         alert(ex.message);

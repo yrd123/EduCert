@@ -39,6 +39,7 @@ class ViewApplicants extends Component {
         .then((data) => this.setState({currentApplicants :data, applicants:data}))
         .catch(err => {
             this.setState({fetchError:err.message});
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }) 
 
         fetch("http://localhost:4000/getAllApplicantsOfOrganization", {
@@ -53,9 +54,10 @@ class ViewApplicants extends Component {
               return response.text().then(text => { throw new Error(text) })
             }
           })
-        .then((data) => this.setState({allApplicants :data}))  
+        .then((data) => this.setState({allApplicants :data, fetchError:''}))  
         .catch(err => {
             this.setState({fetchError:err.message});
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }) 
     }
 
@@ -65,6 +67,7 @@ class ViewApplicants extends Component {
         navigate({pathname:'/organization/viewApplicantDocuments/',state:{applicantId}});
     }*/
 
+    
     
     handleTabChange = tab =>{
         if(tab === 'Current')
@@ -119,6 +122,10 @@ class ViewApplicants extends Component {
         return (
             <>
                 <div style={{margin: 10, backgroundColor: 'white', padding: 30, paddingLeft: 120, paddingRight:120}}>
+                { this.state.fetchError &&
+                            <div class="alert alert-danger" role="alert">
+                            <center>{this.state.fetchError}</center>
+                        </div>}
                 <SearchBar search={this.search} searchInput={searchText} />
                     <br />
                     <CenteredTabs tabs={["Current","All"]} handleTabChange={this.handleTabChange} /><br />
