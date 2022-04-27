@@ -11,6 +11,7 @@ export default class Login extends Component {
         role:"viceAdmin"
       },
       errors: {},
+      loginError:""
     }
     
   handleChange = (e) => {
@@ -22,9 +23,9 @@ export default class Login extends Component {
   handleSubmit = async (e) => {
     e.preventDefault();
     if (this.handleValidation()) {
-        let token = await login(this.state.loginCredentials);
-        if(token){
-          localStorage.setItem('eduCertJwtToken', token);
+        let response = await login(this.state.loginCredentials);
+        if(response.ok){
+          localStorage.setItem('eduCertJwtToken', response.token);
           let role = this.state.loginCredentials.role;
           if(role === 'admin')
             window.location = '/';
@@ -32,6 +33,9 @@ export default class Login extends Component {
             window.location = '/';
           else if(role === 'applicant')
             window.location = '/';
+        }
+        else{
+          this.setState({loginError :  response.error})
         }
       } 
     else 
@@ -94,9 +98,10 @@ export default class Login extends Component {
         <div className="forms">
           {/* LOGIN FORM */}
           <form  id="login" onSubmit={this.handleSubmit} name="loginform" method="POST">
+          { this.state.loginError && 
           <div class="alert alert-danger" role="alert">
-                <center>Hello </center>
-                </div>
+            <center>{this.state.loginError}</center>
+          </div>}
             <br/>
             <div id="loginwarning" className="warning">
               {/* INSERT LOGIN WARNINGS HERE */}

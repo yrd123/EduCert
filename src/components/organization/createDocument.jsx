@@ -6,7 +6,8 @@ import "react-toastify/dist/ReactToastify.css";
 class CreateVerifiedDocument extends Component {
   state = {
     data: { documentId: '', applicantId: '', applicantName: '', applicantOrganizationNumber: '', documentName: '', description: '', dateOfAccomplishment: '', tenure: '', percentage: '', outOfPercentage: '' },
-    loaderData: { selectedFile: null }
+    loaderData: { selectedFile: null },
+    uploadError:''
   };
 
   handleChange = (e) => {
@@ -101,7 +102,7 @@ class CreateVerifiedDocument extends Component {
       body: data,
       headers: { "x-auth-token": localStorage.getItem("eduCertJwtToken") }
     })
-      .then(response => {
+    .then(response => {
         if (response.ok)
           return response.text();
         else {
@@ -115,6 +116,7 @@ class CreateVerifiedDocument extends Component {
       .catch((err) => {
         // then print response status
         toast.error("upload fail");
+        this.setState({uploadError: err.message})
       });
     // this.setState({ data: { documentId: '', applicantId: '', applicantName: '', applicantOrganizationNumber: '', documentName: '', description: '', dateOfAccomplishment: '', tenure: '', percentage: '', outOfPercentage: '' } })
 
@@ -128,9 +130,10 @@ class CreateVerifiedDocument extends Component {
         <div className="forms">
 
           <br /><center><h4>  Details </h4></center><br />
+         { this.state.uploadError &&
           <div class="alert alert-danger" role="alert">
-            <center>Hello </center>
-          </div>
+            <center>{this.state.uploadError}</center>
+          </div>}
           <form onSubmit={this.handleSubmit}>
             <label>Document Id</label>
             <input className="form-control" name="documentId" id="documentId" onChange={this.handleChange} value={this.state.data.documentId} type="text" placeholder="123" required />

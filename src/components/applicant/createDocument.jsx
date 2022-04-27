@@ -17,7 +17,8 @@ class CreateSelfUploadedDocument extends Component {
             percentage: "",
             outOfPercentage: ""
         },
-        loaderData: { selectedFile: null }
+        loaderData: { selectedFile: null },
+        uploadError:''
     };
 
     handleChange = (e) => {
@@ -112,7 +113,13 @@ class CreateSelfUploadedDocument extends Component {
             body: data,
             headers: {  "x-auth-token": localStorage.getItem("eduCertJwtToken") }
         })
-        .then(response => response.json())
+        .then(response => {
+          if (response.ok)
+            return response.text();
+          else {
+            return response.text().then(text => { throw new Error(text) })
+          }
+        })
         .then((res) => {
             // then print response status
             toast.success("upload success");
@@ -120,6 +127,7 @@ class CreateSelfUploadedDocument extends Component {
         .catch((err) => {
             // then print response status
             toast.error("upload fail");
+            this.setState({uploadError:err.message})
           });
         this.setState({ data: { documentId: '', applicantId: '', applicantName: '', applicantOrganizationNumber: '', documentName: '', description: '', dateOfAccomplishment: '', tenure: '', percentage: '', outOfPercentage: '' } })
 
@@ -129,9 +137,10 @@ class CreateSelfUploadedDocument extends Component {
         return (
             <React.Fragment>
 
+                {this.state.uploadError &&
                 <div class="alert alert-danger" role="alert">
-                <center>Hello </center>
-                </div>
+                  <center>{this.state.uploadError}</center>
+                </div>}
                 <div className="forms">
                     <br />
                     <center>

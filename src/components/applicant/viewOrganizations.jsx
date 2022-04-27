@@ -7,7 +7,8 @@ class ViewOrganizations extends Component {
         organizations : [{"organizationId":"org1", "hasPermission":true},{"organizationId":"org2", "hasPermission":true}],
         sorting : { property : "organizationId", order : "asc" },
         searchText  : "",
-        organizationId:''
+        organizationId:'',
+        error:''
     };
 
     async componentDidMount(){
@@ -24,10 +25,20 @@ class ViewOrganizations extends Component {
             }
         }),
         headers:{"Content-Type" : "application/json","x-auth-token":localStorage.getItem("eduCertJwtToken")}
+        })        
+        .then(response => {
+            if(response.ok)
+                return response.text();
+            else
+                return response.text().then(text => { throw new Error(text) })
         })
-        .then(response => response.json())
-        alert(`Granted ${organization}`);
-        window.location.reload(false);
+        .then(data => {
+            alert(data + `to ${organization}`);
+            window.location.reload(false);
+        })
+        .catch(err => {
+            this.setState({error:err.message});
+        })
     };
 
     revokePermission = organization => {
@@ -40,13 +51,24 @@ class ViewOrganizations extends Component {
             }),
             headers:{"Content-Type" : "application/json","x-auth-token":localStorage.getItem("eduCertJwtToken")}
         })
-        .then(response => response.json())
-        alert(`Revoked ${organization}`);
-        window.location.reload(false);
+        .then(response => {
+            if(response.ok)
+                return response.text();
+            else
+                return response.text().then(text => { throw new Error(text) })
+        })
+        .then(data => {
+            alert(data + `for ${organization}`);
+            window.location.reload(false);
+        })
+        .catch(err => {
+            this.setState({error:err.message});
+        })
+    
+        
     };
 
     setPermissions = async() => {
-        console.log("yo")
         let organizations = this.state.organizations;
         for(let org of organizations){
         await fetch("http://localhost:4000/hasMyPermission", {
@@ -57,12 +79,20 @@ class ViewOrganizations extends Component {
                 }
             }),
             headers:{"Content-Type" : "application/json","x-auth-token":localStorage.getItem("eduCertJwtToken")}
-        }).then(response => response.json())
+        }).then(response => {
+            if(response.ok)
+                return response.json();
+            else
+                return response.text().then(text => { throw new Error(text) })
+        })
         .then(data => {
             org["hasPermission"] = data;
             console.log(org["organizationId"])
             console.log(org["hasPermission"]);
             console.log(data);
+        })
+        .catch(err => {
+            this.setState({error:err.message});
         })
     }
             
@@ -105,6 +135,10 @@ class ViewOrganizations extends Component {
         return (
             <>
                 <div style={{margin: 10, backgroundColor: 'white', padding: 40, paddingLeft: 120, paddingRight:120}}>
+                { this.state.error &&
+                    <div class="alert alert-danger" role="alert">
+                        <center>{this.state.error}</center>
+                    </div>}
                 <SearchBar search={this.search} searchInput={searchText} />
                     <br />
                     <table className="table table-striped">

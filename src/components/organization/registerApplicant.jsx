@@ -21,7 +21,7 @@ export default class RegisterApplicant extends Component {
     e.preventDefault();
 
     if (this.handleSignUpValidation()) {
-      fetch("http://localhost:4000/registerApplicant", {
+      ("http://localhost:4000/registerApplicant", {
         method:"POST",
         body:JSON.stringify(this.state.applicantinfoSignup),
         headers:{"Content-Type" : "application/json","x-auth-token":localStorage.getItem("eduCertJwtToken")}
@@ -29,14 +29,14 @@ export default class RegisterApplicant extends Component {
         .then(response => {
           // console.log(response)
           if(response.ok)
-            return response.json();
+            return response.text();
           else{
             return response.text().then(text => { throw new Error(text) })
           }
         })
         .then(data => {
           // this.setState({viceAdmins:data});
-          alert("Applicant registered successfully");
+          alert(data);
           window.location = '/viceAdmin/viewApplicants';
         })
         .catch(err => {

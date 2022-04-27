@@ -171,14 +171,23 @@ export default function ViewApplicantDocuments(){
     const [sorting, setSort] = useState({ property: "documentName", order: "asc" });
 
     let initializeApplicant = () => {
-        fetch("http://localhost:4000/getPermissionedApplicant", {
+        fetch("http://localhost:4000/missionedApplicant", {
             method:"POST",
             body:JSON.stringify({data: applicantId}),
             headers:{"Content-Type" : "application/json","x-auth-token":localStorage.getItem("eduCertJwtToken")}
             })
-            .then(response => response.json())
-            .then((data) => setApplicant(data))
-            console.log(applicant)
+            .then(response => {
+                // console.log(response)
+                if(response.ok)
+                  return response.json();
+                else{
+                  return response.text().then(text => { throw new Error(text) })
+                }
+              })
+            .then(data => setApplicant(data))
+            .catch(err => {
+                setError(err.message);
+            })
     }
 
     let initializeDocuments = () => {
@@ -188,8 +197,18 @@ export default function ViewApplicantDocuments(){
         body:JSON.stringify({data: applicantId}),
         headers:{"Content-Type" : "application/json","x-auth-token":localStorage.getItem("eduCertJwtToken")}
         })
-        .then(response => response.json())
-        .then((data) => setDocuments(data));
+        .then(response => {
+            // console.log(response)
+            if(response.ok)
+              return response.json();
+            else{
+              return response.text().then(text => { throw new Error(text) })
+            }
+          })
+        .then((data) => setDocuments(data))
+        .catch(err => {
+            setError(err.message);
+        })
     }
 
     useEffect(() => {
@@ -214,6 +233,7 @@ export default function ViewApplicantDocuments(){
         })
         .then((data) => {
             alert('Current Organization Updated successfully');
+            setApplicant(data)
         })
         .catch(err => {
             setError(err.message);
@@ -246,6 +266,10 @@ export default function ViewApplicantDocuments(){
     return ( 
         <React.Fragment>
             <div style={{ margin: 10, backgroundColor: 'white', padding: 40, paddingLeft: 10, paddingRight: 10 }}>
+            { updateError &&
+                            <div class="alert alert-danger" role="alert">
+                            <center>{updateError}</center>
+            </div>}
                 <br />
                 <h3>Applicant's Personal Details</h3>
                 <br></br>

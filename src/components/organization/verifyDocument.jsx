@@ -42,13 +42,13 @@ export default function VerifyDocument() {
     .then(response => {
       // console.log(response)
       if(response.ok)
-          return response.json();
+          return response.text();
       else{
           return response.text().then(text => { throw new Error(text) })
       }
       })
       .then((data) => {
-          alert('Document Verified successfully');
+          alert(data);
           window.location = '/viceAdmin/dashboard'
       })
       .catch(err => {

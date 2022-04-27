@@ -21,7 +21,7 @@ export default class UpdatePassword extends Component {
     e.preventDefault();
     if (this.handleValidation()) {
       console.log(this.state.data);
-      fetch("http://localhost:4000/updateMyPassword", {
+      fetch("http://localhost:4000/word", {
         method: "POST",
         body: JSON.stringify({ data: this.state.data }),
         headers: { "Content-Type": "application/json", "x-auth-token": localStorage.getItem("eduCertJwtToken") }
@@ -29,13 +29,13 @@ export default class UpdatePassword extends Component {
       .then(response => {
         // console.log(response)
         if(response.ok)
-          return response.json();
+          return response.text(); //Update Successful
         else{
           return response.text().then(text => { throw new Error(text) })
         }
       })
       .then((data) => {
-        alert('password updated successfully');
+        alert(data);
         window.location= '/applicant/profile';
       })
       .catch(err => {

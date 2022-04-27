@@ -39,7 +39,6 @@ class OrganizationDashboard extends Component {
         }
       })
       .then(data => {
-          console.log(data)
           this.setState({documents:data});
       })
       .catch(err => {
@@ -83,11 +82,11 @@ class OrganizationDashboard extends Component {
         this.setState({searchText});
     }
 
-    redirectToVerify = document =>{
+    /*redirectToVerify = document =>{
         const navigate = useNavigate();
         navigate({pathname:'/organization/verify',state:{document}});
     }
-
+*/
     render() { 
         const {currentPage, documentsStatus, pageSize, documents, sorting, searchText} = this.state;
         let filteredDocuments = documents;

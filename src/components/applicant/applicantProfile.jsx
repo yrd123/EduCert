@@ -25,15 +25,24 @@ class ApplicantProfile extends Component {
             // body:JSON.stringify({"data":{"applicantId":this.state.applicantId}}),
             headers: { "Content-Type": "application/json", "x-auth-token": localStorage.getItem("eduCertJwtToken") }
         })
-            .then(response => response.json())
-            .then((data) => this.setState({ data: data }))
+        .then(response => {
+            if(response.ok)
+                return response.json();
+            else{
+                return response.text().then(text => { throw new Error(text) })
+            }
+        })
+        .then((data) => this.setState({ data: data }))
+        .catch(err => {
+            this.setState({updateError:"Fetch Error: "+err.message});
+        })
     }
 
     handleSubmit = (e) => {
         e.preventDefault();
         console.log(this.state.data);
 
-        fetch("http://localhost:4000/updateMyPersonalDetails", {
+        fetch("http://localhost:4000/PersonalDetails", {
             method: "POST",
             body: JSON.stringify({ "data": this.state.data }),
             headers: { "Content-Type": "application/json", "x-auth-token": localStorage.getItem("eduCertJwtToken") }
@@ -41,14 +50,14 @@ class ApplicantProfile extends Component {
         .then(response => {
             // console.log(response)
             if(response.ok)
-              return response.json();
+              return response.text(); //Update Successful
             else{
               return response.text().then(text => { throw new Error(text) })
             }
           })
           .then(data => {
             // this.setState({viceAdmins:data});
-            alert("Update successfull");
+            alert(data);
           })
           .catch(err => {
             this.setState({updateError:err.message});

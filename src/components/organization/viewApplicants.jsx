@@ -18,7 +18,8 @@ class ViewApplicants extends Component {
         searchText  : "",
         openApplicantModal: false,
         currentApplicants:[],
-        allApplicants:[]
+        allApplicants:[],
+        fetchError:""
     };
 
 
@@ -27,22 +28,42 @@ class ViewApplicants extends Component {
         method:"POST",
         headers:{"Content-Type" : "application/json","x-auth-token":localStorage.getItem("eduCertJwtToken")}
         })
-        .then(response => response.json())
-        .then((data) => this.setState({currentApplicants :data, applicants:data}))    
+        .then(response => {
+            // console.log(response)
+            if(response.ok)
+              return response.json();
+            else{
+              return response.text().then(text => { throw new Error(text) })
+            }
+          })
+        .then((data) => this.setState({currentApplicants :data, applicants:data}))
+        .catch(err => {
+            this.setState({fetchError:err.message});
+        }) 
 
         fetch("http://localhost:4000/getAllApplicantsOfOrganization", {
         method:"POST",
         headers:{"Content-Type" : "application/json","x-auth-token":localStorage.getItem("eduCertJwtToken")}
         })
-        .then(response => response.json())
+        .then(response => {
+            // console.log(response)
+            if(response.ok)
+              return response.json();
+            else{
+              return response.text().then(text => { throw new Error(text) })
+            }
+          })
         .then((data) => this.setState({allApplicants :data}))  
+        .catch(err => {
+            this.setState({fetchError:err.message});
+        }) 
     }
 
-    redirectToViewApplicantDocuments = applicantId =>{
+    /*redirectToViewApplicantDocuments = applicantId =>{
         console.log(applicantId)
         const navigate = useNavigate();
         navigate({pathname:'/organization/viewApplicantDocuments/',state:{applicantId}});
-    }
+    }*/
 
     
     handleTabChange = tab =>{
@@ -82,7 +103,7 @@ class ViewApplicants extends Component {
     }
 
     render() { 
-        const {currentPage, applicantsStatus, pageSize, applicants, sorting, searchText} = this.state;
+        const {currentPage, pageSize, applicants, sorting, searchText} = this.state;
         console.log(this.state.allApplicants)  
 
         let filteredApplicants = applicants;
