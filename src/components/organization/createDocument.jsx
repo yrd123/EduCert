@@ -136,9 +136,6 @@ class CreateVerifiedDocument extends Component {
 
     if(this.handleValidation())
     {
-
-    
-
     const data = new FormData();
     for (var x = 0; x < this.state.loaderData.selectedFile.length; x++) {
       data.append("file", this.state.loaderData.selectedFile[x]);
@@ -163,6 +160,7 @@ class CreateVerifiedDocument extends Component {
         // then print response status
         this.setState({ uploadError:'' })
         toast.success("upload success");
+        window.location = '/organization/dashboard';
       })
       .catch((err) => {
         // then print response status

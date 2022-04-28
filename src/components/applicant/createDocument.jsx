@@ -172,6 +172,7 @@ class CreateSelfUploadedDocument extends Component {
             // then print response status
             this.setState({ uploadError:'' })
             toast.success("upload success");
+            window.location = '/applicant/dashboard';
         })
         .catch((err) => {
             // then print response status
