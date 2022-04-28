@@ -18,7 +18,8 @@ class CreateSelfUploadedDocument extends Component {
             outOfPercentage: ""
         },
         loaderData: { selectedFile: null },
-        uploadError:''
+        uploadError:'' ,
+        errors : {} 
     };
 
     handleChange = (e) => {
@@ -96,10 +97,57 @@ class CreateSelfUploadedDocument extends Component {
         }
       };
 
+      handleValidation() {
+        let data = this.state.data;
+        let errors = {};
+        let formIsValid = true;
+    
+        //Id
+        if (!data["documentId"]) {
+          formIsValid = false;
+          errors["documentId"] = "Doc Id Cannot be empty";
+        }
+
+        if (!data["applicantName"]) {
+          formIsValid = false;
+          errors["applicantName"] = "Applicant Name Cannot be empty";
+        }
+
+        if (!data["applicantOrganizationNumber"]) {
+          formIsValid = false;
+          errors["applicantOrganizationNumber"] = "ApplicantOrganizationNumber Cannot be empty";
+        }
+
+        if (!data["organizationId"]) {
+          formIsValid = false;
+          errors["organizationId"] = "Organization Id Cannot be empty";
+        }
+
+        if (!data["documentName"]) {
+          formIsValid = false;
+          errors["documentName"] = "Document Name Cannot be empty";
+        }
+
+
+        if (!data["dateOfAccomplishment"]) {
+          formIsValid = false;
+          errors["dateOfAccomplishment"] = "Date Of Accomplishment Cannot be empty";
+        }
+
+        
+        this.setState({ errors: errors });
+        return formIsValid;
+      }
+    
+
 
     handleSubmit = (e) => {
         e.preventDefault();
-
+        
+        console.log("idhar" );
+        console.log(this.state.errors );
+        if (this.handleValidation()) {
+          
         const data = new FormData();
         for (var x = 0; x < this.state.loaderData.selectedFile.length; x++) {
           data.append("file", this.state.loaderData.selectedFile[x]);
@@ -132,7 +180,10 @@ class CreateSelfUploadedDocument extends Component {
             window.scrollTo({ top: 0, behavior: 'smooth' });
           });
         // this.setState({ data: { documentId: '', applicantId: '', applicantName: '', applicantOrganizationNumber: '', documentName: '', description: '', dateOfAccomplishment: '', tenure: '', percentage: '', outOfPercentage: '' } })
-
+        }
+        else{
+          return ;
+        }
     };
 
     render() {
@@ -159,8 +210,13 @@ class CreateSelfUploadedDocument extends Component {
                             value={this.state.data.documentId}
                             type="text"
                             placeholder="123"
-                            required
+                            
                         />
+                        {this.state.errors['documentId'] &&
+                        <div class="alert alert-danger" role="alert">
+                          {this.state.errors["documentId"]}
+                        </div>
+                        }
 
                         <label>Applicant Name</label>
                         <input
@@ -171,8 +227,13 @@ class CreateSelfUploadedDocument extends Component {
                             value={this.state.data.applicantName}
                             type="text"
                             placeholder="Sanyam Gandhi"
-                            required
+                            
                         />
+                        {this.state.errors['applicantName'] &&
+                        <div class="alert alert-danger" role="alert">
+                          {this.state.errors["applicantName"]}
+                        </div>
+                        }
 
                         <label>Applicant Organization Number</label>
                         <input
@@ -183,8 +244,13 @@ class CreateSelfUploadedDocument extends Component {
                             value={this.state.data.applicantOrganizationNumber}
                             type="text"
                             placeholder="AB123"
-                            required
+                            
                         />
+                        {this.state.errors['applicantOrganizationNumber'] &&
+                        <div class="alert alert-danger" role="alert">
+                          {this.state.errors["applicantOrganizationNumber"]}
+                        </div>
+                        }
 
                         <label>OrganizationId</label>
                         <input
@@ -195,8 +261,14 @@ class CreateSelfUploadedDocument extends Component {
                             value={this.state.data.organizationId}
                             type="text"
                             placeholder="org1"
-                            required
+                            
                         />
+                        
+                        {this.state.errors['organizationId'] &&
+                        <div class="alert alert-danger" role="alert">
+                          {this.state.errors["organizationId"]}
+                        </div>
+                        }
 
                         <label>Document Name</label>
                         <input
@@ -207,8 +279,13 @@ class CreateSelfUploadedDocument extends Component {
                             value={this.state.data.documentName}
                             type="text"
                             placeholder="marksheet"
-                            required
+                            
                         />
+                        {this.state.errors['documentName'] &&
+                        <div class="alert alert-danger" role="alert">
+                          {this.state.errors["documentName"]}
+                        </div>
+                        }
 
                         <label>Document Description</label>
                         <input
@@ -219,7 +296,7 @@ class CreateSelfUploadedDocument extends Component {
                             value={this.state.data.description}
                             type="text"
                             placeholder="Marksheet of 10th std"
-                            required
+                            
                         />
 
                         <label>Date Of Accomplishment(End Date)</label>
@@ -231,8 +308,13 @@ class CreateSelfUploadedDocument extends Component {
                             value={this.state.data.dateOfAccomplishment}
                             type="text"
                             placeholder="24-02-2016"
-                            required
+                            
                         />
+                        {this.state.errors['dateOfAccomplishment'] &&
+                        <div class="alert alert-danger" role="alert">
+                          {this.state.errors["dateOfAccomplishment"]}
+                        </div>
+                        }
 
                         <label>Tenure(In years)</label>
                         <input

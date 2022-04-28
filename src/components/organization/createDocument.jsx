@@ -7,7 +7,8 @@ class CreateVerifiedDocument extends Component {
   state = {
     data: { documentId: '', applicantId: '', applicantName: '', applicantOrganizationNumber: '', documentName: '', description: '', dateOfAccomplishment: '', tenure: '', percentage: '', outOfPercentage: '' },
     loaderData: { selectedFile: null },
-    uploadError:''
+    uploadError:'' ,
+    errors : {} 
   };
 
   handleChange = (e) => {
@@ -86,8 +87,57 @@ class CreateVerifiedDocument extends Component {
     }
   };
 
+
+  handleValidation() {
+    let data = this.state.data;
+    let errors = {};
+    let formIsValid = true;
+
+    //Id
+    if (!data["documentId"]) {
+      formIsValid = false;
+      errors["documentId"] = "Doc Id Cannot be empty";
+    }
+
+    if (!data["applicantName"]) {
+      formIsValid = false;
+      errors["applicantName"] = "Applicant Name Cannot be empty";
+    }
+
+    if (!data["applicantOrganizationNumber"]) {
+      formIsValid = false;
+      errors["applicantOrganizationNumber"] = "ApplicantOrganizationNumber Cannot be empty";
+    }
+
+    if (!data["organizationId"]) {
+      formIsValid = false;
+      errors["organizationId"] = "Organization Id Cannot be empty";
+    }
+
+    if (!data["documentName"]) {
+      formIsValid = false;
+      errors["documentName"] = "Document Name Cannot be empty";
+    }
+
+
+    if (!data["dateOfAccomplishment"]) {
+      formIsValid = false;
+      errors["dateOfAccomplishment"] = "Date Of Accomplishment Cannot be empty";
+    }
+
+    
+    this.setState({ errors: errors });
+    return formIsValid;
+  }
+
+
   handleSubmit = (e) => {
     e.preventDefault();
+
+    if(this.handleValidation())
+    {
+
+    
 
     const data = new FormData();
     for (var x = 0; x < this.state.loaderData.selectedFile.length; x++) {
@@ -120,6 +170,11 @@ class CreateVerifiedDocument extends Component {
         this.setState({uploadError: err.message})
         window.scrollTo({ top: 0, behavior: 'smooth' });
       });
+
+    }
+    else {
+      return ;
+    }
     // this.setState({ data: { documentId: '', applicantId: '', applicantName: '', applicantOrganizationNumber: '', documentName: '', description: '', dateOfAccomplishment: '', tenure: '', percentage: '', outOfPercentage: '' } })
 
   };
@@ -138,26 +193,50 @@ class CreateVerifiedDocument extends Component {
           </div>}
           <form onSubmit={this.handleSubmit}>
             <label>Document Id</label>
-            <input className="form-control" name="documentId" id="documentId" onChange={this.handleChange} value={this.state.data.documentId} type="text" placeholder="123" required />
-
+            <input className="form-control" name="documentId" id="documentId" onChange={this.handleChange} value={this.state.data.documentId} type="text" placeholder="123"  />
+            {this.state.errors['documentId'] &&
+              <div class="alert alert-danger" role="alert">
+                {this.state.errors["documentId"]}
+              </div>
+            }
             <label>Applicant Id</label>
-            <input className="form-control" name="applicantId" id="applicantId" onChange={this.handleChange} value={this.state.data.applicantId} type="text" placeholder="1814078" required />
-
+            <input className="form-control" name="applicantId" id="applicantId" onChange={this.handleChange} value={this.state.data.applicantId} type="text" placeholder="1814078"  />
+            {this.state.errors['applicantId'] &&
+              <div class="alert alert-danger" role="alert">
+                {this.state.errors["applicantId"]}
+              </div>
+            }
             <label>Applicant Name</label>
-            <input className="form-control" name="applicantName" id="applicantName" onChange={this.handleChange} value={this.state.data.applicantName} type="text" placeholder="Sanyam Gandhi" required />
-
+            <input className="form-control" name="applicantName" id="applicantName" onChange={this.handleChange} value={this.state.data.applicantName} type="text" placeholder="Sanyam Gandhi"  />
+            {this.state.errors['applicantName'] &&
+              <div class="alert alert-danger" role="alert">
+                {this.state.errors["applicantName"]}
+              </div>
+            }
             <label>Applicant Organization Number</label>
-            <input className="form-control" name="applicantOrganizationNumber" id="applicantOrganizationNumber" onChange={this.handleChange} value={this.state.data.applicantOrganizationNumber} type="text" placeholder="6QAZ" required />
-
+            <input className="form-control" name="applicantOrganizationNumber" id="applicantOrganizationNumber" onChange={this.handleChange} value={this.state.data.applicantOrganizationNumber} type="text" placeholder="6QAZ"  />
+            {this.state.errors['applicantOrganizationNumber'] &&
+              <div class="alert alert-danger" role="alert">
+                {this.state.errors["applicantOrganizationNumber"]}
+              </div>
+            }
             <label>Document Name</label>
-            <input className="form-control" name="documentName" id="documentName" onChange={this.handleChange} value={this.state.data.documentName} type="text" placeholder="Marksheet" required />
-
+            <input className="form-control" name="documentName" id="documentName" onChange={this.handleChange} value={this.state.data.documentName} type="text" placeholder="Marksheet"  />
+            {this.state.errors['documentName'] &&
+              <div class="alert alert-danger" role="alert">
+                {this.state.errors["documentName"]}
+              </div>
+            }
             <label>Document Description</label>
-            <input className="form-control" name="description" id="description" onChange={this.handleChange} value={this.state.data.description} type="text" placeholder="Marksheet of 10th std" required />
+            <input className="form-control" name="description" id="description" onChange={this.handleChange} value={this.state.data.description} type="text" placeholder="Marksheet of 10th std"  />
 
             <label>Date Of Accomplishment(End Date)</label>
-            <input className="form-control" name="dateOfAccomplishment" id="dateOfAccomplishment" onChange={this.handleChange} value={this.state.data.dateOfAccomplishment} type="text" placeholder="24-11-2016" required />
-
+            <input className="form-control" name="dateOfAccomplishment" id="dateOfAccomplishment" onChange={this.handleChange} value={this.state.data.dateOfAccomplishment} type="text" placeholder="24-11-2016"  />
+            {this.state.errors['dateOfAccomplishment'] &&
+              <div class="alert alert-danger" role="alert">
+                {this.state.errors["dateOfAccomplishment"]}
+              </div>
+            }
             <label>Tenure(In years)</label>
             <input className="form-control" name="tenure" id="tenure" onChange={this.handleChange} value={this.state.data.tenure} type="text" placeholder="2 Year" />
 
