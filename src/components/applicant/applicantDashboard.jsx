@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { getDocumentsByApplicantId } from '../../services/documentService';
 import Pagination from '../common/pagination';
 import { paginate } from '../../utils/paginate';
 import _ from 'lodash';

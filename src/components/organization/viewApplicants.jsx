@@ -4,7 +4,7 @@ import { paginate } from '../../utils/paginate';
 import _ from 'lodash';
 import CenteredTabs from '../common/tabs';
 import SearchBar from '../common/searchBar';
-import { Link, Navigate, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 
 class ViewApplicants extends Component {

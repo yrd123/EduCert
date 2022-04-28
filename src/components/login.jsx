@@ -7,8 +7,7 @@ export default class Login extends Component {
       loginCredentials: {
         userId: "",
         password: "",
-        organization:"",
-        role:"viceAdmin"
+        organization:""
       },
       errors: {},
       loginError:""
@@ -26,13 +25,7 @@ export default class Login extends Component {
         let response = await login(this.state.loginCredentials);
         if(response.ok){
           localStorage.setItem('eduCertJwtToken', response.token);
-          let role = this.state.loginCredentials.role;
-          if(role === 'admin')
-            window.location = '/admin/viewViceAdmins';
-          else if(role === '/organization/organizationDashboard')
-            window.location = '/organization/dashboard';
-          else if(role === '/applicant/applicantDashboard')
-            window.location = '/applicant/dashboard';
+          window.location = '/';
         }
         else{
           this.setState({loginError :  response.error})
@@ -131,13 +124,6 @@ export default class Login extends Component {
                 {  this.state.errors["organization"]}
                 </div>
               }
-
-              <label for="role">Choose a Role:</label>
-              <select name="role" id="role" onChange={this.handleChange} value = {this.state.loginCredentials.role}>
-                <option value="admin">admin</option>
-                <option value="viceAdmin">viceAdmin</option>
-                <option value="applicant">applicant</option>
-              </select>
               <br></br>
               <br></br>
               <br></br>

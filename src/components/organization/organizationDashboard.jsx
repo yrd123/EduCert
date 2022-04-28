@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { getDocumentsByOrganizationId } from '../../services/documentService';
 import Pagination from '../common/pagination';
 import { paginate } from '../../utils/paginate';
 import _ from 'lodash';
@@ -7,8 +6,7 @@ import CustomModal from '../common/modal';
 import CenteredTabs from '../common/tabs';
 import SearchBar from '../common/searchBar';
 import PreviewCertificate from '../common/previewCertificate';
-import { getApplicantById } from '../../services/applicantService';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 class OrganizationDashboard extends Component {
     state = { 
