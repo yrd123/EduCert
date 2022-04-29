@@ -109,11 +109,6 @@ class CreateVerifiedDocument extends Component {
       errors["applicantOrganizationNumber"] = "ApplicantOrganizationNumber Cannot be empty";
     }
 
-    if (!data["organizationId"]) {
-      formIsValid = false;
-      errors["organizationId"] = "Organization Id Cannot be empty";
-    }
-
     if (!data["documentName"]) {
       formIsValid = false;
       errors["documentName"] = "Document Name Cannot be empty";
@@ -133,7 +128,7 @@ class CreateVerifiedDocument extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-
+    console.log(this.handleValidation())
     if(this.handleValidation())
     {
     const data = new FormData();

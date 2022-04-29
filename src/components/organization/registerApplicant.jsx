@@ -37,7 +37,7 @@ export default class RegisterApplicant extends Component {
         .then(data => {
           // this.setState({viceAdmins:data});
           alert(data);
-          window.location = '/viceAdmin/viewApplicants';
+          window.location = '/organization/viewApplicants';
         })
         .catch(err => {
           this.setState({registrationError:err.message});
