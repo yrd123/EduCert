@@ -58,7 +58,7 @@ export default class Login extends Component {
       formIsValid = false;
       errors["password"] = "Cannot be empty";
     } else if (typeof loginCredentials["password"] !== "undefined") {
-      var minNumberofChars = 5;
+      var minNumberofChars = 2;
       var maxNumberofChars = 20;
       var newPassword = loginCredentials["password"];
       if (
