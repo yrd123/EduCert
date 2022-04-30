@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Progress } from "reactstrap";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import backend from '../../config.json';
+const url = String(backend.backend) + "";
 
 class CreateVerifiedDocument extends Component {
   state = {
@@ -138,7 +140,7 @@ class CreateVerifiedDocument extends Component {
     data.append('data', JSON.stringify(this.state.data));
 
     console.log([...data]);
-    fetch("http://localhost:4000/createVerifiedDocument", {
+    fetch(url+"/createVerifiedDocument", {
       method: "POST",
       // body: JSON.stringify({ "data": this.state.data , "file": file}),
       body: data,

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import '../../static/css/login.css';
-
+import backend from '../../config.json';
+const url = String(backend.backend) + "";
 
 
 export default class RegisterViceAdmin extends Component {
@@ -24,7 +25,7 @@ export default class RegisterViceAdmin extends Component {
     e.preventDefault();
 
     if (this.handleValidation()) {
-      fetch("http://localhost:4000/registerViceAdmin", {
+      fetch(url+"/registerViceAdmin", {
         method:"POST",
         body:JSON.stringify(this.state.viceAdminInfo),
         headers:{"Content-Type" : "application/json","x-auth-token":localStorage.getItem("eduCertJwtToken")}

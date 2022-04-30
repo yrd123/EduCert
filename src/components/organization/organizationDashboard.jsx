@@ -7,6 +7,8 @@ import CenteredTabs from '../common/tabs';
 import SearchBar from '../common/searchBar';
 import PreviewCertificate from '../common/previewCertificate';
 import { Link } from 'react-router-dom';
+import backend from '../../config.json';
+const url = String(backend.backend) + "";
 
 class OrganizationDashboard extends Component {
     state = { 
@@ -24,7 +26,7 @@ class OrganizationDashboard extends Component {
 
     componentDidMount() {
 
-        fetch("http://localhost:4000/getDocumentsSignedByOrganization", {
+        fetch(url+"/getDocumentsSignedByOrganization", {
         method:"POST",
         headers:{"Content-Type" : "application/json","x-auth-token":localStorage.getItem("eduCertJwtToken")}
     })

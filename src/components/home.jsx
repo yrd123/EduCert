@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import backend from '../config.json';
+const url = String(backend.backend) + "";
+
 class Home extends Component {
     state = { 
       applicant:{}
@@ -11,7 +14,7 @@ class Home extends Component {
     }
 
     verifyDocument = () =>{
-      fetch("http://localhost:4000/verifyDocument", {
+      fetch(url+"/verifyDocument", {
             method:"POST",
             body:JSON.stringify({
               "org":"Org1MSP",

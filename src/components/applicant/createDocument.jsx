@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import backend from '../../config.json';
+const url = String(backend.backend) + "";
 
 
 class CreateSelfUploadedDocument extends Component {
@@ -155,7 +157,7 @@ class CreateSelfUploadedDocument extends Component {
         data.append('data', JSON.stringify(this.state.data));
 
         console.log([...data]);
-        fetch("http://localhost:4000/createSelfUploadedDocument", {
+        fetch(url+"/createSelfUploadedDocument", {
             method: "POST",
             // body: JSON.stringify({ "data": this.state.data , "file": file}),
             body: data,

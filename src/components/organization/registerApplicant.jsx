@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import '../../static/css/login.css';
+import backend from '../../config.json';
+const url = String(backend.backend) + "";
 
 export default class RegisterApplicant extends Component {
     state = {
@@ -21,7 +23,7 @@ export default class RegisterApplicant extends Component {
     e.preventDefault();
 
     if (this.handleSignUpValidation()) {
-      fetch("http://localhost:4000/registerApplicant", {
+      fetch(url+"/registerApplicant", {
         method:"POST",
         body:JSON.stringify(this.state.applicantinfoSignup),
         headers:{"Content-Type" : "application/json","x-auth-token":localStorage.getItem("eduCertJwtToken")}

@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import '../../static/css/login.css';
+import backend from '../../config.json';
+const url = String(backend.backend) + "";
 
 export default class UpdatePassword extends Component {
   state = {
@@ -21,7 +23,7 @@ export default class UpdatePassword extends Component {
     e.preventDefault();
     if (this.handleValidation()) {
       console.log(this.state.data);
-      fetch("http://localhost:4000/updateMyPassword", {
+      fetch(url+"/updateMyPassword", {
         method: "POST",
         body: JSON.stringify({ data: this.state.data }),
         headers: { "Content-Type": "application/json", "x-auth-token": localStorage.getItem("eduCertJwtToken") }

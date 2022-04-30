@@ -11,6 +11,9 @@ import PreviewCertificate from '../common/previewCertificate';
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
+import backend from '../../config.json';
+const url = String(backend.backend) + "";
+
 
 class ApplicantDashboard extends Component {
     state = { 
@@ -26,7 +29,7 @@ class ApplicantDashboard extends Component {
     };
 
     componentDidMount() {
-        fetch("http://localhost:4000/getMydocuments", {
+        fetch(url+"/getMydocuments", {
         method:"POST",
         headers:{"Content-Type" : "application/json","x-auth-token":localStorage.getItem("eduCertJwtToken")}
         })

@@ -12,6 +12,8 @@ import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import './cardscss.css';
+import backend from '../../config.json';
+const url = String(backend.backend) + "";
 
 class ViewApplicantDocuments extends Component {
     state = { 
@@ -94,7 +96,7 @@ class ViewApplicantDocuments extends Component {
 
     console.log(this.state.applicantId);
 
-    fetch("http://localhost:4000/getDocumentsByApplicantId", {
+    fetch(url+"/getDocumentsByApplicantId", {
         method:"POST",
         body:JSON.stringify({"data":{"applicantId":this.state.applicantId}}),
         headers:{"Content-Type" : "application/json","x-auth-token":localStorage.getItem('eduCertJwtToken')}

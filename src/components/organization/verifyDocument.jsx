@@ -20,6 +20,8 @@ import { useLocation } from 'react-router-dom'
 import React, { useState } from 'react';
 import CustomModal from '../common/modal';
 import PreviewCertificate from '../common/previewCertificate';
+import backend from '../../config.json';
+const url = String(backend.backend) + "";
 
 
 
@@ -34,7 +36,7 @@ export default function VerifyDocument() {
     e.preventDefault();
 
     console.log(document);
-    fetch("http://localhost:4000/verifyDocument", {
+    fetch(url+"/verifyDocument", {
       method: "POST",
       body: JSON.stringify({ "data": { "documentId": document.documentId } }),
       headers: { "Content-Type": "application/json", "x-auth-token": localStorage.getItem("eduCertJwtToken") }

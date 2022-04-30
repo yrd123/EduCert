@@ -4,6 +4,8 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import './login.css'
 import { getOrganizationById } from '../services/organizationService';
+import backend from '../../config.json';
+const url = String(backend.backend) + "";
 
 
 
@@ -25,7 +27,7 @@ handleSubmit = (e) => {
     e.preventDefault();
     console.log(this.state.data) ;
 
-    fetch("http://localhost:4000/createSelfUploadedDocument", {
+    fetch(url+"/createSelfUploadedDocument", {
     method:"POST",
     body:JSON.stringify({"data": this.state.data }),
     headers:{"Content-Type" : "application/json","x-auth-token":localStorage.getItem("eduCertJwtToken")}})

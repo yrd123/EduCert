@@ -5,6 +5,8 @@ import _ from 'lodash';
 import CenteredTabs from '../common/tabs';
 import SearchBar from '../common/searchBar';
 import { Link } from 'react-router-dom';
+import backend from '../../config.json';
+const url = String(backend.backend) + "";
 
 
 class ViewApplicants extends Component {
@@ -24,7 +26,7 @@ class ViewApplicants extends Component {
 
 
     componentDidMount() {
-        fetch("http://localhost:4000/getCurrentlyEnrolledApplicants", {
+        fetch(url+"/getCurrentlyEnrolledApplicants", {
         method:"POST",
         headers:{"Content-Type" : "application/json","x-auth-token":localStorage.getItem("eduCertJwtToken")}
         })

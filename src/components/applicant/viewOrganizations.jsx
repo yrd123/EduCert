@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import _ from 'lodash';
 import SearchBar from '../common/searchBar';
+import backend from '../../config.json';
+const url = String(backend.backend) + "";
 
 class ViewOrganizations extends Component {
     state = { 
@@ -17,7 +19,7 @@ class ViewOrganizations extends Component {
 
     grantPermission = organization =>{
 
-        fetch("http://localhost:4000/grantAccessToOrganization", {
+        fetch(url+"/grantAccessToOrganization", {
         method:"POST",
         body:JSON.stringify({
             "data":{
@@ -43,7 +45,7 @@ class ViewOrganizations extends Component {
     };
 
     revokePermission = organization => {
-        fetch("http://localhost:4000/revokeAccessFromOrganization", {
+        fetch(url+"/revokeAccessFromOrganization", {
             method:"POST",
             body:JSON.stringify({
                 "data":{
@@ -72,7 +74,7 @@ class ViewOrganizations extends Component {
     setPermissions = async() => {
         let organizations = this.state.organizations;
         for(let org of organizations){
-        await fetch("http://localhost:4000/hasMyPermission", {
+        await fetch(url+"/hasMyPermission", {
             method:"POST",
             body:JSON.stringify({
                 "data":{

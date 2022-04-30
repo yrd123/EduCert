@@ -3,6 +3,8 @@ import {useLocation} from 'react-router-dom';
 import _ from 'lodash';
 import CustomModal from '../common/modal';
 import PreviewCertificate from '../common/previewCertificate';
+import backend from '../../config.json';
+const url = String(backend.backend) + "";
 
 // /*import { getOrganizationById } from '../../services/organizationService';
 // import Modal from '@mui/material/Modal';
@@ -171,7 +173,7 @@ export default function ViewApplicantDocuments(){
     const [sorting, setSort] = useState({ property: "documentName", order: "asc" });
 
     let initializeApplicant = () => {
-        fetch("http://localhost:4000/getPermissionedApplicant", {
+        fetch(url+"/getPermissionedApplicant", {
             method:"POST",
             body:JSON.stringify({data: applicantId}),
             headers:{"Content-Type" : "application/json","x-auth-token":localStorage.getItem("eduCertJwtToken")}
@@ -192,7 +194,7 @@ export default function ViewApplicantDocuments(){
 
     let initializeDocuments = () => {
         console.log(applicantId)
-        fetch("http://localhost:4000/getDocumentsByApplicantId", {
+        fetch(url+"/getDocumentsByApplicantId", {
         method:"POST",
         body:JSON.stringify({data: applicantId}),
         headers:{"Content-Type" : "application/json","x-auth-token":localStorage.getItem("eduCertJwtToken")}
@@ -218,7 +220,7 @@ export default function ViewApplicantDocuments(){
 
 
     let changeCurrentOrganization = () => {
-        fetch("http://localhost:4000/changeCurrentOrganization", {
+        fetch(url+"/changeCurrentOrganization", {
         method:"POST",
         body:JSON.stringify({data: {applicantId}}),
         headers:{"Content-Type" : "application/json","x-auth-token":localStorage.getItem("eduCertJwtToken")}

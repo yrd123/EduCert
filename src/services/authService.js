@@ -1,10 +1,11 @@
-
+import backend from '../config.json';
+const url = String(backend.backend) + "";
 
 
 export async function login(loginCredentials){
     console.log(loginCredentials)
     try{
-        const promise = await fetch("http://localhost:4000/login", {
+        const promise = await fetch(url+"/login", {
         method:"POST",
         headers:{"Content-Type" : "application/json"},
         body:JSON.stringify(loginCredentials)
