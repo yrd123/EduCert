@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import '../../static/css/login.css';
+import backend from '../../config.json';
+const url = String(backend.backend) + "";
 
 export default class ViewViceAdmins extends Component {
   state = {
@@ -7,7 +9,7 @@ export default class ViewViceAdmins extends Component {
   };
 
   componentDidMount(){
-        fetch("http://localhost:4000/getViceAdmins", {
+        fetch(url+"/getViceAdmins", {
         method:"POST",
         headers:{"Content-Type" : "application/json","x-auth-token":localStorage.getItem("eduCertJwtToken")}
         })

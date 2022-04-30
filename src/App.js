@@ -65,7 +65,7 @@ class App extends Component{
 
                 */}
                 <Route element={<AdminProtectedRoutes />}>
-                  <Route exact path="admin/viewViceAdmins" element={(user && user.role === 'admin')?<ViewViceAdmins />:<Navigate to="/login" />} />
+                  <Route exact path="admin/viewViceAdmins" element={<ViewViceAdmins />} />
                   <Route exact path="admin/registerViceAdmin" element={<RegisterViceAdmin />} />
                 </Route>
                 <Route element={<ViceAdminProtectedRoutes />}>
