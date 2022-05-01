@@ -266,6 +266,10 @@ export default function ViewApplicantDocuments(){
         return status === "Verified" ? "badge badge-success" : "badge badge-warning";
     }
 
+    let viewDocument = docUrl => {
+        window.open(docUrl);
+    }
+
     const sortedDocuments = _.orderBy(documents, [sorting.property], [sorting.order]);
     
     return ( 
@@ -333,7 +337,7 @@ export default function ViewApplicantDocuments(){
                                 <td>{document.updatedBy}</td>
                                 <td><span className={getStatusClass(document.status)}>{document.status}</span></td>
                                 <td>
-                                    <CustomModal modalBody={<PreviewCertificate document={document} />} modalButtonLabel="View" />
+                                    <button className="btn btn-secondary" onClick={() => viewDocument(document.documentUrl)} >View</button>
                                 </td>
                             </tr>
                         )}

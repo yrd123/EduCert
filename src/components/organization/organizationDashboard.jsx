@@ -57,6 +57,10 @@ class OrganizationDashboard extends Component {
         this.setState({currentPage : page});
     }
 
+    viewDocument = docUrl => {
+        window.open(docUrl);
+    }
+
     sort(property){
         if(this.state.sorting.property === property){
             const order = (this.state.sorting.order === "asc") ? "desc" : "asc";
@@ -153,7 +157,8 @@ class OrganizationDashboard extends Component {
                                 <td><span className={this.getStatusClass(document.status)}>{document.status}</span></td>
                                 <td>
                                 {   
-                                    document.status === "Verified" ? <CustomModal modalBody={<PreviewCertificate document={document} />} modalButtonLabel="&nbsp;View&nbsp;"/> :
+                                    //document.status === "Verified" ? <CustomModal modalBody={<PreviewCertificate document={document} />} modalButtonLabel="&nbsp;View&nbsp;"/> :
+                                    document.status === "Verified" ? <button className="btn btn-secondary" onClick={() => this.viewDocument(document.documentUrl)} >View</button> :
                                     <Link
                                     to="/organization/verify" state={{document:document}}                         
                                     >
@@ -167,7 +172,6 @@ class OrganizationDashboard extends Component {
                         )}
                         </tbody>
                     </table>
-                    
                     <Pagination 
                         itemsCount={filteredDocuments.length} 
                         pageSize={this.state.pageSize} 
