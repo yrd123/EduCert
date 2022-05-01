@@ -20,7 +20,7 @@ class ApplicantDashboard extends Component {
         documents : [],
         documentsStatus : "All",
         currentPage : 1,
-        pageSize : 2,
+        pageSize : 5,
         sorting : { property : "documentName", order : "asc" },
         searchText  : "",
         //openOrganizationModal: false,

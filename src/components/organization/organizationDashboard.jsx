@@ -15,7 +15,7 @@ class OrganizationDashboard extends Component {
         documents : [],
         documentsStatus : "All",
         currentPage : 1,
-        pageSize : 50,
+        pageSize : 5,
         sorting : { property : "documentName", order : "asc" },
         searchText  : "",
         openApplicantModal: false,

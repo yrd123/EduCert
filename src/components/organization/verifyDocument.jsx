@@ -51,7 +51,7 @@ export default function VerifyDocument() {
       })
       .then((data) => {
           alert(data);
-          window.location = '/viceAdmin/dashboard'
+          window.location = '/organization/dashboard'
       })
       .catch(err => {
           setError(err.message);

@@ -15,7 +15,7 @@ class ViewApplicants extends Component {
         ],
         applicantsStatus : "Current",
         currentPage : 1,
-        pageSize : 2,
+        pageSize : 5,
         sorting : { property : "applicantName", order : "asc" },
         searchText  : "",
         openApplicantModal: false,
