@@ -7,7 +7,7 @@ const url = String(backend.backend) + "";
 class ApplicantProfile extends Component {
     state = {
         applicant: {},
-        data: { applicantId: '', email: '', name: '', pin: '', state: '', country: '', contact: '', dtaeOfBirth: '' },
+        data: { applicantId: '', email: '', name: '', pin: '', state: '', country: '', contact: '', dateOfBirth: '', currentOrganization:'' },
         updateError:""
     };
 
@@ -83,7 +83,6 @@ class ApplicantProfile extends Component {
                             <input type="id" name="id" value={this.state.data.applicantId} placeholder="1814078" disabled />
                             <label htmlFor="email">Email</label>
                             <input className="form-control" name="email" id="email" onChange={this.handleChange} value={this.state.data.email} type="text" placeholder="sanyamgandhi00@gmail.com" required />
-                     
                             <label htmlFor="fullName">Name</label>
                             <input className="form-control" name="name" id="name" onChange={this.handleChange} value={this.state.data.name} type="text" placeholder="Sanyam Gandhi" required />
                             <label htmlFor="address">Address</label>
@@ -91,7 +90,6 @@ class ApplicantProfile extends Component {
                             <label htmlFor="pincode">Pin/Zip Code</label>
                             <input className="form-control" name="pin" id="pin" onChange={this.handleChange} value={this.state.data.pin} type="text" placeholder="444001" required />
                             <label htmlFor="state">State</label>
-
                             <input className="form-control" name="state" id="state" onChange={this.handleChange} value={this.state.data.state} type="text" placeholder="Maharashtra" required />
                             <label htmlFor="country">Country</label>
                             <input className="form-control" name="country" id="country" onChange={this.handleChange} value={this.state.data.country} type="text" placeholder="India" required />
@@ -99,7 +97,8 @@ class ApplicantProfile extends Component {
                             <input className="form-control" name="contact" id="contact" onChange={this.handleChange} value={this.state.data.contact} type="text" placeholder="7887779499" required />
                             <label htmlFor="dob">Date of Birth</label>
                             <input type="text" name="dob" value={this.state.data.dateOfBirth} placeholder="24-11-2000" disabled />
-
+                            <label htmlFor="currentOrganization">Current Organization</label>
+                            <input type="text" name="currentOrganization" value={this.state.data.currentOrganization} placeholder="24-11-2000" disabled />
                             <input type="submit" value="UPDATE" className="button" />
                             <NavLink to="/applicant/updatePassword"><center>Update Your Password</center> </NavLink>
 

@@ -44,7 +44,7 @@ class ViewApplicants extends Component {
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }) 
 
-        fetch("http://localhost:4000/getAllApplicantsOfOrganization", {
+        fetch(url+"/getAllApplicantsOfOrganization", {
         method:"POST",
         headers:{"Content-Type" : "application/json","x-auth-token":localStorage.getItem("eduCertJwtToken")}
         })
