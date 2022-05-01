@@ -35,7 +35,7 @@ class ViewOrganizations extends Component {
                 return response.text().then(text => { throw new Error(text) })
         })
         .then(data => {
-            alert(data + `to ${organization}`);
+            alert(data + ` to ${organization}`);
             window.location.reload(false);
         })
         .catch(err => {
@@ -61,7 +61,7 @@ class ViewOrganizations extends Component {
                 return response.text().then(text => { throw new Error(text) })
         })
         .then(data => {
-            alert(data + `for ${organization}`);
+            alert(data + ` for ${organization}`);
             window.location.reload(false);
         })
         .catch(err => {
