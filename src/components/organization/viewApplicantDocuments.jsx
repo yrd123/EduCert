@@ -267,7 +267,8 @@ export default function ViewApplicantDocuments(){
     }
 
     let viewDocument = docUrl => {
-        window.open(docUrl);
+        if(docUrl) window.open(docUrl);
+        else alert("Document is either missing or is tampered");
     }
 
     const sortedDocuments = _.orderBy(documents, [sorting.property], [sorting.order]);
@@ -343,6 +344,7 @@ export default function ViewApplicantDocuments(){
                         )}
                     </tbody>
                 </table>
+
             </div>
         </React.Fragment>
      );

@@ -58,7 +58,8 @@ class OrganizationDashboard extends Component {
     }
 
     viewDocument = docUrl => {
-        window.open(docUrl);
+        if(docUrl) window.open(docUrl);
+        else alert("Document is either missing or is tampered");
     }
 
     sort(property){
@@ -172,6 +173,7 @@ class OrganizationDashboard extends Component {
                         )}
                         </tbody>
                     </table>
+
                     <Pagination 
                         itemsCount={filteredDocuments.length} 
                         pageSize={this.state.pageSize} 

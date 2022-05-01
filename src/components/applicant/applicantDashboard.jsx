@@ -82,6 +82,10 @@ class ApplicantDashboard extends Component {
         this.setState({searchText});
     }
 
+    viewDocument = docUrl => {
+        if(docUrl) window.open(docUrl);
+        else alert("Document is either missing or is tampered");
+    }
     // handleOpenOrganizationModal = organizationId => this.setState({openOrganizationModal:true, organization: getOrganizationById(organizationId)});
     // handleCloseOrganizationModal = () => this.setState({openOrganizationModal:false});
     
@@ -152,14 +156,10 @@ class ApplicantDashboard extends Component {
                     <td>{document.percentage}</td>
                     <td>{document.outOfPercentage}</td>
                     <td>{document.updatedBy}</td>
-                    <td><span className={this.getStatusClass(document.status)}>{document.status}</span></td>
-                                        
-<td>
-<CustomModal modalBody={<PreviewCertificate document={document} />} modalButtonLabel="View"/> 
-</td>
-
-                    
-                    
+                    <td><span className={this.getStatusClass(document.status)}>{document.status}</span></td>                                      
+                    <td>
+                        <button className="btn btn-secondary" onClick={() => this.viewDocument(document.documentUrl)} >View</button> 
+                    </td>                    
                 </tr>
                 )}
                 
