@@ -12,6 +12,7 @@ import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import backend from '../../config.json';
+import { Link } from 'react-router-dom';
 const url = String(backend.backend) + "";
 
 
@@ -158,13 +159,21 @@ class ApplicantDashboard extends Component {
                     <td>{document.updatedBy}</td>
                     <td><span className={this.getStatusClass(document.status)}>{document.status}</span></td>                                      
                     <td>
-                        <button className="btn btn-secondary" onClick={() => this.viewDocument(document.documentUrl)} >View</button> 
+                        {/* <button className="btn btn-secondary" onClick={() => this.viewDocument(document.documentUrl)} >View</button>  */}
+                        <Link to="/viewDocument" state={{documentUrl:document.documentUrl}}>
+                            <button className="btn btn-secondary" >View</button> 
+                        </Link>
                     </td>                    
                 </tr>
                 )}
                 
                 </tbody>
             </table>
+
+            <Link to="/viewDocument" state={{documentUrl:"https://helpx.adobe.com/content/dam/help/en/photoshop/using/convert-color-image-black-white/jcr_content/main-pars/before_and_after/image-before/Landscape-Color.jpg"}}>
+                <button className="btn btn-secondary" >View</button> 
+            </Link>
+
             <Pagination 
                 itemsCount={filteredDocuments.length} 
                 pageSize={pageSize} 

@@ -26,6 +26,7 @@ import { Navigate } from "react-router-dom";
 import ViceAdminProtectedRoutes from './protected routes/ViceAdminProtectedRoutes';
 import AdminProtectedRoutes from './protected routes/AdminProtectedRoutes';
 import ApplicantProtectedRoutes from './protected routes/ApplicantProtectedRoutes';
+import ViewDocument from './components/common/viewDocument';
 
 
 class App extends Component{
@@ -83,6 +84,8 @@ class App extends Component{
                   <Route exact path="applicant/createDocument" element={<CreateSelfUploadedDocument />} />
                   <Route exact path="applicant/viewOrganizations" element={<ViewOrganizations />} /> 
                 </Route>
+                <Route exact path="/viewDocument" element={<ViewDocument />} />
+
             </Routes>
         </div>
         {/* <div id="inner-div">

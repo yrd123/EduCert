@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import {useLocation} from 'react-router-dom';
+import {Link, useLocation} from 'react-router-dom';
 import _ from 'lodash';
 import CustomModal from '../common/modal';
 import PreviewCertificate from '../common/previewCertificate';
@@ -338,7 +338,10 @@ export default function ViewApplicantDocuments(){
                                 <td>{document.updatedBy}</td>
                                 <td><span className={getStatusClass(document.status)}>{document.status}</span></td>
                                 <td>
-                                    <button className="btn btn-secondary" onClick={() => viewDocument(document.documentUrl)} >View</button>
+                                    {/* <button className="btn btn-secondary" onClick={() => viewDocument(document.documentUrl)} >View</button> */}
+                                    <Link to="/viewDocument" state={{documentUrl:document.documentUrl}}>
+                                        <button className="btn btn-secondary" >View</button> 
+                                    </Link>
                                 </td>
                             </tr>
                         )}

@@ -159,7 +159,13 @@ class OrganizationDashboard extends Component {
                                 <td>
                                 {   
                                     //document.status === "Verified" ? <CustomModal modalBody={<PreviewCertificate document={document} />} modalButtonLabel="&nbsp;View&nbsp;"/> :
-                                    document.status === "Verified" ? <button className="btn btn-secondary" onClick={() => this.viewDocument(document.documentUrl)} >View</button> :
+                                    document.status === "Verified" ?
+                                    <Link
+                                    to="/viewDocument" state={{documentUrl:document.documentUrl}}                         
+                                    >
+                                    <button className="btn btn-secondary" >View</button> 
+                                    </Link>
+                                    :
                                     <Link
                                     to="/organization/verify" state={{document:document}}                         
                                     >
@@ -173,7 +179,9 @@ class OrganizationDashboard extends Component {
                         )}
                         </tbody>
                     </table>
-
+                    <Link to="/viewDocument" state={{documentUrl:"https://helpx.adobe.com/content/dam/help/en/photoshop/using/convert-color-image-black-white/jcr_content/main-pars/before_and_after/image-before/Landscape-Color.jpg"}}>
+                <button className="btn btn-secondary" >View</button> 
+            </Link>
                     <Pagination 
                         itemsCount={filteredDocuments.length} 
                         pageSize={this.state.pageSize} 
