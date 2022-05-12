@@ -19,8 +19,6 @@
 import { useLocation } from 'react-router-dom'
 import React, { useState } from 'react';
 import CustomModal from '../common/modal';
-import { Link } from 'react-router-dom';
-
 import PreviewCertificate from '../common/previewCertificate';
 import backend from '../../config.json';
 const url = String(backend.backend) + "";
@@ -66,7 +64,8 @@ export default function VerifyDocument() {
     <React.Fragment>
       <div className="forms">
         <br />
-
+        <center><CustomModal modalBody={<PreviewCertificate document={document} />} modalButtonLabel="View Document" /></center>
+        <Link to="/viewDocument" state={{documentUrlhttps://helpx.adobe.com/content/dam/help/en/photoshop/using/convert-color-image-black-white/jcr_content/main-pars/before_and_after/image-before/Landscape-Color.jpg"}}>
 
         <form onSubmit={handleSubmit}>
                   { verifyError &&
@@ -116,12 +115,6 @@ export default function VerifyDocument() {
 
           <label>Out of Percentage/GPA</label>
           <input className="form-control" value={document.outOfPercentage} name="outOfPercentage" type="number" placeholder="100/4" id="outOfPercentage" />
-
-	<center>
-	<Link to="/viewDocument" state={{documentUrl:document.documentUrl}}>
-            <input className="button" type="button" value="view" />
-        </Link>
-	</center>
           
           <center>
             <input type="submit" className="button" value="Verify" />

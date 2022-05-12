@@ -6,7 +6,7 @@ const url = String(backend.backend) + "";
 
 class ViewOrganizations extends Component {
     state = { 
-        organizations : [{"organizationId":"somaiya", "hasPermission":true},{"organizationId":"djs", "hasPermission":true}],
+        organizations : [{"organizationId":"org1", "hasPermission":true},{"organizationId":"org2", "hasPermission":true}],
         sorting : { property : "organizationId", order : "asc" },
         searchText  : "",
         organizationId:'',

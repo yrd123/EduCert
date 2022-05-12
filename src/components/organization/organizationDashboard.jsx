@@ -179,9 +179,8 @@ class OrganizationDashboard extends Component {
                         )}
                         </tbody>
                     </table>
-                    <Link to="/viewDocument" state={{documentUrl:"https://helpx.adobe.com/content/dam/help/en/photoshop/using/convert-color-image-black-white/jcr_content/main-pars/before_and_after/image-before/Landscape-Color.jpg"}}>
-                <button className="btn btn-secondary" >View</button> 
-            </Link>
+                    
+              
                     <Pagination 
                         itemsCount={filteredDocuments.length} 
                         pageSize={this.state.pageSize} 

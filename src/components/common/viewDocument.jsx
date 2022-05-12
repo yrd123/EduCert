@@ -7,7 +7,12 @@ export default function ViewDocument() {
     const { documentUrl } = location.state;
     return (
         <React.Fragment>
+	{   documentUrl &&
             <img src={documentUrl} />
-        </React.Fragment>
+        }
+	{
+	!documentUrl && <div>Document has been tampered or removed!</div>
+}	
+	 </React.Fragment>
     )
 }
