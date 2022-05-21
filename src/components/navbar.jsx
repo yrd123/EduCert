@@ -49,7 +49,7 @@ const navigate = useNavigate();
       </nav>*/
 
       <header>
-        <h1><img src="https://www.formationsco.com/wp-content/uploads/2017/12/certificate_icon.png" className="logoImg" /> EduCert</h1>
+        <h1><img src="https://www.formationsco.com/wp-content/uploads/2017/12/certificate_icon.png" className="logoImg" /> DocdInBlocks</h1>
         <div className="nav-div">
           <NavLink to="/"> <button className="navBtn ">Home</button></NavLink>
           

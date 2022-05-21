@@ -105,6 +105,12 @@ class ViewOrganizations extends Component {
 
     }
 
+    hasRevokePermission = organizationId => {
+        if(organizationId == 'org1')
+            return true;
+        return false;
+    }
+
     sort(property){
         if(this.state.sorting.property === property){
             const order = (this.state.sorting.order === "asc") ? "desc" : "asc";
@@ -162,7 +168,7 @@ class ViewOrganizations extends Component {
                                     { organization.hasPermission && 
                                     <button  type="button" class="btn btn-success" disabled>Grant</button>}
                                 </td>
-                                <td>{ organization.hasPermission &&
+                                <td>{ organization.hasPermission && this.hasRevokePermission(organization.organizationId) &&
                                     <button type="button" onClick={()=>this.revokePermission(organization.organizationId)} class="btn btn-danger">Revoke</button>}
                                     { !organization.hasPermission && 
                                     <button type="button" class="btn btn-danger" disabled>Revoke</button>}
